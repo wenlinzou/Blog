@@ -1,0 +1,35 @@
+body{
+	margin:0px;
+	padding:0px;
+}
+.user ul li {
+	list-style-type: none;
+	float: left;
+	width: 190px;
+	height:23px;
+}
+.user ul{
+	margin:0px;
+	padding:0px;
+	overflow: hidden;
+}
+.addUser ul li{
+	list-style-type: none;
+	float: left;
+	width: 190px;
+	height:23px;
+}
+.addUser ul{
+	margin:0px;
+	padding:0px;
+	overflow: hidden;
+}
+.title li{
+	width: 170px;
+	height:23px;
+	background-color: #FFBB77;
+	text-align: center;
+	border-radius:3px;
+	line-height: 23px;
+	color:white;
+}

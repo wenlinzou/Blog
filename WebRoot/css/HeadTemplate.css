@@ -1,0 +1,26 @@
+.headTemplate ul li{
+	list-style-type: none;
+	float: left;
+	width: 150px;
+	height:23px;
+	border-radius:3px;
+	text-align: center;
+	margin-left: 3px;
+}
+.headTemplate ul{
+	margin:0px;
+	padding:0px;
+	overflow: hidden;
+}
+a{
+	text-decoration: none;
+}
+.headtitle a{
+	font-weight:bold;
+}
+.headuserTitle{
+	background-color: #FFBB77;
+}
+.headarticleTitle{
+	background-color:#93ADF1;
+}

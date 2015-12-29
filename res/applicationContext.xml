@@ -150,7 +150,7 @@
     
   
 	<!-- Spring 工具类 -->
-	<bean id="springContextUtil" class="com.base.util.SpringContextUtil" />
+	<bean id="springContextUtil" class="com.apps.base.SpringContextUtil" />
 	
 	<!-- 设置文件上传时的参数  -->
 	<!--  这里申明的id必须为multipartResolver  -->  

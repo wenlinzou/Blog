@@ -1,0 +1,32 @@
+body{
+	margin:0px;
+	padding:0px;
+}
+.article ul li {
+	list-style-type: none;
+	width: 70px;
+	/* height:23px; */
+}
+.articleleft{
+	width:70px;
+}
+.articleright{
+	width:370px;
+	background-color: grey;
+}
+.article ul{
+	margin:0px;
+	padding:0px;
+	overflow: hidden;
+    float: left;
+	
+}
+.title li{
+	width: 170px;
+	height:23px;
+	background-color: #93ADF1;
+	text-align: center;
+	border-radius:3px;
+	line-height: 23px;
+	color:white;
+}

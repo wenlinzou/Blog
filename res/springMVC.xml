@@ -43,10 +43,10 @@
 	<!-- 以下配置将拦截所有的URL请求 -->
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
-		<bean class="com.base.interceptor.ExceptionInterceptor" />
+		<bean class="com.apps.base.ExceptionInterceptor" />
 	</mvc:interceptors>
 	<!-- 以下配置将拦截特有的URL请求 -->
-	<mvc:interceptors>
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/course/**.shtml"/>
 			<mvc:mapping path="/file/**.shtml"/>
@@ -73,15 +73,15 @@
 			<mvc:mapping path="/sysRole/**.shtml"/>
 			<mvc:mapping path="/sysUser/**.shtml"/>
 			
-			<mvc:mapping path="/**/*.do"/><!-- 后台代码的修改删除等操作都是“.do：”的 -->
+			<mvc:mapping path="/**/*.do"/>后台代码的修改删除等操作都是“.do：”的
 			
 			<bean class="com.base.interceptor.AuthInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<!-- <mvc:mapping 和<mvc:exclude-mapping  可以写多个-->
+			<mvc:mapping 和<mvc:exclude-mapping  可以写多个
 			<mvc:mapping path="/front/**/*.shtml" />
 			<mvc:exclude-mapping path="/front/indexAction/indexPage.shtml"/>
-			<mvc:exclude-mapping path="/front/indexAction/videoview.shtml"/><!-- 先不拦截视频播放页面 -->
+			<mvc:exclude-mapping path="/front/indexAction/videoview.shtml"/>先不拦截视频播放页面
 			<mvc:exclude-mapping path="/front/indexAction/addV_clinum.shtml"/>
 			<mvc:exclude-mapping path="/front/indexAction/queryByChoice.shtml"/>
 			<mvc:exclude-mapping path="/front/indexAction/queryDocByChoice.shtml"/>
@@ -94,7 +94,7 @@
 			<mvc:exclude-mapping path="/front/studentRegister/*.shtml"/>
 			<bean class="com.base.interceptor.IndexSTInterceptor" />
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 	
 <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
 	<mvc:resources mapping="/css/**" location="/css/" />

@@ -1,12 +1,10 @@
-package com.apps.blog.back.bean;
+package com.apps.blog.back.pager;
 
 import java.util.Date;
-/**
- * 文章
- * @author Pet
- *
- */
-public class Article {
+
+import com.apps.base.BasePage;
+
+public class ArticlePage extends BasePage{
 	private int id;
 	private int pid;
 	private int rootid;
@@ -44,7 +42,6 @@ public class Article {
 	public void setCont(String cont) {
 		this.cont = cont;
 	}
-	
 	public Date getPdate() {
 		return pdate;
 	}
@@ -57,6 +54,5 @@ public class Article {
 	public void setIsleaf(int isleaf) {
 		this.isleaf = isleaf;
 	}
-	
 	
 }

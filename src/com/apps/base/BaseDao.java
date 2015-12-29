@@ -1,5 +1,7 @@
 package com.apps.base;
 
+import java.util.List;
+
 
 
 public interface BaseDao<T> {
@@ -16,9 +18,9 @@ public interface BaseDao<T> {
 	public void delete(Object id);
 	
 
-	/*public int queryByCount(BasePage page);
+	/**/public int queryByCount(BasePage page);
 	
-	public List<T> queryByList(BasePage page);*/
+	public List<T> queryByList(BasePage page);
 	
 	
 	public T queryById(Object id);
