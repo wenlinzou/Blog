@@ -11,4 +11,5 @@ public interface ArticleService<T> {
 	public List<Article> queryAll();
 	public Article queryById(Integer id);
 	public void update(Article article);
+	public void add(Article article);
 }

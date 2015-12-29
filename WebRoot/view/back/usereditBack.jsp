@@ -31,11 +31,9 @@
 			</ul>
 
 			<ul>
-				<li><input type="text" value='${user.username }'
-					name="username" /></li>
-				<li><input type="text" value='${user.nickname }'
-					name="nickname" /></li>
-				<li><input type="submit" value="修改" /></li>
+				<li><input type="text" value='${user.username }' name="username" /></li>
+				<li><input type="text" value='${user.nickname }' name="nickname" /></li>
+				<li><input type="submit" value="修改" /><input type="button" value="返回"onclick="window.history.go(-1)" /></li>
 			</ul>
 		</form>
 	</div>

@@ -12,15 +12,16 @@
 	padding:0px;
 	overflow: hidden;
 }
-a{
+.head{
 	text-decoration: none;
+	color:white;
 }
 .headtitle a{
 	font-weight:bold;
 }
 .headuserTitle{
-	background-color: #FFBB77;
+	background-color: #FD5B56;
 }
 .headarticleTitle{
-	background-color:#93ADF1;
+	background-color:#FFB976;
 }

@@ -4,15 +4,35 @@ body{
 }
 .article ul li {
 	list-style-type: none;
-	width: 70px;
+	
 	/* height:23px; */
 }
+.articleleft li{
+	width: 70px;
+	margin-top: 5px;
+	text-align: right;
+}
 .articleleft{
-	width:70px;
+	width:170px;
+	height:827px;
+	
+}
+.articleleftcont{
+	width:170px;
+	height:650px;/*669*/
 }
 .articleright{
-	width:370px;
+	width:800px;
 	background-color: grey;
+}
+.articleright li{
+	width:470px;
+	margin-top: 5px;
+}
+
+.articlerightcont{
+	height:500px;
+	width:800px;
 }
 .article ul{
 	margin:0px;

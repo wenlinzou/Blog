@@ -57,4 +57,22 @@ public class ArticleController extends BaseAction {
 		}
 		return "back/articleBack";
 	}
+	
+	@RequestMapping("/add")
+	public String add(Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
+		if(null != title){
+			if(!MyStringUtils.isNull(title)){
+				Article article = new Article();
+				article.setPid(pid);
+				article.setRootid(rootid);
+				article.setTitle(title);
+				article.setCont(cont);
+				article.setIsleaf(isleaf);
+				articleService.add(article);
+				String redirctStr = "redirect:/article/queryAll.do";
+				return redirctStr;
+			}
+		}
+		return "back/articleBack";
+	}
 }

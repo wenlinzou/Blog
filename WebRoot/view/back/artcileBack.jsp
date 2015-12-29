@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>类别</li>
 			<li>类型</li>
 			<li>标题</li>
-			<li>内容</li>
+			<!-- <li>内容</li> -->
 			<li>时间</li>
 			<li>可见</li>
 			<li>操作</li>
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li>${article.pid }</li>
 				<li>${article.rootid }</li>
 				<li>${article.title }</li>
-				<li>${article.cont }</li>
+				<%-- <li>${article.cont }</li> --%>
 				<li><fmt:formatDate value="${article.pdate }" pattern="yyyy-MM-dd HH:mm:ss" /></li>
 				<li>${article.isleaf }</li>
 				<li><a href="<%=basePath%>article/queryById.do?id=${article.id }">修改</a></li>

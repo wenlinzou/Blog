@@ -42,10 +42,10 @@
 		添加时，除了密码和注册时间是有sql语句写死的，其他的数据都是从表单提交过来的。
 		初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
 	<insert id="add" parameterType="Object" >
-		insert into t_student
-		(g_id, s_id, ml_id, stu_logname, stu_pwd, stu_email, stu_regtime, stu_name, stu_sex, stu_age, stu_point, stu_remark, stu_telephone,stu_emaver,stu_pwdexptim,stu_valcod)
+		insert into article
+		(pid, rootid, title, cont, pdate, isleaf)
 		values
-		(#{g_id}, #{s_id}, #{ml_id}, #{stu_logname}, #{stu_pwd}, #{stu_email}, now(), #{stu_name}, #{stu_sex}, #{stu_age}, #{stu_point}, #{stu_remark}, #{stu_telephone}, #{stu_emaver}, #{stu_pwdexptim}, #{stu_valcod})
+		(#{pid}, #{rootid}, #{title}, #{cont}, now(), #{isleaf})
 	</insert>
 	
 	<!-- 删除记录 -->

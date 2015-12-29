@@ -45,5 +45,12 @@ public class ArticleImplService<T> extends BaseService<T> implements ArticleServ
 		}
 	}
 
+	@Override
+	public void add(Article article) {
+		if(null!=article){
+			articleDao.add(article);
+		}
+	}
+
 
 }

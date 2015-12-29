@@ -2,6 +2,10 @@ body{
 	margin:0px;
 	padding:0px;
 }
+p{
+	margin:0px;
+	padding:0px;
+}
 .article ul li {
 	list-style-type: none;
 	float: left;
@@ -16,7 +20,7 @@ body{
 .title li{
 	width: 170px;
 	height:23px;
-	background-color: #93ADF1;
+	background-color: #FFB976;
 	text-align: center;
 	border-radius:3px;
 	line-height: 23px;
