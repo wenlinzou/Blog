@@ -52,5 +52,17 @@ public class ArticleImplService<T> extends BaseService<T> implements ArticleServ
 		}
 	}
 
+	@Override
+	public List<Article> queryAllSortDate() {
+		return articleDao.queryAllSortDate();
+	}
+
+	@Override
+	public List<Article> queryByThing(Article article) {
+		if(null!=article){
+			return articleDao.queryByThing(article);
+		}
+		return null;
+	}
 
 }

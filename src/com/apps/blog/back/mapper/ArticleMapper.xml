@@ -59,9 +59,28 @@
 	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
 		select * from article
 	</select>
+	
+	<!-- 查询全部 按照时间倒叙 -->
+	<select id="queryAllSortDate" resultMap="BaseResultMap" parameterType="Object">
+		select * from article where isleaf = 1 order by pdate desc
+	</select>
+	
 	<!-- 根据id查询 -->
 	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
 		select * from article where id=#{id}
+	</select>
+	
+	<!-- 根据一些条件查询 -->
+	<select id="queryByThing" resultMap="BaseResultMap" parameterType="Object">
+		select * from article where 1=1 
+			<!-- 类别 -->
+			<if test="pid != null  ">
+				and pid=#{pid}
+			</if>
+			<if test="isleaf != null  ">
+				and isleaf=#{isleaf}
+			</if>
+		order by pdate desc
 	</select>
 	
 	<!-- 根据id，拼接修改记录 -->

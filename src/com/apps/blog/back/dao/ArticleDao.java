@@ -11,4 +11,7 @@ public interface ArticleDao<T> extends BaseDao<T>{
 	public Article queryById(Integer id);
 	public void update(Article article);
 	public void add(Article article);
+	
+	public List<Article> queryAllSortDate();
+	public List<Article> queryByThing(Article article);
 }

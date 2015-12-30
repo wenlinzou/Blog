@@ -242,7 +242,8 @@ a.link-1:hover {
 }
 
 .fleft {
-	float: left;
+	    height: 300px;
+    width: 100%;
 	margin-right: 25px;
 	margin-bottom: 0px;
 }
@@ -882,6 +883,8 @@ blockquote p {
 
 .blog {
 	overflow: hidden;
+	/*我的添加*/
+	/* height:400px; */
 }
 
 .blog .links {

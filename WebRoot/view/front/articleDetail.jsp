@@ -39,7 +39,7 @@
  <header> 
   <div class="container_12">
     <div class="grid_12"> 
-    <h1><a href="index.html"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
+    <h1><a href="<%=basePath%>articleFront/queryAllArticle.shtml"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
           
          
            <div class="clear"></div>
@@ -47,18 +47,18 @@
 <div class="menu_block">
            <nav  class="" >
              <ul class="sf-menu">
-                   <li><a href="index.html">Home</a></li>
-                   <li><a href="index-1.html">About</a>
+                   <li><a href="javascript:void(0);">Home</a></li>
+                   <li><a href="javascript:void(0);">About</a>
                      <ul>
-                        <li><a href="#"> Agency</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Team</a></li>
+                        <li><a href="javascript:void(0);"> Agency</a></li>
+                        <li><a href="javascript:void(0);">News</a></li>
+                        <li><a href="javascript:void(0);">Team</a></li>
                      </ul>
                    </li>
-                   <li><a href="index-2.html">Gallery</a></li>
-                   <li><a href="index-3.html">Tours</a></li>
-                   <li class="current"><a href="index-4.html">Blog</a></li>
-                   <li><a href="index-5.html">Contacts</a></li>
+                   <li><a href="javascript:void(0);">Gallery</a></li>
+                   <li><a href="javascript:void(0);">Tours</a></li>
+                   <li class="current"><a href="javascript:void(0);">Blog</a></li>
+                   <li><a href="javascript:void(0);">Contacts</a></li>
                  </ul>
             </nav>
            <div class="clear"></div>
@@ -75,19 +75,23 @@
     <div class="grid_9">
       <h3>Recent Posts</h3>
       <div class="blog">
-        <time datetime="2013-01-01">23<br>
+        <time datetime="2013-01-01"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br>
 APR</time>
         <div class="extra_wrapper">
-          <div class="text1 upp">Dellentesq imperdir gerti </div>
-          <div class="links">Posted by <a href="#">Demo User</a><a href="#" class="comment">0 Comment(s)</a></div>
+          <div class="text1 upp">${article.title }</div>
+          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">${article.pdate}0 Comment(s)</a></div>
         </div>
         <div class="clear"></div>
-        <img src="<%=basePath%>plugjs/front/images/page5_img1.jpg" alt="" class="img_inner fleft">
+        <%-- <img src="<%=basePath%>plugjs/front/images/page5_img1.jpg" alt="" class="img_inner fleft"> --%>
         <div class="extra_wrapper">
-          <p class="text1">Gellentesque imperdiet gerti loki holewvelit neque. Ut vestibulum mi sit amet ornare. </p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse jew wligulawe dolor, condimentum ac justo sed, tincidunt commodo molity wer massarete. Nulla non urnatr nisi. Donec varius lectus in vestibulum auctor. Spendisse magna veliternowe dignissim eu commodo ut vestibulum nectro quam. Pellentesque imperdiet velit neque. Ut vestibulum mi sit ametwertilo ornare consectetur. Quisque sed quamhy loi justo. Nulla congue sed turpis nec lacinia. Nulla facilisi. Ut sit amet gravidatylo wtellus. Morbi id wer nolit consequat eros. </p>Vivamus imperdiet ante vitae lorem varius tristique meli. Phasellus tristique lectus id volutpat condimentum. Mauris quam lectus cursus at congue nec ultrices luctus orci quam lectus cursus at congue.
+          <!-- <p class="text1">Gellentesque imperdiet gerti loki holewvelit neque. Ut vestibulum mi sit amet ornare. </p> -->
+          ${article.cont }
+         <!--  <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse jew wligulawe dolor, condimentum ac justo sed, tincidunt commodo molity wer massarete. Nulla non urnatr nisi. Donec varius lectus in vestibulum auctor. Spendisse magna veliternowe dignissim eu commodo ut vestibulum nectro quam. Pellentesque imperdiet velit neque. Ut vestibulum mi sit ametwertilo ornare consectetur. Quisque sed quamhy loi justo. Nulla congue sed turpis nec lacinia. Nulla facilisi. Ut sit amet gravidatylo wtellus. Morbi id wer nolit consequat eros. 
+          </p>
+          Vivamus imperdiet ante vitae lorem varius tristique meli. Phasellus tristique lectus id volutpat condimentum. Mauris quam lectus cursus at congue nec ultrices luctus orci quam lectus cursus at congue. -->
           <br>
-          <a href="#" class="btn">Details</a>
+          <a onclick="window.history.go(-1)" class="btn">Back</a>
         </div>
       </div>
      
@@ -95,25 +99,16 @@ APR</time>
     <div class="grid_3">
       <h3>类别</h3>
       <ul class="list2 l1">
-        <li><a href="#">Fgo psu dr sit amek </a></li>
-        <li><a href="#">Sem psum dr sit ametre conse
-</a></li>
-        <li><a href="#">Rame sum dr sit ame consec</a></li>
-        <li><a href="#">Bem psum dr sit ameteko </a></li>
-        <li><a href="#">Nem dsum dr sit amewas </a></li>
-        <li><a href="#">Vcem psum dr sit </a></li>
+      
+      	<c:forEach items="${categoryList }" var="category">
+        	<li><a href="<%=basePath%>articleFront/queryByThing.shtml?pid=${category.id}">${category.name }</a></li>
+        </c:forEach>
+        
       </ul>
       <h3>存档</h3>
       <ul class="list2 l1">
         <li><a href="#">August 2012</a></li>
-        <li><a href="#">July 2012</a></li>
-        <li><a href="#">June 2012</a></li>
-        <li><a href="#">May 2012</a></li>
-        <li><a href="#">April 2012</a></li>
-        <li><a href="#">March 2012</a></li>
-        <li><a href="#">February 2012</a></li>
-        <li><a href="#">January 2012</a></li>
-        <li><a href="#">December 2011</a></li>
+        
       </ul>
     </div>
     <div class="clear"></div>
@@ -162,7 +157,7 @@ APR</time>
       <a href="#"></a>
     </div>
       <div class="copy">
-     &copy; Copyright &copy; 2014.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+     &copy; Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a>
      </div></div>
      <div class="clear"></div>
   </div>
