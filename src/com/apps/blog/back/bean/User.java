@@ -1,14 +1,16 @@
 package com.apps.blog.back.bean;
 
 public class User {
-	private int id;
+	private Integer id;
 	private String username;
 	private String password;
 	private String nickname;
-	public int getId() {
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getUsername() {

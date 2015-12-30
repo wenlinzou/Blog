@@ -34,40 +34,40 @@
 </script>
 </head>
 
-<body>
-	<header>
-	<div class="container_12">
-		<div class="grid_12">
-			<h1>
-				<a href="index.html"><img src="<%=basePath%>plugjs/front/images/logo.png"
-					alt="Gerald Harris attorney at law"></a>
-			</h1>
+ <body  class="">
+<!--==============================header=================================-->
+ <header> 
+  <div class="container_12">
+    <div class="grid_12"> 
+    <h1><a href="index.html"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
+          
+         
+           <div class="clear"></div>
+      </div>
+<div class="menu_block">
+           <nav  class="" >
+             <ul class="sf-menu">
+                   <li><a href="index.html">Home</a></li>
+                   <li><a href="index-1.html">About</a>
+                     <ul>
+                        <li><a href="#"> Agency</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Team</a></li>
+                     </ul>
+                   </li>
+                   <li><a href="index-2.html">Gallery</a></li>
+                   <li><a href="index-3.html">Tours</a></li>
+                   <li class="current"><a href="index-4.html">Blog</a></li>
+                   <li><a href="index-5.html">Contacts</a></li>
+                 </ul>
+            </nav>
+           <div class="clear"></div>
+           </div>
+           <div class="clear"></div>
+          </div>
+</header>
 
-
-			<div class="clear"></div>
-		</div>
-		<div class="menu_block">
-			<nav class="">
-			<ul class="sf-menu">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="index-1.html">About</a>
-					<ul>
-						<li><a href="#"> Agency</a></li>
-						<li><a href="#">News</a></li>
-						<li><a href="#">Team</a></li>
-					</ul></li>
-				<li><a href="index-2.html">Gallery</a></li>
-				<li><a href="index-3.html">Tours</a></li>
-				<li class="current"><a href="index-4.html">Blog</a></li>
-				<li><a href="index-5.html">Contacts</a></li>
-			</ul>
-			</nav>
-			<div class="clear"></div>
-		</div>
-		<div class="clear"></div>
-	</div>
-	</header>
-	<div class="main">
+<div class="main">
 <!--=======content================================-->
 
 <div class="content">
@@ -90,9 +90,10 @@ APR</time>
           <a href="#" class="btn">Details</a>
         </div>
       </div>
-      
+     
+    </div>
     <div class="grid_3">
-      <h3>Categories</h3>
+      <h3>类别</h3>
       <ul class="list2 l1">
         <li><a href="#">Fgo psu dr sit amek </a></li>
         <li><a href="#">Sem psum dr sit ametre conse
@@ -102,7 +103,7 @@ APR</time>
         <li><a href="#">Nem dsum dr sit amewas </a></li>
         <li><a href="#">Vcem psum dr sit </a></li>
       </ul>
-      <h3>Archive</h3>
+      <h3>存档</h3>
       <ul class="list2 l1">
         <li><a href="#">August 2012</a></li>
         <li><a href="#">July 2012</a></li>
@@ -118,6 +119,7 @@ APR</time>
     <div class="clear"></div>
   </div>
 </div>
+
 <!--=======bottom================================-->
 <div class="bottom_block">
   <div class="container_12">
@@ -168,6 +170,5 @@ APR</time>
 </footer>
 
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
-</div>
 </body>
 </html>

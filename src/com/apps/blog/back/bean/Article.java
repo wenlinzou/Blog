@@ -7,30 +7,36 @@ import java.util.Date;
  *
  */
 public class Article {
-	private int id;
-	private int pid;
-	private int rootid;
+	private Integer id;
+	private Integer pid;
+	private Integer rootid;
 	private String title;
 	private String cont;
 	private Date pdate;
-	private int isleaf;
-	public int getId() {
+	private Integer isleaf;
+	
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public int getPid() {
+	public Integer getPid() {
 		return pid;
 	}
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
-	public int getRootid() {
+	public Integer getRootid() {
 		return rootid;
 	}
-	public void setRootid(int rootid) {
+	public void setRootid(Integer rootid) {
 		this.rootid = rootid;
+	}
+	public void setIsleaf(Integer isleaf) {
+		this.isleaf = isleaf;
 	}
 	public String getTitle() {
 		return title;
@@ -51,12 +57,10 @@ public class Article {
 	public void setPdate(Date pdate) {
 		this.pdate = pdate;
 	}
-	public int getIsleaf() {
+	public Integer getIsleaf() {
 		return isleaf;
 	}
-	public void setIsleaf(int isleaf) {
-		this.isleaf = isleaf;
-	}
+
 	
 	
 }

@@ -1,0 +1,39 @@
+body{
+	margin:0px;
+	padding:0px;
+}
+p{
+	margin:0px;
+	padding:0px;
+}
+.category ul li {
+	list-style-type: none;
+	float: left;
+	width: 170px;
+	height:23px;
+}
+.category ul{
+	margin:0px;
+	padding:0px;
+	overflow: hidden;
+}
+.title li{
+	width: 170px;
+	height:23px;
+	background-color: #FFDC76;
+	text-align: center;
+	border-radius:3px;
+	line-height: 23px;
+	color:white;
+}
+.addCategory ul{
+	margin:0px;
+	padding:0px;
+	overflow: hidden;
+}
+.addCategory ul li {
+	list-style-type: none;
+	float: left;
+	width: 170px;
+	height:23px;
+}
