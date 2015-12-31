@@ -264,6 +264,7 @@ a.link-1:hover {
 }
 .wrapper, .extra_wrapper {
 	overflow: hidden;
+	
 }
 .clear {
 	float: none !important;

@@ -5,23 +5,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
   <head>
     <base href="<%=basePath%>">
     
     <title>管理文章</title>
     
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+	
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/article.css">
   </head>
   
   <body>
+  
+   <c:if test="${empty user}">
+   	   <a onclick="window.history.go(-1)">back</a>
+   </c:if>
+   
+   <c:if test="${!empty user}">
+  
 	<%@include file="HeadTemplate.jsp"%>
 	<!-- <input type="button" onclick="showAddBtn();" value="添加"/> -->
 	<a href="<%=basePath %>view/back/artcileaddBack.jsp">添加</a>
@@ -49,5 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</ul>
 		</c:forEach>
 	</div>
+	
+	</c:if>
+	
 </body>
 </html>

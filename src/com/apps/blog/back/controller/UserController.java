@@ -3,6 +3,9 @@ package com.apps.blog.back.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +49,7 @@ public class UserController extends BaseAction {
 		return redirctStr;
 	}
 	@RequestMapping("/login")
-	public String login(String username, String password){
+	public String login(String username, String password, HttpServletRequest request){
 		boolean usernameisnull = MyStringUtils.isNull(username);
 		boolean passwordisnull = MyStringUtils.isNull(password);
 		String jumpJsp = "back/indexLogin";
@@ -56,11 +59,17 @@ public class UserController extends BaseAction {
 			user.setPassword(password);
 			boolean canLogin = userService.login(user);
 			if(canLogin){
+				request.getSession(true).setAttribute("user", user);
 				String redirctStr = "redirect:/user/queryAll.do";
 				return redirctStr;
 			}
 		}
 		return jumpJsp;
+	}
+	@RequestMapping("/loginOut")
+	public void loginOut(HttpServletRequest request){
+		request.getSession().setAttribute("user", null);
+		request.getSession().removeAttribute("user");
 	}
 	@RequestMapping("/queryAll")
 	public String queryAll(Model model){

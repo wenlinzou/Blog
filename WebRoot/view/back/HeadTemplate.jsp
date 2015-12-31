@@ -4,5 +4,6 @@
 		<li class="headuserTitle"><a class="head" href="user/queryAll.do">用户</a></li>
 		<li class="headarticleTitle"><a class="head" href="article/queryAll.do">文章</a></li>
 		<li class="headcategoryTitle"><a class="head" href="category/queryAll.do">文章类别</a></li>
+		<li class="headuseroutTitle"><a class="head" href="user/loginOut.do">退出</a></li>
 	</ul>
 </div>
