@@ -65,4 +65,11 @@ public class ArticleImplService<T> extends BaseService<T> implements ArticleServ
 		return null;
 	}
 
+	@Override
+	public void updateClick(Integer inputid) {
+		if(null!=inputid)
+			articleDao.updateClick(inputid);
+		
+	}
+
 }

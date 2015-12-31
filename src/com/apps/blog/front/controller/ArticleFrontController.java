@@ -1,5 +1,7 @@
 package com.apps.blog.front.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -30,16 +32,25 @@ public class ArticleFrontController extends BaseAction {
 	@RequestMapping("/queryAllArticle")
 	public String queryAllArticle(Model model) throws Exception {
 		List<Article> articleList = articleService.queryAllSortDate();
+		List<Date> dates = new ArrayList<Date>(); 
 		for (int i = 0; i < articleList.size(); i++) {
 			Article a = articleList.get(i);
+			dates.add(a.getPdate());
 			String imgStr = MyStringUtils.queryImg(a.getCont());
 			if(!MyStringUtils.isNull(imgStr)){
 				articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
 			}
+			articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
+			
 		}
+		List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
+		dateList = MyStringUtils.arrangeEnglishMonth(dateList);
+		
 		
 		List<Category> categoryList = categoryService.queryAll();
 		
+		
+		model.addAttribute("dateList", dateList);
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("categoryList", categoryList);
 		
@@ -50,6 +61,8 @@ public class ArticleFrontController extends BaseAction {
 	public String queryDetailById(Integer id, Model model) throws Exception {
 		if(null != id){
 			Article article = articleService.queryById(id);
+			article.setShortmon(MyStringUtils.arrangeEnglishShortMonth(article.getPdate()));
+			articleService.updateClick(id);
 			model.addAttribute("article", article);
 			
 			List<Category> categoryList = categoryService.queryAll();
@@ -75,7 +88,13 @@ public class ArticleFrontController extends BaseAction {
 				if(!MyStringUtils.isNull(imgStr)){
 					articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
 				}
+				articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
 			}
+			
+			List<Date> dates = new ArrayList<Date>(); 
+			List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
+			dateList = MyStringUtils.arrangeEnglishMonth(dateList);
+			model.addAttribute("dateList", dateList);
 			
 			model.addAttribute("articleList", articleList);
 			

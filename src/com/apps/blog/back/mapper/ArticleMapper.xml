@@ -9,7 +9,7 @@
 
 	<!-- t_student table all fields 不要stu_pwd, -->
 	<sql id="Base_Column_List">
-		id, pid, rootid, title, cont, pdate, isleaf
+		id, pid, rootid, title, cont, pdate, isleaf, click
 	</sql>
 
 	<!-- 查询条件 -->
@@ -53,6 +53,11 @@
 		update article set stu_delsta=0 where id=#{id}
 	</update>
 	
+	<!-- 阅读一次点击率加1 -->
+	<select id="updateClick"  parameterType="java.lang.Integer" statementType="CALLABLE">
+		<!-- {CALL artclick_insert(#{inputid,mode=IN, javaType=INTEGER})} -->
+		call artclick_insert(#{id});
+	</select>
 	
 	
 	<!-- 查询全部 -->

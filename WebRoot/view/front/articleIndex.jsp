@@ -79,7 +79,7 @@
       
       <div class="blog">
         <time datetime="${article.pdate }"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br>
-<fmt:formatDate value="${article.pdate}" type="time" pattern="MM"/></time>
+${article.shortmon }</time>
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title } </div>
           <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a>
@@ -124,6 +124,9 @@
       </ul>
       <h3>存档</h3>
       <ul class="list2 l1">
+      	<c:forEach items="${dateList }" var="dates">
+      		<li><a href="">${dates }</a></li>
+      	</c:forEach>
         <li><a href="#">August 2012</a></li>
         <!-- <li><a href="#">July 2012</a></li>
         <li><a href="#">June 2012</a></li>

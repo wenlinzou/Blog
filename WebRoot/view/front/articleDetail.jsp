@@ -76,10 +76,10 @@
       <h3>Recent Posts</h3>
       <div class="blog">
         <time datetime="2013-01-01"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br>
-APR</time>
+${article.shortmon }</time>
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title }</div>
-          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">${article.pdate}0 Comment(s)</a></div>
+          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">${article.pdate}0 Comment(s)&nbsp;${article.click }</a></div>
         </div>
         <div class="clear"></div>
         <%-- <img src="<%=basePath%>plugjs/front/images/page5_img1.jpg" alt="" class="img_inner fleft"> --%>

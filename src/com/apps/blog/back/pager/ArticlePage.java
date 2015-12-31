@@ -13,8 +13,16 @@ public class ArticlePage extends BasePage{
 	private Date pdate;
 	private Integer isleaf;
 	
+	private Integer click;
 	
 	
+	
+	public Integer getClick() {
+		return click;
+	}
+	public void setClick(Integer click) {
+		this.click = click;
+	}
 	public Integer getId() {
 		return id;
 	}

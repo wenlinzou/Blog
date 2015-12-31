@@ -16,4 +16,5 @@ public interface ArticleService<T> {
 	
 	public List<Article> queryAllSortDate();
 	public List<Article> queryByThing(Article article);
+	public void updateClick(Integer inputid);
 }

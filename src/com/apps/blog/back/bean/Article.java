@@ -15,13 +15,29 @@ public class Article {
 	private Date pdate;
 	private Integer isleaf;
 	
+	private Integer click;
+	
 	private String img;
 	
+	private String shortmon;
 	
 	
 	
+	
+	public Integer getClick() {
+		return click;
+	}
+	public void setClick(Integer click) {
+		this.click = click;
+	}
 	public String getImg() {
 		return img;
+	}
+	public String getShortmon() {
+		return shortmon;
+	}
+	public void setShortmon(String shortmon) {
+		this.shortmon = shortmon;
 	}
 	public void setImg(String img) {
 		this.img = img;
