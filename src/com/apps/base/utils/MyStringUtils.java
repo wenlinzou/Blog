@@ -1,9 +1,12 @@
 package com.apps.base.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyStringUtils {
 	public static boolean isNull(String str) {
@@ -67,6 +70,8 @@ public class MyStringUtils {
 		}
 		return null;
 	}
+	
+	
 	public static List<String> arrangeEnglishMonth(List<String> strs){
 		List<String> list = new ArrayList<String>();
 		for (int i = 0; i < strs.size(); i++) {
@@ -82,12 +87,36 @@ public class MyStringUtils {
 		}
 		return list;
 	}
+	
+	public static Map<String, String> arrangeEnglishMonth(List<String> strs, Integer ismap){
+		Map<String, String> map = new HashMap<String, String>();
+		for (int i = 0; i < strs.size(); i++) {
+			StringBuilder sb = new StringBuilder();
+			String monthstr = strs.get(i).substring(4, strs.get(i).length());
+			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
+			for (MonthEnum mo : MonthEnum.values()) {
+				if(monthstr.equals(mo.getMonth())){
+					sb.append(mo);
+					sb.append(" ").append(strs.get(i).substring(0, 4));
+					map.put(strs.get(i)+"01", sb.toString());
+				}
+			}
+		}
+		return map;
+	}
+	
+	public static Date strTransDate(String str) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.parse(str);
+	}
+	
 	public static List<String> arrangeEnglishShortMonth(List<Date> dates){
 		List<String> strs = queryAllMonth(dates);
 		List<String> list = new ArrayList<String>();
 		for (int i = 0; i < strs.size(); i++) {
 			StringBuilder sb = new StringBuilder();
 			String monthstr = strs.get(i).substring(4, strs.get(i).length());
+			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
 			for (MonthShortEnum mo : MonthShortEnum.values()) {
 				if(monthstr.equals(mo.getMonth())){
 					sb.append(mo);
@@ -103,6 +132,7 @@ public class MyStringUtils {
 		StringBuilder sb = new StringBuilder();
 		if(!isNull(strs)){
 			String monthstr = strs.substring(4, strs.length());
+			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
 			for (MonthShortEnum mo : MonthShortEnum.values()) {
 				if(monthstr.equals(mo.getMonth())){
 					sb.append(mo);

@@ -2,7 +2,9 @@ package com.apps.blog.front.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +46,15 @@ public class ArticleFrontController extends BaseAction {
 			
 		}
 		List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
-		dateList = MyStringUtils.arrangeEnglishMonth(dateList);
+//		dateList = MyStringUtils.arrangeEnglishMonth(dateList);
+		
+		Map<String, String> monthMap = new HashMap<String, String>();
+		monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
 		
 		
 		List<Category> categoryList = categoryService.queryAll();
+		model.addAttribute("monthMap", monthMap);
 		
-		
-		model.addAttribute("dateList", dateList);
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("categoryList", categoryList);
 		
@@ -78,12 +82,17 @@ public class ArticleFrontController extends BaseAction {
 			artcile.setPid(pid);
 		}
 		if(!MyStringUtils.isNull(date)){
-			//artcile.setPdate(pdate);
+			Date pdate = MyStringUtils.strTransDate(date);
+			if(null!=pdate)
+				artcile.setPdate(pdate);
 		}
+		artcile.setIsleaf(1);
 		if(null!=artcile){
 			List<Article> articleList = articleService.queryByThing(artcile);
+			List<Date> dates = new ArrayList<Date>(); 
 			for (int i = 0; i < articleList.size(); i++) {
 				Article a = articleList.get(i);
+				dates.add(a.getPdate());
 				String imgStr = MyStringUtils.queryImg(a.getCont());
 				if(!MyStringUtils.isNull(imgStr)){
 					articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
@@ -91,10 +100,11 @@ public class ArticleFrontController extends BaseAction {
 				articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
 			}
 			
-			List<Date> dates = new ArrayList<Date>(); 
 			List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
-			dateList = MyStringUtils.arrangeEnglishMonth(dateList);
-			model.addAttribute("dateList", dateList);
+			
+			Map<String, String> monthMap = new HashMap<String, String>();
+			monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+			model.addAttribute("monthMap", monthMap);
 			
 			model.addAttribute("articleList", articleList);
 			

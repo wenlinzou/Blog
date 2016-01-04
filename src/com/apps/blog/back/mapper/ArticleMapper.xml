@@ -82,6 +82,9 @@
 			<if test="pid != null  ">
 				and pid=#{pid}
 			</if>
+			<if test="pdate != null  ">
+				and month(pdate)=month(#{pdate})
+			</if>
 			<if test="isleaf != null  ">
 				and isleaf=#{isleaf}
 			</if>

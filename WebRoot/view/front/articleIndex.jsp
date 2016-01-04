@@ -124,10 +124,13 @@ ${article.shortmon }</time>
       </ul>
       <h3>存档</h3>
       <ul class="list2 l1">
-      	<c:forEach items="${dateList }" var="dates">
+      	<%-- <c:forEach items="${dateList }" var="dates">
       		<li><a href="">${dates }</a></li>
+      	</c:forEach> --%>
+      	<c:forEach items="${monthMap }" var="months">
+      		<li><a href="<%=basePath%>articleFront/queryByThing.shtml?date=${months.key }">${months.value }</a></li>
       	</c:forEach>
-        <li><a href="#">August 2012</a></li>
+        <!-- <li><a href="#">August 2012</a></li> -->
         <!-- <li><a href="#">July 2012</a></li>
         <li><a href="#">June 2012</a></li>
         <li><a href="#">May 2012</a></li>
