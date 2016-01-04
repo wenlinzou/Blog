@@ -2,6 +2,8 @@ package com.apps.blog.back.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.pager.ArticlePage;
@@ -40,7 +43,11 @@ public class ArticleController extends BaseAction {
 		return "back/articleeditBack";
 	}
 	@RequestMapping("/update")
-	public String update(Integer id, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
+	public String update(HttpServletRequest request, Integer id, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-article update IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		if(null != id){
 			if(!MyStringUtils.isNull(title)){
 				Article article = new Article();
@@ -59,7 +66,11 @@ public class ArticleController extends BaseAction {
 	}
 	
 	@RequestMapping("/add")
-	public String add(Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
+	public String add(HttpServletRequest request, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-article add IP : " + IPUtils.getAddressByIP(userLogIP));
+				
 		if(null != title){
 			if(!MyStringUtils.isNull(title)){
 				Article article = new Article();

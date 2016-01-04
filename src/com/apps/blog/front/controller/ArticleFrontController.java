@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
@@ -32,7 +35,11 @@ public class ArticleFrontController extends BaseAction {
 	
 	
 	@RequestMapping("/queryAllArticle")
-	public String queryAllArticle(Model model) throws Exception {
+	public String queryAllArticle(HttpServletRequest request, Model model) throws Exception {
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("front-article visit IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		List<Article> articleList = articleService.queryAllSortDate();
 		List<Date> dates = new ArrayList<Date>(); 
 		for (int i = 0; i < articleList.size(); i++) {
@@ -62,7 +69,11 @@ public class ArticleFrontController extends BaseAction {
 	}
 	
 	@RequestMapping("/queryDetailById")
-	public String queryDetailById(Integer id, Model model) throws Exception {
+	public String queryDetailById(HttpServletRequest request, Integer id, Model model) throws Exception {
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("front-article visit detail IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		if(null != id){
 			Article article = articleService.queryById(id);
 			article.setShortmon(MyStringUtils.arrangeEnglishShortMonth(article.getPdate()));
@@ -76,7 +87,11 @@ public class ArticleFrontController extends BaseAction {
 	}
 	
 	@RequestMapping("/queryByThing")
-	public String queryByThing(Integer pid, String date, Model model) throws Exception {
+	public String queryByThing(HttpServletRequest request, Integer pid, String date, Model model) throws Exception {
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("front-article visit by-search IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		Article artcile = new Article();
 		if(null != pid){
 			artcile.setPid(pid);

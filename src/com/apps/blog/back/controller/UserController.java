@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.User;
 import com.apps.blog.back.service.impl.UserImplService;
@@ -33,7 +34,11 @@ public class UserController extends BaseAction {
 	 * @throws Exception 
 	 */
 	@RequestMapping("/save")
-	public String save(String username, String password, String nickname){
+	public String save(HttpServletRequest request, String username, String password, String nickname){
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-user add IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		boolean usernameisnull = MyStringUtils.isNull(username);
 		boolean passwordisnull = MyStringUtils.isNull(password);
 		boolean nickanamenull = MyStringUtils.isNull(nickname);
@@ -49,7 +54,11 @@ public class UserController extends BaseAction {
 		return redirctStr;
 	}
 	@RequestMapping("/login")
-	public String login(String username, String password, HttpServletRequest request){
+	public String login(HttpServletRequest request, String username, String password){
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-user login IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		boolean usernameisnull = MyStringUtils.isNull(username);
 		boolean passwordisnull = MyStringUtils.isNull(password);
 		String jumpJsp = "back/indexLogin";
@@ -68,6 +77,10 @@ public class UserController extends BaseAction {
 	}
 	@RequestMapping("/loginOut")
 	public void loginOut(HttpServletRequest request){
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-user loginout IP : " + IPUtils.getAddressByIP(userLogIP));
+				
 		request.getSession().setAttribute("user", null);
 		request.getSession().removeAttribute("user");
 	}
@@ -87,7 +100,11 @@ public class UserController extends BaseAction {
 		return "back/usereditBack";
 	}
 	@RequestMapping("/update")
-	public String update(String username, String nickname, Integer id, Model model){
+	public String update(HttpServletRequest request, String username, String nickname, Integer id, Model model){
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-user update IP : " + IPUtils.getAddressByIP(userLogIP));
+		
 		if(null!=id){
 			User user = new User();
 			if(!MyStringUtils.isNull(username) && null!=id){
