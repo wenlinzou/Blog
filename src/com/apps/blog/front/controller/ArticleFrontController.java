@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
+import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleImplService;
 import com.apps.blog.back.service.impl.CategoryImplService;
 
@@ -38,7 +40,7 @@ public class ArticleFrontController extends BaseAction {
 	public String queryAllArticle(HttpServletRequest request, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("front-article visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		List<Article> articleList = articleService.queryAllSortDate();
 		List<Date> dates = new ArrayList<Date>(); 
@@ -60,19 +62,73 @@ public class ArticleFrontController extends BaseAction {
 		
 		
 		List<Category> categoryList = categoryService.queryAll();
-		model.addAttribute("monthMap", monthMap);
+//		model.addAttribute("monthMap", monthMap);
+		request.getSession().setAttribute("monthMap", monthMap);
 		
 		model.addAttribute("articleList", articleList);
-		model.addAttribute("categoryList", categoryList);
+//		model.addAttribute("categoryList", categoryList);
+		request.getSession().setAttribute("categoryList", categoryList);
 		
 		return "front/articleIndex";
+	}
+	
+	@RequestMapping("/queryAllArticlePage")
+	@ResponseBody
+	public Map<String,Object> queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("front-article page visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		if(null != pid){
+			page.setPid(pid);
+		}
+		if(!MyStringUtils.isNull(date)){
+			Date pdate = MyStringUtils.strTransDate(date);
+			if(null!=pdate)
+				page.setPdate(pdate);
+		}
+		page.setIsleaf(1);
+		page.setRows(5);
+		
+		List<Article> articleList = articleService.queryListByPage(page);
+		List<Date> dates = new ArrayList<Date>(); 
+		for (int i = 0; i < articleList.size(); i++) {
+			Article a = articleList.get(i);
+			dates.add(a.getPdate());
+			String imgStr = MyStringUtils.queryImg(a.getCont());
+			if(!MyStringUtils.isNull(imgStr)){
+				articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
+			}
+			articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
+		}
+		List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
+//		dateList = MyStringUtils.arrangeEnglishMonth(dateList);
+		
+		Map<String, String> monthMap = new HashMap<String, String>();
+		monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+		
+		
+		List<Category> categoryList = categoryService.queryAll();
+		/*model.addAttribute("monthMap", monthMap);
+		
+		model.addAttribute("articleList", articleList);
+		model.addAttribute("categoryList", categoryList);*/
+		
+		map.put("monthMap", monthMap);
+		map.put("articleList", articleList);
+		map.put("categoryList", categoryList);
+		map.put("pageData", page);
+		
+		return map;
 	}
 	
 	@RequestMapping("/queryDetailById")
 	public String queryDetailById(HttpServletRequest request, Integer id, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit detail IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("front-article visit detail IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		if(null != id){
 			Article article = articleService.queryById(id);
@@ -80,8 +136,8 @@ public class ArticleFrontController extends BaseAction {
 			articleService.updateClick(id);
 			model.addAttribute("article", article);
 			
-			List<Category> categoryList = categoryService.queryAll();
-			model.addAttribute("categoryList", categoryList);
+			//List<Category> categoryList = categoryService.queryAll();
+			//model.addAttribute("categoryList", categoryList);
 		}
 		return "front/articleDetail";
 	}
@@ -90,7 +146,7 @@ public class ArticleFrontController extends BaseAction {
 	public String queryByThing(HttpServletRequest request, Integer pid, String date, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit by-search IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		Article artcile = new Article();
 		if(null != pid){
@@ -115,11 +171,11 @@ public class ArticleFrontController extends BaseAction {
 				articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
 			}
 			
-			List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
+			//List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
 			
-			Map<String, String> monthMap = new HashMap<String, String>();
-			monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
-			model.addAttribute("monthMap", monthMap);
+			//Map<String, String> monthMap = new HashMap<String, String>();
+			//monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+			//model.addAttribute("monthMap", monthMap);
 			
 			model.addAttribute("articleList", articleList);
 			
@@ -134,7 +190,7 @@ public class ArticleFrontController extends BaseAction {
 	
 	
 	
-	@RequestMapping("/add")
+	/*@RequestMapping("/add")
 	public String add(Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
 		if(null != title){
 			if(!MyStringUtils.isNull(title)){
@@ -150,5 +206,5 @@ public class ArticleFrontController extends BaseAction {
 			}
 		}
 		return "back/articleBack";
-	}
+	}*/
 }

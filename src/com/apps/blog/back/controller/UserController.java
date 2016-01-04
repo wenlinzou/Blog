@@ -37,7 +37,7 @@ public class UserController extends BaseAction {
 	public String save(HttpServletRequest request, String username, String password, String nickname){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-user add IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-user add IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		boolean usernameisnull = MyStringUtils.isNull(username);
 		boolean passwordisnull = MyStringUtils.isNull(password);
@@ -57,7 +57,7 @@ public class UserController extends BaseAction {
 	public String login(HttpServletRequest request, String username, String password){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-user login IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-user login IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		boolean usernameisnull = MyStringUtils.isNull(username);
 		boolean passwordisnull = MyStringUtils.isNull(password);
@@ -79,7 +79,7 @@ public class UserController extends BaseAction {
 	public void loginOut(HttpServletRequest request){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-user loginout IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-user loginout IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 				
 		request.getSession().setAttribute("user", null);
 		request.getSession().removeAttribute("user");
@@ -103,7 +103,7 @@ public class UserController extends BaseAction {
 	public String update(HttpServletRequest request, String username, String nickname, Integer id, Model model){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-user update IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-user update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		if(null!=id){
 			User user = new User();

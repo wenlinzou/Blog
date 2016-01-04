@@ -46,7 +46,7 @@ public class ArticleController extends BaseAction {
 	public String update(HttpServletRequest request, Integer id, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-article update IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-article update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		if(null != id){
 			if(!MyStringUtils.isNull(title)){
@@ -69,7 +69,7 @@ public class ArticleController extends BaseAction {
 	public String add(HttpServletRequest request, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-article add IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-article add IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 				
 		if(null != title){
 			if(!MyStringUtils.isNull(title)){

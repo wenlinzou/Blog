@@ -37,7 +37,7 @@ public class CategoryController extends BaseAction {
 	public String save(HttpServletRequest request, String name){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-category add IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-category add IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 				
 		boolean nameisnull = MyStringUtils.isNull(name);
 		if(!nameisnull){
@@ -68,7 +68,7 @@ public class CategoryController extends BaseAction {
 	public String update(HttpServletRequest request, String name, Integer id, Model model){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-category update IP : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-category update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		if(null!=id){
 			Category category = new Category();
