@@ -12,32 +12,7 @@
 		id, pid, rootid, title, cont, pdate, isleaf, click
 	</sql>
 
-	<!-- 查询条件 -->
-	<sql id="Example_Where_Clause">
-		where 1=1 and stu_delsta=1 
-		<trim suffixOverrides=",">
-			<if test="g_id != null and g_id != ''">
-				and stu.g_id=#{g_id} 
-			</if>
-			<if test="s_id != null and s_id != ''">
-				and stu.s_id=#{s_id} 
-			</if>
-			<if test="ml_id != null and ml_id != ''">
-				and stu.ml_id=#{ml_id} 
-			</if>
-			<!-- 模糊查询 -->
-			<if test="stu_emaver != null and stu_emaver != ''">
-				and stu.stu_emaver=#{stu_emaver} 
-			</if>
-			<if test="stu_pwdexptim != null and stu_pwdexptim != ''">
-				and stu.stu_pwdexptim=#{stu_pwdexptim} 
-			</if>
-			<if test="stu_valcod != null and stu_valcod != ''">
-				and stu.stu_valcod=#{stu_valcod} 
-			</if>
-		</trim>
-	</sql>
-
+	
 	<!-- 插入记录 
 		添加时，除了密码和注册时间是有sql语句写死的，其他的数据都是从表单提交过来的。
 		初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
@@ -114,67 +89,56 @@
 		 where id=#{id}
 	</update>
 	
-	<select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
-		select * from article;
+	
+	<select id="queryCountByPage" resultType="java.lang.Integer" parameterType="Object">
+		select count(1) from article
+			<!-- 类别 -->
+			<if test="pid != null  ">
+				and pid=#{pid}
+			</if>
+			<if test="pdate != null  ">
+				and month(pdate)=month(#{pdate})
+			</if>
+			<if test="isleaf != null  ">
+				and isleaf=#{isleaf}
+			</if>
+			<if test="pager.orderCondition != null and pager.orderCondition != ''">
+				${pager.orderCondition} 
+			</if>
+			<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+				${pager.mysqlQueryCondition} 
+			</if>
+			order by pdate desc
+	</select>
+	<select id="queryListByPage" resultMap="BaseResultMap" parameterType="Object">
+		select * from article where 1=1 
+			<!-- 类别 -->
+			<if test="pid != null  ">
+				and pid=#{pid}
+			</if>
+			<if test="pdate != null  ">
+				and month(pdate)=month(#{pdate})
+			</if>
+			<if test="isleaf != null  ">
+				and isleaf=#{isleaf}
+			</if>
+			order by pdate desc
+			<if test="pager.orderCondition != null and pager.orderCondition != ''">
+				${pager.orderCondition} 
+			</if>
+			<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+				${pager.mysqlQueryCondition} 
+			</if>
+		
 			<!-- <include refid="Base_Column_List" /> -->
-			<!-- , 
+			<!-- 
+			
+			, 
 			
 		<include refid="Example_Where_Clause" /> -->
 	</select>
 	
 	
-	
-	<!-- 根据id，拼接修改记录，注册时间不要，密码不要 -->
-	<update id="updateBySelective" parameterType="Object" >
-		update t_student set 
-		<trim suffixOverrides=",">
-			<if test="g_id != null  ">
-				g_id=#{g_id},
-			</if>
-			<if test="s_id != null  ">
-				s_id=#{s_id},
-			</if>
-			<if test="ml_id != null  ">
-				ml_id=#{ml_id},
-			</if>
-			<if test="stu_logname != null  ">
-				stu_logname=#{stu_logname},
-			</if>
-			<if test="stu_email != null  ">
-				stu_email=#{stu_email},
-			</if>
-			<if test="stu_name != null ">
-				stu_name = #{stu_name},
-			</if>
-			<if test="stu_sex != null ">
-				stu_sex = #{stu_sex},
-			</if>
-			<if test="stu_age != null ">
-				stu_age = #{stu_age},
-			</if>
-			<if test="stu_point != null  ">
-				stu_point = #{stu_point},
-			</if>
-			<if test="stu_remark != null ">
-				stu_remark = #{stu_remark},
-			</if>
-			<if test="stu_telephone != null ">
-				stu_telephone = #{stu_telephone},
-			</if>
-			<if test="stu_emaver != null ">
-				stu_emaver = #{stu_emaver},
-			</if>
-			<if test="stu_pwdexptim != null ">
-				stu_pwdexptim = #{stu_pwdexptim},
-			</if>
-			<if test="stu_valcod != null ">
-				stu_valcod = #{stu_valcod},
-			</if>
-		</trim>
-		 where stu_id=#{id}
-	</update>
-	
-
 
 	
 	 <!-- 根据 id 查询密码，用于比较密码 -->

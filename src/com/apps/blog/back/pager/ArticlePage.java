@@ -15,8 +15,23 @@ public class ArticlePage extends BasePage{
 	
 	private Integer click;
 	
+	private String img;
+	
+	private String shortmon;
 	
 	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getShortmon() {
+		return shortmon;
+	}
+	public void setShortmon(String shortmon) {
+		this.shortmon = shortmon;
+	}
 	public Integer getClick() {
 		return click;
 	}

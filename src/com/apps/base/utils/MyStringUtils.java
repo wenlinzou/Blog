@@ -9,6 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 public class MyStringUtils {
+	//使用时间恒定的比较函数，可以让攻击者摸不着头脑
+	public static boolean slowEquals(byte[] a, byte[] b){
+		int diff = a.length ^ b.length;
+	    for(int i = 0; i < a.length && i < b.length; i++)
+	        diff |= a[i] ^ b[i];
+	    return diff == 0;
+	}
+	
+	
 	public static boolean isNull(String str) {
 		if (null != str && !"".equals(str)) {
 			return false;

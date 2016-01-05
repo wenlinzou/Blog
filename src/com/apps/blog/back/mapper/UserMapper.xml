@@ -45,8 +45,14 @@
 	</insert>
 	
 	<!-- 后台用户登陆 -->
-	<select id="login" resultType="java.lang.Integer" parameterType="Object">
+	<!-- <select id="login" resultType="java.lang.Integer" parameterType="Object">
 		select count(1) from user where username=#{username} and password=#{password}
+	</select> -->
+	<select id="queryUser" resultMap="BaseResultMap" parameterType="Object">
+		select * from user where username=#{username} and password=#{password}
+	</select>
+	<select id="queryUserByName" resultMap="BaseResultMap" parameterType="Object">
+		select * from user where username=#{username}
 	</select>
 	
 	<!-- 查询所有用户 -->

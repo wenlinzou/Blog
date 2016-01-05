@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.apps.base.BaseService;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.dao.ArticleDao;
+import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.ArticleService;
 
 
@@ -70,6 +71,24 @@ public class ArticleImplService<T> extends BaseService<T> implements ArticleServ
 		if(null!=inputid)
 			articleDao.updateClick(inputid);
 		
+	}
+
+	@Override
+	public List<Article> queryListByPage(ArticlePage page) {
+		if(page!=null){
+			Integer totalCount = queryCountByPage(page);
+			page.getPager().setRowCount(totalCount);
+			List<Article> lists = articleDao.queryListByPage(page);
+			
+			return lists;
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public Integer queryCountByPage(ArticlePage page) {
+		return articleDao.queryByCount(page);
 	}
 
 }

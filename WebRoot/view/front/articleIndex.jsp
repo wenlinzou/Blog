@@ -25,6 +25,7 @@
 <script src="<%=basePath%>plugjs/front/js/jquery.equalheights.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery.easing.1.3.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery.ui.totop.js"></script>
+<script src="<%=basePath%>js/articleIndex.js"></script>
 <script>
 	$(window).load(function() {
 		$().UItoTop({
@@ -88,16 +89,11 @@ ${article.shortmon }</time>
         </div>
         <div class="clear"></div>
         ${article.img }
-        <%-- <img src="<%=basePath%>plugjs/front/images/page5_img1.jpg" alt="" class="img_inner fleft"> --%>
         <div class="extra_wrapper">
          <div class="text" style="width:100%; height:200px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
           <p>
-          
-          <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse jew wligulawe dolor, condimentum ac justo sed, tincidunt commodo molity wer massarete. Nulla non urnatr nisi. Donec varius lectus in vestibulum auctor. Spendisse magna veliternowe dignissim eu commodo ut vestibulum nectro quam. Pellentesque imperdiet velit neque. Ut vestibulum mi sit ametwertilo ornare consectetur. Quisque sed quamhy loi justo. Nulla congue sed turpis nec lacinia. Nulla facilisi. Ut sit amet gravidatylo wtellus. Morbi id wer nolit consequat eros. -->
           ${article.cont } 
           </p>
-          <!-- Vivamus imperdiet ante vitae lorem varius tristique meli. Phasellus tristique lectus id volutpat condimentum. Mauris quam lectus cursus at congue nec ultrices luctus orci quam lectus cursus at congue. -->
-          
           <br>
           </div>
          <a href="<%=basePath%>articleFront/queryDetailById.shtml?id=${article.id}" class="btn">Details</a>

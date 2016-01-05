@@ -1,6 +1,7 @@
 package com.apps.base.utils;
 
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 
 
@@ -31,9 +32,20 @@ public class MD5Utils {
             return null;
         }
 	}
-	
-	public static void main(String[] args) {
-		String str = md5("root");
-		System.out.println(str);
+	public static String md5Salt(String message, String salt){
+		return md5(message+salt);
+		//进行加盐两次 md5
+		/*String md5pwd = md5(message);
+		return md5(md5(md5pwd+salt));*/
 	}
+	
+	
+	public static String salt(){
+		SecureRandom random = new SecureRandom();
+		byte bytes[] = new byte[20];
+		random.nextBytes(bytes);
+		return bytes.toString();
+	}
+	
+	
 }

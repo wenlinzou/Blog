@@ -29,6 +29,11 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+	
+	<listener>  
+		<listener-class>com.apps.blog.front.controller.CountLineListener</listener-class>   
+	</listener>
+	
 <!-- 字符集过滤器 -->
   <filter>
     <filter-name>encodingFilter</filter-name>

@@ -4,7 +4,6 @@ package com.apps.blog.back.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
+import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
+import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
+import com.apps.blog.back.service.impl.SaltImplService;
 import com.apps.blog.back.service.impl.UserImplService;
 
 @Controller
@@ -26,6 +28,8 @@ public class UserController extends BaseAction {
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
 	private UserImplService<User> userService;
+	@Autowired(required = false)
+	private SaltImplService<Salt> saltService;
 	
 	/**
 	 * 跳转到数据展示及操作页面，添加列表数据到页面。
@@ -45,12 +49,25 @@ public class UserController extends BaseAction {
 		if(!usernameisnull && ! passwordisnull){
 			User user = new User();
 			user.setUsername(username);
+			
+			//将MD5+salt的MD5值放入password中
+			String saltStr = MD5Utils.salt();
+			password = MD5Utils.md5Salt(password, saltStr);
 			user.setPassword(password);
 			if(!nickanamenull)
 				user.setNickname(nickname);
 			userService.add(user);
+			
+			//获取userid
+			User loginuser = userService.queryUser(user);
+			Salt salt = new Salt();
+			salt.setSalt(saltStr);
+			salt.setUserid(loginuser.getId());
+			saltService.add(salt);
+			
+			
 		}
-		String redirctStr = "redirect:/user/list.do";
+		String redirctStr = "redirect:/user/queryAll.do";
 		return redirctStr;
 	}
 	@RequestMapping("/login")
@@ -65,13 +82,29 @@ public class UserController extends BaseAction {
 		if(!usernameisnull && ! passwordisnull){
 			User user = new User();
 			user.setUsername(username);
-			user.setPassword(password);
+			User usernameTemp = userService.queryUserByName(user);
+			if(null!=usernameTemp){
+				String datapwd = usernameTemp.getPassword();
+				
+				//查找用户的salt
+				Salt salt = saltService.querySalt(usernameTemp.getId());
+				//md5(inpupwd+salt) == dataPwd
+				String arrangePwd = MD5Utils.md5Salt(password, salt.getSalt());
+				boolean canLogin = userService.login(arrangePwd, datapwd);
+				
+				if(canLogin){
+					request.getSession(true).setAttribute("user", user);
+					String redirctStr = "redirect:/user/queryAll.do";
+					return redirctStr;
+				}
+			}
+			/*user.setPassword(password);
 			boolean canLogin = userService.login(user);
 			if(canLogin){
 				request.getSession(true).setAttribute("user", user);
 				String redirctStr = "redirect:/user/queryAll.do";
 				return redirctStr;
-			}
+			}*/
 		}
 		return jumpJsp;
 	}

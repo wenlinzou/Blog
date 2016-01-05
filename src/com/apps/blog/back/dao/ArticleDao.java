@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.apps.base.BaseDao;
 import com.apps.blog.back.bean.Article;
+import com.apps.blog.back.pager.ArticlePage;
 
 
 public interface ArticleDao<T> extends BaseDao<T>{
@@ -15,4 +16,7 @@ public interface ArticleDao<T> extends BaseDao<T>{
 	public List<Article> queryAllSortDate();
 	public List<Article> queryByThing(Article article);
 	public void updateClick(Integer inputid);
+	
+	public List<Article> queryListByPage(ArticlePage page);
+	public Integer queryCountByPage(ArticlePage page);
 }
