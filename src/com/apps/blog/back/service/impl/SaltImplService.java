@@ -1,8 +1,5 @@
 package com.apps.blog.back.service.impl;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

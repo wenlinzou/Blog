@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.apps.base.BaseDao;
 import com.apps.blog.back.bean.Category;
-import com.apps.blog.back.bean.User;
 
 public interface CategoryDao<T> extends BaseDao<T> {
 	public void add(Category category);

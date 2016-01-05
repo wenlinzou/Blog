@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,30 +181,8 @@ public class ArticleFrontController extends BaseAction {
 			
 			List<Category> categoryList = categoryService.queryAll();
 			model.addAttribute("categoryList", categoryList);
-			return "front/articleIndex";
-		}else{
-			return "front/articleIndex";
 		}
+			return "front/articleIndex";
 	}
 	
-	
-	
-	
-	/*@RequestMapping("/add")
-	public String add(Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
-		if(null != title){
-			if(!MyStringUtils.isNull(title)){
-				Article article = new Article();
-				article.setPid(pid);
-				article.setRootid(rootid);
-				article.setTitle(title);
-				article.setCont(cont);
-				article.setIsleaf(isleaf);
-				articleService.add(article);
-				String redirctStr = "redirect:/article/queryAll.do";
-				return redirctStr;
-			}
-		}
-		return "back/articleBack";
-	}*/
 }

@@ -14,7 +14,6 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
-import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleImplService;
 
 @Controller

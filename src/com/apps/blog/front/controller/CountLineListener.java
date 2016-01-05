@@ -1,6 +1,7 @@
 package com.apps.blog.front.controller;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -15,9 +16,9 @@ public class CountLineListener implements HttpSessionListener {
         ServletContext application = session.getServletContext(); 
         
         // 在application范围由一个HashSet集保存所有的session 
-        HashSet sessions = (HashSet) application.getAttribute("sessions"); 
+        Set<HttpSession> sessions = (Set<HttpSession>) application.getAttribute("sessions"); 
         if (sessions == null) { 
-               sessions = new HashSet(); 
+               sessions = new HashSet<HttpSession>(); 
                application.setAttribute("sessions", sessions); 
         } 
         
@@ -32,11 +33,11 @@ System.out.println("当前人数:"+sessions.size());
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession session = event.getSession(); 
         ServletContext application = session.getServletContext(); 
-        HashSet sessions = (HashSet) application.getAttribute("sessions"); 
+        Set<HttpSession> sessions = (HashSet<HttpSession>) application.getAttribute("sessions"); 
         
         // 销毁的session均从HashSet集中移除 
         sessions.remove(session); 
-
+System.out.println("remove 当前人数:"+sessions.size());
 	}
 
 }

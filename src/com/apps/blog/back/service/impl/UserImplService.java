@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apps.base.BaseService;
-import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.User;
-import com.apps.blog.back.dao.SaltDao;
 import com.apps.blog.back.dao.UserDao;
 import com.apps.blog.back.service.UserService;
 

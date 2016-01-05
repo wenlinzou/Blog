@@ -15,7 +15,6 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Category;
-import com.apps.blog.back.bean.User;
 import com.apps.blog.back.service.impl.CategoryImplService;
 
 @Controller

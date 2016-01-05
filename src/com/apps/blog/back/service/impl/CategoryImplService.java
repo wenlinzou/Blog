@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.apps.base.BaseService;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Category;
-import com.apps.blog.back.bean.User;
 import com.apps.blog.back.dao.CategoryDao;
 import com.apps.blog.back.service.CategoryService;
 

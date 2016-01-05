@@ -30,7 +30,6 @@ public class MyStringUtils {
 		if (startIndex > 0) {
 			String tempStr = str.substring(startIndex);
 			int endIndex = tempStr.indexOf(">");
-			System.out.println(endIndex + tempStr.length());
 			String imgStr = tempStr.substring(0, endIndex + 1);
 			return imgStr;
 		} else {
