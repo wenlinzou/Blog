@@ -37,7 +37,7 @@
 	
 	<!-- 查询全部 -->
 	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
-		select * from article
+		select * from article order by pdate desc
 	</select>
 	
 	<!-- 查询全部 按照时间倒叙 -->
