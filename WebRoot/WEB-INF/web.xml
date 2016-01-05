@@ -69,11 +69,15 @@
 <!-- web服务器内部错误引导页面，页面还没有建立201505201012-->
 	<error-page>
 		<error-code>404</error-code>
-		<location>/common/jsp/error/404.jsp</location>
+		<location>/common/error/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>400</error-code>
+		<location>/common/error/404.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/common/jsp/error/500.jsp</location>
+		<location>/common/error/500.jsp</location>
 	</error-page>
 	
 <!-- 去掉jsp生成html页面的空行-->

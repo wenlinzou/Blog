@@ -8,8 +8,13 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-public class CountLineListener implements HttpSessionListener {
+import org.apache.log4j.Logger;
 
+import com.apps.blog.back.controller.ArticleController;
+
+public class CountLineListener implements HttpSessionListener {
+	private final static Logger log = Logger.getLogger(CountLineListener.class);
+	
 	@Override
 	public void sessionCreated(HttpSessionEvent event) {
 		HttpSession session = event.getSession(); 
@@ -26,6 +31,7 @@ public class CountLineListener implements HttpSessionListener {
         sessions.add(session); 
         // 可以在别处从application范围中取出sessions集合 
         // 然后使用sessions.size()获取当前活动的session数，即为“在线人数” 
+        log.info("当前人数:"+sessions.size());
 System.out.println("当前人数:"+sessions.size());
 	}
 
@@ -37,6 +43,7 @@ System.out.println("当前人数:"+sessions.size());
         
         // 销毁的session均从HashSet集中移除 
         sessions.remove(session); 
+        log.info("remove 当前人数:"+sessions.size());
 System.out.println("remove 当前人数:"+sessions.size());
 	}
 
