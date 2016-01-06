@@ -94,7 +94,7 @@
       <ul class="list2 l1">
       
       	<c:forEach items="${categoryList }" var="category">
-        	<li><a href="<%=basePath%>articleFront/queryByThing.shtml?pid=${category.id}">${category.name }</a></li>
+        	<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?pid=${category.id}">${category.name }</a></li>
         </c:forEach>
         
       </ul>
@@ -102,7 +102,7 @@
       <ul class="list2 l1">
         <!-- <li><a href="#">August 2012</a></li> -->
         <c:forEach items="${monthMap }" var="months">
-      		<li><a href="<%=basePath%>articleFront/queryByThing.shtml?date=${months.key }">${months.value }</a></li>
+      		<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?date=${months.key }">${months.value }</a></li>
       	</c:forEach>
         
       </ul>
