@@ -1,7 +1,9 @@
 package com.apps.blog.back.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
@@ -31,6 +34,27 @@ public class UserController extends BaseAction {
 	@Autowired(required = false)
 	private SaltImplService<Salt> saltService;
 	
+	
+	@RequestMapping("checkName")
+	@ResponseBody
+	public Map<String, Object> checkName(String username, String password, String nickname){
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean usernameisnull = MyStringUtils.isNull(username);
+		if(!usernameisnull){
+			User user = new User();
+			user.setUsername(username);
+			User usernameTemp = userService.queryUserByName(user);
+			if(null==usernameTemp){
+				map.put("canSave", true);
+				map.put("jumpUrl", "user/save.do");
+			} else {
+				map.put("canSave", false);
+				map.put("msg", "existed");
+			}
+		}
+		return map;
+	}
+	
 	/**
 	 * 跳转到数据展示及操作页面，添加列表数据到页面。
 	 * @param model
@@ -49,23 +73,23 @@ public class UserController extends BaseAction {
 		if(!usernameisnull && ! passwordisnull){
 			User user = new User();
 			user.setUsername(username);
-			
-			//将MD5+salt的MD5值放入password中
-			String saltStr = MD5Utils.salt();
-			password = MD5Utils.md5Salt(password, saltStr);
-			user.setPassword(password);
-			if(!nickanamenull)
-				user.setNickname(nickname);
-			userService.add(user);
-			
-			//获取userid
-			User loginuser = userService.queryUser(user);
-			Salt salt = new Salt();
-			salt.setSalt(saltStr);
-			salt.setUserid(loginuser.getId());
-			saltService.add(salt);
-			
-			
+			User usernameTemp = userService.queryUserByName(user);
+				if(null==usernameTemp){
+				//将MD5+salt的MD5值放入password中
+				String saltStr = MD5Utils.salt();
+				password = MD5Utils.md5Salt(password, saltStr);
+				user.setPassword(password);
+				if(!nickanamenull)
+					user.setNickname(nickname);
+				userService.add(user);
+				
+				//获取userid
+				User loginuser = userService.queryUser(user);
+				Salt salt = new Salt();
+				salt.setSalt(saltStr);
+				salt.setUserid(loginuser.getId());
+				saltService.add(salt);
+			}
 		}
 		String redirctStr = "redirect:/user/queryAll.do";
 		return redirctStr;

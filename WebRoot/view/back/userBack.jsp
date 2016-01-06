@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/user.css">
 	
+	<script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/userBack.js"></script>
  </head>
    <body>
@@ -36,7 +37,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</ul>
 		<c:forEach items="${users }" var="user">
 			<ul>
-	
 				<li>${user.id }</li>
 				<li>${user.username }</li>
 				<%-- <li>${user.password }</li> --%>
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</c:forEach>
 	</div>
 	<div id="showAddDiv" class="addUser" style="display: none;">
-		<form action="<%=basePath%>user/save.do" method="post">
+		<form onsubmit="return checkName();" method="post" id="saveForm">
 		<ul><li>名称</li><li>密码</li><li>昵称</li></ul>
 		<ul>
 			<li><input type="text" name="username"/></li>
