@@ -3,18 +3,14 @@
 <mapper namespace="com.apps.blog.back.dao.ArticleDao">
 	<!-- Result Map -->
 	<resultMap id="BaseResultMap" type="com.apps.blog.back.bean.Article">
-<!-- 		<result column="stu_id"				property="id" 			/> -->
-		
 	</resultMap>
 
-	<!-- t_student table all fields 不要stu_pwd, -->
 	<sql id="Base_Column_List">
 		id, pid, rootid, title, cont, pdate, isleaf, click
 	</sql>
 
 	
-	<!-- 插入记录 
-		添加时，除了密码和注册时间是有sql语句写死的，其他的数据都是从表单提交过来的。
+	<!-- 插入记录 		添加时，除了密码和注册时间是有sql语句写死的，其他的数据都是从表单提交过来的。
 		初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
 	<insert id="add" parameterType="Object" >
 		insert into article
@@ -91,7 +87,7 @@
 	
 	
 	<select id="queryCountByPage" resultType="java.lang.Integer" parameterType="Object">
-		select count(1) from article
+		select count(1) from article where 1=1 
 			<!-- 类别 -->
 			<if test="pid != null  ">
 				and pid=#{pid}
@@ -108,8 +104,8 @@
 			<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
 				${pager.mysqlQueryCondition} 
 			</if>
-			order by pdate desc
 	</select>
+	
 	<select id="queryListByPage" resultMap="BaseResultMap" parameterType="Object">
 		select * from article where 1=1 
 			<!-- 类别 -->
@@ -129,29 +125,16 @@
 			<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
 				${pager.mysqlQueryCondition} 
 			</if>
-		
-			<!-- <include refid="Base_Column_List" /> -->
-			<!-- 
-			
-			, 
-			
-		<include refid="Example_Where_Clause" /> -->
 	</select>
 	
 	
 
 	
-	 <!-- 根据 id 查询密码，用于比较密码 -->
-	<!--<select id="queryPwdById" resultType="String" parameterType="java.lang.Integer">
-		select stu_pwd from t_student where stu_id=#{id} and stu_delsta=1 
-	</select> -->
 	
 	<!-- 学生 列表总数 -->
 	<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
 		select count(1) from article
-		
 	</select>
-
 	
 
 </mapper>   

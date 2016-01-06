@@ -73,13 +73,10 @@ public class ArticleFrontController extends BaseAction {
 	}
 	
 	@RequestMapping("/queryAllArticlePage")
-	@ResponseBody
-	public Map<String,Object> queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
+	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("front-article page visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-		
-		Map<String,Object> map = new HashMap<String,Object>();
 		
 		if(null != pid){
 			page.setPid(pid);
@@ -90,38 +87,34 @@ public class ArticleFrontController extends BaseAction {
 				page.setPdate(pdate);
 		}
 		page.setIsleaf(1);
-		page.setRows(5);
+//		page.setRows(5);
 		
 		List<Article> articleList = articleService.queryListByPage(page);
-		List<Date> dates = new ArrayList<Date>(); 
 		for (int i = 0; i < articleList.size(); i++) {
 			Article a = articleList.get(i);
-			dates.add(a.getPdate());
 			String imgStr = MyStringUtils.queryImg(a.getCont());
 			if(!MyStringUtils.isNull(imgStr)){
 				articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
 			}
 			articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
 		}
-		List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
-//		dateList = MyStringUtils.arrangeEnglishMonth(dateList);
 		
-		Map<String, String> monthMap = new HashMap<String, String>();
-		monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
-		
-		
-		List<Category> categoryList = categoryService.queryAll();
-		/*model.addAttribute("monthMap", monthMap);
-		
+		if(null == request.getSession().getAttribute("monthMap")){
+			List<Article> articleMonthList = articleService.queryAllSortDate();
+			List<String> dateList = articleService.getAllDate(articleMonthList);
+			Map<String, String> monthMap = new HashMap<String, String>();
+			monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+			request.getSession().setAttribute("monthMap", monthMap);
+		}
+		if(null == request.getSession().getAttribute("categoryList")){
+			List<Category> categoryList = categoryService.queryAll();
+			request.getSession().setAttribute("categoryList", categoryList);
+		}
 		model.addAttribute("articleList", articleList);
-		model.addAttribute("categoryList", categoryList);*/
+		model.addAttribute("pageData", page);
 		
-		map.put("monthMap", monthMap);
-		map.put("articleList", articleList);
-		map.put("categoryList", categoryList);
-		map.put("pageData", page);
 		
-		return map;
+		return "front/articleIndex";
 	}
 	
 	@RequestMapping("/queryDetailById")

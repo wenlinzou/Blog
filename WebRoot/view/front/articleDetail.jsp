@@ -75,21 +75,14 @@
     <div class="grid_9">
       <h3>Recent Posts</h3>
       <div class="blog">
-        <time datetime="2013-01-01"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br>
-${article.shortmon }</time>
+        <time datetime="2013-01-01"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br/>${article.shortmon }</time>
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title }</div>
-          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">${article.pdate}0 Comment(s)&nbsp;${article.click }</a></div>
+          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">${article.pdate} Comment(s)&nbsp;${article.click }</a></div>
         </div>
         <div class="clear"></div>
-        <%-- <img src="<%=basePath%>plugjs/front/images/page5_img1.jpg" alt="" class="img_inner fleft"> --%>
         <div class="extra_wrapper">
-          <!-- <p class="text1">Gellentesque imperdiet gerti loki holewvelit neque. Ut vestibulum mi sit amet ornare. </p> -->
           ${article.cont }
-         <!--  <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse jew wligulawe dolor, condimentum ac justo sed, tincidunt commodo molity wer massarete. Nulla non urnatr nisi. Donec varius lectus in vestibulum auctor. Spendisse magna veliternowe dignissim eu commodo ut vestibulum nectro quam. Pellentesque imperdiet velit neque. Ut vestibulum mi sit ametwertilo ornare consectetur. Quisque sed quamhy loi justo. Nulla congue sed turpis nec lacinia. Nulla facilisi. Ut sit amet gravidatylo wtellus. Morbi id wer nolit consequat eros. 
-          </p>
-          Vivamus imperdiet ante vitae lorem varius tristique meli. Phasellus tristique lectus id volutpat condimentum. Mauris quam lectus cursus at congue nec ultrices luctus orci quam lectus cursus at congue. -->
           <br>
           <a onclick="window.history.go(-1)" class="btn">Back</a>
         </div>

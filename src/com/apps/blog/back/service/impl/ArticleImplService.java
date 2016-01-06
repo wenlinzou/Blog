@@ -1,6 +1,8 @@
 package com.apps.blog.back.service.impl;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apps.base.BaseService;
+import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.dao.ArticleDao;
 import com.apps.blog.back.pager.ArticlePage;
@@ -88,7 +91,18 @@ public class ArticleImplService<T> extends BaseService<T> implements ArticleServ
 
 	@Override
 	public Integer queryCountByPage(ArticlePage page) {
-		return articleDao.queryByCount(page);
+		return articleDao.queryCountByPage(page);
+	}
+	
+	
+	public List<String> getAllDate(List<Article> articleList){
+		List<Date> dates = new ArrayList<Date>(); 
+		for (int i = 0; i < articleList.size(); i++) {
+			Article a = articleList.get(i);
+			dates.add(a.getPdate());
+		}
+		List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
+		return dateList;
 	}
 
 }

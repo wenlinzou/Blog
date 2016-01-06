@@ -16,9 +16,10 @@
 
 
 <link rel="icon" href="<%=basePath%>plugjs/front/images/favicon.ico">
-<link rel="shortcut icon"
-	href="<%=basePath%>plugjs/front/images/favicon.ico" />
+<link rel="shortcut icon" href="<%=basePath%>plugjs/front/images/favicon.ico" />
 <link rel="stylesheet" href="<%=basePath%>plugjs/front/css/style.css">
+<link rel="stylesheet" href="<%=basePath%>css/articleIndex.css">
+
 <script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery-migrate-1.1.1.js"></script>
 <script src="<%=basePath%>plugjs/front/js/superfish.js"></script>
@@ -40,7 +41,7 @@
  <header> 
   <div class="container_12">
     <div class="grid_12"> 
-    <h1><a href="articleFront/queryAllArticle.shtml"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
+    <h1><a href="articleFront/queryAllArticlePage.shtml"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
           
          
            <div class="clear"></div>
@@ -79,8 +80,7 @@
       <c:forEach items="${articleList }" var="article">
       
       <div class="blog">
-        <time datetime="${article.pdate }"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br>
-${article.shortmon }</time>
+        <time datetime="${article.pdate }"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br/>${article.shortmon }</time>
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title } </div>
           <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a>
@@ -103,13 +103,17 @@ ${article.shortmon }</time>
       
       </c:forEach>
       
-     
+      	<div class="pageCenter">
+	      <c:if test="${pageData.page > 1}"><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page-1}">上一页</a>&nbsp;</c:if>
+	      <c:if test="${pageData.page < pageData.pager.pageCount}"><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page+1}">&nbsp;下一页</a></c:if>
+		</div>
+		
     </div>
     <div class="grid_3">
       <h3>类别</h3>
       <ul class="list2 l1">
       	<c:forEach items="${categoryList }" var="category">
-        	<li><a href="<%=basePath%>articleFront/queryByThing.shtml?pid=${category.id}">${category.name }</a></li>
+        	<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?pid=${category.id}">${category.name }</a></li>
         </c:forEach>
         
         <!-- <li><a href="#">Sem psum dr sit ametre conse</a></li>
@@ -120,21 +124,11 @@ ${article.shortmon }</time>
       </ul>
       <h3>存档</h3>
       <ul class="list2 l1">
-      	<%-- <c:forEach items="${dateList }" var="dates">
-      		<li><a href="">${dates }</a></li>
-      	</c:forEach> --%>
+      	
       	<c:forEach items="${monthMap }" var="months">
-      		<li><a href="<%=basePath%>articleFront/queryByThing.shtml?date=${months.key }">${months.value }</a></li>
+      		<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?date=${months.key }">${months.value }</a></li>
       	</c:forEach>
-        <!-- <li><a href="#">August 2012</a></li> -->
-        <!-- <li><a href="#">July 2012</a></li>
-        <li><a href="#">June 2012</a></li>
-        <li><a href="#">May 2012</a></li>
-        <li><a href="#">April 2012</a></li>
-        <li><a href="#">March 2012</a></li>
-        <li><a href="#">February 2012</a></li>
-        <li><a href="#">January 2012</a></li>
-        <li><a href="#">December 2011</a></li> -->
+       
       </ul>
     </div>
     <div class="clear"></div>
