@@ -74,8 +74,8 @@
 
 <div class="content">
   <div class="container_12">
-      <h3><!-- Recent Posts -->&nbsp;&nbsp;最近的帖子</h3>
     <div class="grid_9">
+      <h3><!-- Recent Posts -->最近的帖子</h3>
       
       <c:forEach items="${articleList }" var="article">
       
