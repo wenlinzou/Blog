@@ -156,13 +156,14 @@ public class IPUtils {
 			reader.close();
 			return buffer.toString();
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			return "读取失败";
 		} finally {
 			if (connection != null) {
 				connection.disconnect();// 关闭连接
 			}
 		}
-		return null;
+//		return null;
 	}
 
 	/**

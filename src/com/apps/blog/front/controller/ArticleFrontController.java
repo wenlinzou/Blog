@@ -75,9 +75,10 @@ public class ArticleFrontController extends BaseAction {
 	@RequestMapping("/queryAllArticlePage")
 	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
 		//记录访问者的IP
-		String userLogIP = request.getRemoteAddr();
-		log.info("front-article page visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-		
+		if(null!= page.getPage() && page.getPage() == 1){
+			String userLogIP = request.getRemoteAddr();
+			log.info("front-article page visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		}
 		if(null != pid){
 			page.setPid(pid);
 		}
@@ -113,6 +114,12 @@ public class ArticleFrontController extends BaseAction {
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageData", page);
 		
+		if(!MyStringUtils.isNull(date)){
+			model.addAttribute("date", date);
+		}
+		if(null!=pid){
+			model.addAttribute("pid", pid);
+		}
 		
 		return "front/articleIndex";
 	}

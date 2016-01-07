@@ -104,8 +104,12 @@
       </c:forEach>
       
       	<div class="pageCenter">
-	      <c:if test="${pageData.page > 1}"><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page-1}">上一页</a>&nbsp;</c:if>
-	      <c:if test="${pageData.page < pageData.pager.pageCount}"><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page+1}">&nbsp;下一页</a></c:if>
+	      <c:if test="${pageData.page > 1}">
+	      <a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page-1}<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>">上一页&nbsp;</a>
+	      </c:if>
+	      <c:if test="${pageData.page < pageData.pager.pageCount}">
+	      <a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page+1}<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>">&nbsp;下一页</a>
+	      </c:if>
 		</div>
 		
     </div>
