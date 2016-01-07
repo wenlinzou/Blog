@@ -88,7 +88,7 @@ public class ArticleFrontController extends BaseAction {
 				page.setPdate(pdate);
 		}
 		page.setIsleaf(1);
-		page.setRows(2);
+		page.setRows(5);
 		
 		List<Article> articleList = articleService.queryListByPage(page);
 		for (int i = 0; i < articleList.size(); i++) {
@@ -177,7 +177,7 @@ public class ArticleFrontController extends BaseAction {
 	public String queryDetailById(HttpServletRequest request, Integer id, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit detail IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("front-article visit detail IP : " + userLogIP +" : " /*+ IPUtils.getAddressByIP(userLogIP)*/);
 		
 		if(null != id){
 			Article article = articleService.queryById(id);
@@ -220,11 +220,6 @@ public class ArticleFrontController extends BaseAction {
 				articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
 			}
 			
-			//List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
-			
-			//Map<String, String> monthMap = new HashMap<String, String>();
-			//monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
-			//model.addAttribute("monthMap", monthMap);
 			
 			model.addAttribute("articleList", articleList);
 			
