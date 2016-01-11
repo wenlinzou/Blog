@@ -92,6 +92,8 @@ body {
 
 .container_12 .grid_3 {
 	width:264px;
+	background-color: rgba(224, 218, 213, 0.28);
+	border-radius:6px;
 }
 
 .container_12 .grid_4 {

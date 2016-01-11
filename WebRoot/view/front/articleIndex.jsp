@@ -84,7 +84,7 @@
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title } </div>
           <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a>
-          	<a href="javascript:void(0);" class="comment"><fmt:formatDate value="${article.pdate }" type="date" dateStyle="long"/></a>
+          	<a href="javascript:void(0);" style="font-size:16px;" class="comment"><fmt:formatDate value="${article.pdate }" type="date" dateStyle="long"/></a>
           </div>
         </div>
         <div class="clear"></div>
@@ -98,9 +98,8 @@
           </div>
          <a href="<%=basePath%>articleFront/queryDetailById.shtml?id=${article.id}" class="btn">Details</a>
         </div>
-         
+       <br>
       </div>
-      
       </c:forEach>
       
       	<div class="pageCenter">
