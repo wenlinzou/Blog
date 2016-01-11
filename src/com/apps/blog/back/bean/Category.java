@@ -1,6 +1,7 @@
 package com.apps.blog.back.bean;
 
 public class Category {
+	
 	private Integer id;
 	private String name;
 	

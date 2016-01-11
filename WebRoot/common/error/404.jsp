@@ -40,7 +40,7 @@
  <header> 
   <div class="container_12">
     <div class="grid_12"> 
-    <h1><a href="<%=basePath%>articleFront/queryAllArticle.shtml"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
+    <h1><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml"><img src="<%=basePath%>plugjs/front/images/logo.png" alt="Gerald Harris attorney at law"></a> </h1>
           
          
            <div class="clear"></div>

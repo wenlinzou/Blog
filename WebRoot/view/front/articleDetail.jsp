@@ -12,7 +12,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>Blog</title>
+<title><c:if test="${!empty article.title }">${article.title }</c:if><c:if test="${empty article.title }">Blog</c:if></title>
 
 
 <link rel="icon" href="<%=basePath%>plugjs/front/images/favicon.ico">
@@ -57,7 +57,7 @@
                    </li>
                    <li><a href="javascript:void(0);">Gallery</a></li>
                    <li><a href="javascript:void(0);">Tours</a></li>
-                   <li class="current"><a href="javascript:void(0);">Blog</a></li>
+                   <li><a href="javascript:void(0);">Journey</a></li>
                    <li><a href="javascript:void(0);">Contacts</a></li>
                  </ul>
             </nav>

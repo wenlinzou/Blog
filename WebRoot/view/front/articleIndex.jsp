@@ -59,7 +59,7 @@
                    </li>
                    <li><a href="javascript:void(0);">Gallery</a></li>
                    <li><a href="javascript:void(0);">Tours</a></li>
-                   <li class="current"><a href="javascript:void(0);">Blog</a></li>
+                   <li><a href="javascript:void(0);">Journey</a></li>
                    <li><a href="javascript:void(0);">Contacts</a></li>
                  </ul>
             </nav>

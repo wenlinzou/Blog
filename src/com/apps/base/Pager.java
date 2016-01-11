@@ -1,6 +1,5 @@
 package com.apps.base;
 
-import java.util.ArrayList;
 
 /**
  * 分页参数
@@ -39,7 +38,6 @@ public class Pager {
 	public int[] getIndexs() {
 		int len = getEndIndex() - getStartIndex() + 1;
 		indexs = new int[len];
-		ArrayList a;
 		for (int i = 0; i < len; i++) {
 			indexs[i] = (getStartIndex() + i);
 		}
