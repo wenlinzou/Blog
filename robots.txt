@@ -1,0 +1,183 @@
+User-agent: Baiduspider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Googlebot
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: MSNBot
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Baiduspider-image
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: YoudaoBot
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sogou web spider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sogou inst spider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sogou spider2
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sogou blog
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sogou News Spider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sogou Orion spider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: ChinasoSpider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: Sosospider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+
+User-agent: yisouspider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: EasouSpider
+Disallow: /js/
+Disallow: /plugjs/
+Disallow: /view/back/
+Disallow: /WEB-INF/
+Disallow: /view/*.js
+Disallow: /.jpg$
+Disallow: /.png$
+Disallow: /.gif$
+Disallow: /.xml$
+Disallow: /.log$
+
+User-agent: *
+Disallow: /

@@ -27,6 +27,7 @@ import com.apps.blog.back.service.impl.CategoryImplService;
 @Controller
 @RequestMapping("/articleFront")
 public class ArticleFrontController extends BaseAction {
+	private final int START_PAGE = 1;
 	private final static Logger log = Logger.getLogger(ArticleFrontController.class);
 
 	@Autowired(required = false)
@@ -75,10 +76,12 @@ public class ArticleFrontController extends BaseAction {
 	@RequestMapping("/queryAllArticlePage")
 	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
 		//记录访问者的IP
-		if(null!= page.getPage() && page.getPage() == 1){
+		if(null!= page.getPage() && page.getPage() == START_PAGE){
 			String userLogIP = request.getRemoteAddr();
-			log.info("front-article page visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-		}
+			log.info("front-article page-visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));			
+		}else		
+			log.info("-currentpage : " + page.getPage());
+		
 		if(null != pid){
 			page.setPid(pid);
 		}
