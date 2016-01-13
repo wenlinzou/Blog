@@ -7,8 +7,43 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class IPUtils {
+	public static Map<String,Long> map  = new HashMap<String, Long>();
+	private static final long OUT_TIME = 500;//1s = 1000ms
+	
+	public static boolean checkSpider(String inputip){
+		boolean isLow = false;
+		Long now = System.currentTimeMillis();
+		if(null == map || map.size() < 1){
+			map.put(inputip, now);
+		} else {
+			isLow = isLowSpider(map, inputip, now);
+			map.remove(inputip);
+			map.put(inputip, now);
+		}
+		return isLow;
+	}
+	public static boolean isLowSpider(Map<String, Long> checkMap, String inputip, Long time){
+		boolean isLowSipder = false;
+		for(Entry<String, Long> useMap:checkMap.entrySet()){
+			String tempIp = useMap.getKey();
+			if(inputip.equals(tempIp)){
+				long visittime = time - useMap.getValue();
+System.out.println("visistime:"+visittime+" ip: " +tempIp +" now:"+time+ " old:" +useMap.getValue());				
+				if(visittime < OUT_TIME){
+					isLowSipder = true;
+				}
+			}
+		}
+		return isLowSipder;
+	}
+	
+	
+	
 	public static String getAddressByIP(String ipAddr) {
 		/*
 		 * old code
@@ -47,9 +82,6 @@ public class IPUtils {
 		return address;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(IPUtils.getAddressByIP("42.156.138.117"));
-	}
 
 	/**
 	 * 

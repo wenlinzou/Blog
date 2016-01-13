@@ -79,12 +79,17 @@ public class ArticleFrontController extends BaseAction {
 	@RequestMapping("/queryAllArticlePage")
 	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
 		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		boolean isLowSpider = IPUtils.checkSpider(userLogIP);
+		if(isLowSpider){
+			return "error/spider";
+		}
+		
+		
 		if(null!= page.getPage() && page.getPage() == START_PAGE){
-			String userLogIP = request.getRemoteAddr();
 			log.info("front-article page-visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));			
 		}else		
 			log.info("-currentpage : " + page.getPage());
-		
 		if(null != pid){
 			page.setPid(pid);
 		}
