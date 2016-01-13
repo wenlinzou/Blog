@@ -20,6 +20,7 @@ import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
+import com.apps.blog.back.bean.User;
 import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleImplService;
 import com.apps.blog.back.service.impl.CategoryImplService;
@@ -28,6 +29,8 @@ import com.apps.blog.back.service.impl.CategoryImplService;
 @RequestMapping("/articleFront")
 public class ArticleFrontController extends BaseAction {
 	private final int START_PAGE = 1;
+	private final int LOGOUT_USER = 1;
+	private final int PAGE_SIZE = 5;
 	private final static Logger log = Logger.getLogger(ArticleFrontController.class);
 
 	@Autowired(required = false)
@@ -90,8 +93,13 @@ public class ArticleFrontController extends BaseAction {
 			if(null != pdate)
 				page.setPdate(pdate);
 		}
-		page.setIsleaf(1);
-		page.setRows(5);
+		Object objUser = request.getSession(true).getAttribute("user");
+		if(null != objUser && objUser instanceof User) {
+			page.setIsleaf(null);
+		} else {
+			page.setIsleaf(LOGOUT_USER);
+		}
+		page.setRows(PAGE_SIZE);
 		
 		List<Article> articleList = articleService.queryListByPage(page);
 		for (int i = 0; i < articleList.size(); i++) {

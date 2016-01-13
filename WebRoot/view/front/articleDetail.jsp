@@ -78,7 +78,7 @@
         <time datetime="2013-01-01"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br/>${article.shortmon }</time>
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title }</div>
-          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">${article.pdate} Comment(s)&nbsp;${article.click }</a></div>
+          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">Views Comment(s)&nbsp;${article.click }</a></div>
         </div>
         <div class="clear"></div>
         <div class="extra_wrapper">
