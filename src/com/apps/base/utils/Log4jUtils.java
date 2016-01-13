@@ -1,5 +1,6 @@
 package com.apps.base.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -15,19 +16,23 @@ import org.apache.log4j.PropertyConfigurator;
 public class Log4jUtils extends HttpServlet {
 	private static final long serialVersionUID = 1l;
 	private static Logger logger = Logger.getLogger(Log4jUtils.class);
+	private static String SEPARATOR = System.getProperty("file.separator");
 	
 	public void init(){
 		String path = this.getServletContext().getRealPath("/");
 		String file = this.getInitParameter("log4j_init_path");
-		String logFile = this.getInitParameter("log4j_file_path");
-
+//		String logFile = this.getInitParameter("log4j_file_path");
+		
 		if(null != file){
 			Properties prop = new Properties();
 			try {
 				//加载log4j.properties
 				prop.load(new FileInputStream(path+file));
 				//设置日志文件的输出路径
-				String logPath = path+logFile+prop.getProperty("log4j.appender.index.File").toString();
+				File webapps = new File(path);
+				String weappsStr = webapps.getParent();
+				String templogpsth = weappsStr + SEPARATOR +"logs" + SEPARATOR;
+				String logPath = templogpsth + prop.getProperty("log4j.appender.index.File").toString();
 				logPath = logPath.replace("\\", "/");
 //				prop.setProperty("log4j.appender.R.File", path+logFile+prop.getProperty("log4j.appender.R.File"));
 				prop.setProperty("log4j.appender.index.File", logPath);
