@@ -9,7 +9,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>编辑用户</title>
+<title>编辑文章类别</title>
 
 
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
