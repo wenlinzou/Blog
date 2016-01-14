@@ -14,7 +14,7 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
-import com.apps.blog.back.service.impl.ArticleImplService;
+import com.apps.blog.back.service.impl.ArticleServiceImpl;
 
 @Controller
 @RequestMapping("/article")
@@ -23,7 +23,7 @@ public class ArticleController extends BaseAction {
 
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
-	private ArticleImplService<Article> articleService;
+	private ArticleServiceImpl<Article> articleService;
 	
 	
 	@RequestMapping("/queryAll")

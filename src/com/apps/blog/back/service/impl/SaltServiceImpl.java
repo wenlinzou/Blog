@@ -10,10 +10,10 @@ import com.apps.blog.back.bean.User;
 import com.apps.blog.back.dao.SaltDao;
 import com.apps.blog.back.service.SaltService;
 
-@Service("saltImplService")
-public class SaltImplService<T> extends BaseService<T> implements SaltService<User> {
+@Service("saltServiceImpl")
+public class SaltServiceImpl<T> extends BaseService<T> implements SaltService<User> {
 
-	private final static Logger log = Logger.getLogger(SaltImplService.class);
+	private final static Logger log = Logger.getLogger(SaltServiceImpl.class);
 	@Autowired
 	private SaltDao<T> saltDao;
 

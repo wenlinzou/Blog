@@ -22,8 +22,8 @@ import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.bean.User;
 import com.apps.blog.back.pager.ArticlePage;
-import com.apps.blog.back.service.impl.ArticleImplService;
-import com.apps.blog.back.service.impl.CategoryImplService;
+import com.apps.blog.back.service.impl.ArticleServiceImpl;
+import com.apps.blog.back.service.impl.CategoryServiceImpl;
 
 @Controller
 @RequestMapping("/articleFront")
@@ -34,10 +34,10 @@ public class ArticleFrontController extends BaseAction {
 	private final static Logger log = Logger.getLogger(ArticleFrontController.class);
 
 	@Autowired(required = false)
-	private ArticleImplService<Article> articleService;
+	private ArticleServiceImpl<Article> articleService;
 	
 	@Autowired(required = false)
-	private CategoryImplService<Category> categoryService;
+	private CategoryServiceImpl<Category> categoryService;
 	
 	
 	@RequestMapping("/queryAllArticle")

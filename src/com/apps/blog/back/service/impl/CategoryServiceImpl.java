@@ -12,10 +12,10 @@ import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.dao.CategoryDao;
 import com.apps.blog.back.service.CategoryService;
 
-@Service("categoryImplService")
-public class CategoryImplService<T> extends BaseService<T>  implements CategoryService<Category> {
+@Service("categoryServiceImpl")
+public class CategoryServiceImpl<T> extends BaseService<T>  implements CategoryService<Category> {
 	
-	private final static Logger log = Logger.getLogger(CategoryImplService.class);
+	private final static Logger log = Logger.getLogger(CategoryServiceImpl.class);
 	@Autowired
     private CategoryDao<T> categoryDao;
 	

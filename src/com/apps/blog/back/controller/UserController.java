@@ -20,8 +20,8 @@ import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
-import com.apps.blog.back.service.impl.SaltImplService;
-import com.apps.blog.back.service.impl.UserImplService;
+import com.apps.blog.back.service.impl.SaltServiceImpl;
+import com.apps.blog.back.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -30,9 +30,9 @@ public class UserController extends BaseAction {
 
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
-	private UserImplService<User> userService;
+	private UserServiceImpl<User> userService;
 	@Autowired(required = false)
-	private SaltImplService<Salt> saltService;
+	private SaltServiceImpl<Salt> saltService;
 	
 	
 	@RequestMapping("checkName")

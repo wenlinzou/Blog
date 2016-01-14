@@ -17,10 +17,10 @@ import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.ArticleService;
 
 
-@Service("articleImplService")
-public class ArticleImplService<T> extends BaseService<T> implements ArticleService<T> {
+@Service("articleServiceImpl")
+public class ArticleServiceImpl<T> extends BaseService<T> implements ArticleService<T> {
 
-	private final static Logger log = Logger.getLogger(ArticleImplService.class);
+	private final static Logger log = Logger.getLogger(ArticleServiceImpl.class);
 	@Autowired
     private ArticleDao<T> articleDao;
 	

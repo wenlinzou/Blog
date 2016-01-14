@@ -14,10 +14,10 @@ import com.apps.blog.back.dao.UserDao;
 import com.apps.blog.back.service.UserService;
 
 
-@Service("userImplService")
-public class UserImplService<T> extends BaseService<T> implements UserService<User> {
+@Service("userServiceImpl")
+public class UserServiceImpl<T> extends BaseService<T> implements UserService<User> {
 
-	private final static Logger log = Logger.getLogger(UserImplService.class);
+	private final static Logger log = Logger.getLogger(UserServiceImpl.class);
 	@Autowired
     private UserDao<T> userDao;
 	
