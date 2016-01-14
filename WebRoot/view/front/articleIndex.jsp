@@ -103,12 +103,25 @@
       </c:forEach>
       
       	<div class="pageCenter">
-	      <c:if test="${pageData.page > 1}">
-	      <a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page-1}<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>">上一页&nbsp;</a>
-	      </c:if>
-	      <c:if test="${pageData.page < pageData.pager.pageCount}">
-	      <a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.page+1}<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>">&nbsp;下一页</a>
-	      </c:if>
+	     
+	      <ul class="pageNum">
+	      
+	      <%-- <c:if test="${pageData.page > 1}">
+	      <li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=1<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>">1&nbsp;</a></li>
+	      </c:if> --%>
+	      
+			<c:forEach begin="1" end="${pageData.pager.pageCount }" varStatus="status">
+				<c:if test="${status.count > (pageData.page - 3) && status.count < (pageData.page + 3) }">
+					<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>" <c:if test="${status.count == pageData.page }">class="currentPage"</c:if> >${status.count }</a></li>
+				</c:if>
+			</c:forEach>
+			
+	     <%--  <c:if test="${pageData.page < pageData.pager.pageCount}">
+	      <li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${pageData.pager.pageCount}<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>">&nbsp;${pageData.pager.pageCount}</a></li>
+	      </c:if> --%>
+	      	<li><c:if test="${pageData.page < pageData.pager.pageCount}">共:${pageData.pager.pageCount}</c:if></li>
+	      </ul>
+	      
 		</div>
 		
     </div>

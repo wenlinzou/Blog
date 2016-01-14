@@ -1,5 +1,27 @@
 .pageCenter{
 	width: 840px;
-	margin: auto;
 	text-align: center;
+}
+.pageNum{
+	margin: auto;
+	display: inline-block;
+	
+}
+.pageNum li{
+	float:left;
+	line-height:30px;
+	font-size:20px;
+	width: 30px;
+	height:30px;
+}
+.currentPage{
+	display: block;
+    color: white;
+    line-height: 30px;
+	color:white;
+	background-color:#F3B0A9;
+	font-size:26px;
+	width: 30px;
+	height:30px;
+	border-radius: 4px;
 }

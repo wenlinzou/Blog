@@ -75,10 +75,15 @@ public class CategoryController extends BaseAction {
 				category.setId(id);
 				category.setName(name);
 				categoryService.update(category);
+				
+				//清空session categoryList
+				request.getSession().setAttribute("categoryList", null);
+				
 				String redirctStr = "redirect:/category/queryAll.do";
 				return redirctStr;
 			}
 		}
+		
 		return "back/categoryBack";
 	}
 }
