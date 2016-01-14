@@ -201,6 +201,17 @@ public class ArticleFrontController extends BaseAction {
 			articleService.updateClick(id);
 			model.addAttribute("article", article);
 			
+			if(null == request.getSession().getAttribute("monthMap")){
+				List<Article> articleMonthList = articleService.queryAllSortDate();
+				List<String> dateList = articleService.getAllDate(articleMonthList);
+				Map<String, String> monthMap = new HashMap<String, String>();
+				monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+				request.getSession().setAttribute("monthMap", monthMap);
+			}
+			if(null == request.getSession().getAttribute("categoryList")){
+				List<Category> categoryList = categoryService.queryAll();
+				request.getSession().setAttribute("categoryList", categoryList);
+			}
 			//List<Category> categoryList = categoryService.queryAll();
 			//model.addAttribute("categoryList", categoryList);
 		}
