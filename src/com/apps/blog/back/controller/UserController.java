@@ -18,6 +18,7 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
+import com.apps.base.utils.OneUserUtils;
 import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
 import com.apps.blog.back.service.impl.SaltServiceImpl;
@@ -117,9 +118,16 @@ public class UserController extends BaseAction {
 				boolean canLogin = userService.login(arrangePwd, datapwd);
 				
 				if(canLogin){
-					request.getSession(true).setAttribute("user", user);
-					String redirctStr = "redirect:/user/queryAll.do";
-					return redirctStr;
+					//在用户登录时，把用户添加到一个ArrayList中
+					//再次登录时查看ArrayList中有没有该用户，如果ArrayList中已经存在该用户，则阻止其登录
+					boolean hasUser = OneUserUtils.hasOldUser(usernameTemp);
+					if(!hasUser){
+						request.getSession(true).setAttribute("user", usernameTemp);
+						String redirctStr = "redirect:/user/queryAll.do";
+						return redirctStr;
+					}else{
+						return jumpJsp;
+					}
 				}
 			}
 			/*user.setPassword(password);
@@ -137,7 +145,10 @@ public class UserController extends BaseAction {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("back-user loginout IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-				
+		
+		User logoutUser = (User) request.getSession().getAttribute("user");	
+		if(null != logoutUser) OneUserUtils.removeLogUser(logoutUser);
+		
 		request.getSession().setAttribute("user", null);
 		request.getSession().removeAttribute("user");
 	}
