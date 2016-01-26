@@ -25,3 +25,25 @@
 	height:30px;
 	border-radius: 4px;
 }
+.currentPageEven{
+	display: block;
+    color: white;
+    line-height: 30px;
+	color:white;
+	background-color:#F3B0A9;
+	font-size:26px;
+	width: 30px;
+	height:30px;
+	border-radius: 4px;
+}
+.currentPageOdd{
+	display: block;
+    color: white;
+    line-height: 30px;
+	color:white;
+	background-color:#9EC9B7;
+	font-size:26px;
+	width: 30px;
+	height:30px;
+	border-radius: 4px;
+}

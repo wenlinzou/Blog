@@ -82,7 +82,7 @@
       <div class="blog">
         <time datetime="${article.pdate }"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br/>${article.shortmon }</time>
         <div class="extra_wrapper">
-          <div class="text1 upp">${article.title } </div>
+          <div class="text1 upp"><a target="_blank" href="<%=basePath%>articleFront/queryDetailById.shtml?id=${article.id}">${article.title }</a> </div>
           <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a>
           	<a href="javascript:void(0);" style="font-size:16px;" class="comment"><fmt:formatDate value="${article.pdate }" type="date" dateStyle="long"/></a>
           </div>
@@ -96,6 +96,7 @@
           </p>
           <br>
           </div>
+          <!-- target="_blank" -->
          <a href="<%=basePath%>articleFront/queryDetailById.shtml?id=${article.id}" class="btn">Details</a>
         </div>
        <br>
@@ -112,7 +113,11 @@
 	      
 			<c:forEach begin="1" end="${pageData.pager.pageCount }" varStatus="status">
 				<c:if test="${status.count > (pageData.page - 3) && status.count < (pageData.page + 3) }">
-					<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>" <c:if test="${status.count == pageData.page }">class="currentPage"</c:if> >${status.count }</a></li>
+					<%-- <li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>" <c:if test="${status.count == pageData.page }">class="currentPage"</c:if> >${status.count }</a></li> --%>
+					<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>"
+						<c:if test="${status.count == pageData.page && pageData.page%2==0 }">class="currentPageOdd"</c:if>
+						<c:if test="${status.count == pageData.page && pageData.page%2!=0 }">class="currentPageEven"</c:if> > ${status.count }</a>
+					</li>
 				</c:if>
 			</c:forEach>
 			
