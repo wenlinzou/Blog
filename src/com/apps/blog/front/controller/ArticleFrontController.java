@@ -195,8 +195,18 @@ public class ArticleFrontController extends BaseAction {
 		String userLogIP = request.getRemoteAddr();
 		log.info("front-article visit detail IP : " + userLogIP +" : " /*+ IPUtils.getAddressByIP(userLogIP)*/);
 		
+		String jumpjsp = "";
 		if(null != id){
+			Object objUser = request.getSession(true).getAttribute("user");
+			
 			Article article = articleService.queryById(id);
+			boolean isSecretArticle = article.getIsleaf() < 1;
+			
+			//如果是存在id,但不可见,且用户没有登录
+			if(isSecretArticle && (null == objUser || !(objUser instanceof User))){
+				return "redirect:/articleFront/queryAllArticlePage.shtml";
+			}
+			
 			article.setShortmon(MyStringUtils.arrangeEnglishShortMonth(article.getPdate()));
 			articleService.updateClick(id);
 			model.addAttribute("article", article);
@@ -212,10 +222,13 @@ public class ArticleFrontController extends BaseAction {
 				List<Category> categoryList = categoryService.queryAll();
 				request.getSession().setAttribute("categoryList", categoryList);
 			}
+			jumpjsp = "front/articleDetail";
+				
+			
 			//List<Category> categoryList = categoryService.queryAll();
 			//model.addAttribute("categoryList", categoryList);
 		}
-		return "front/articleDetail";
+		return jumpjsp;
 	}
 	
 	@RequestMapping("/queryByThing")
