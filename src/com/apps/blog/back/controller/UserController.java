@@ -21,8 +21,8 @@ import com.apps.base.utils.MyStringUtils;
 import com.apps.base.utils.OneUserUtils;
 import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
-import com.apps.blog.back.service.impl.SaltServiceImpl;
-import com.apps.blog.back.service.impl.UserServiceImpl;
+import com.apps.blog.back.service.SaltService;
+import com.apps.blog.back.service.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -31,9 +31,9 @@ public class UserController extends BaseAction {
 
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
-	private UserServiceImpl<User> userService;
+	private UserService<User> userService;
 	@Autowired(required = false)
-	private SaltServiceImpl<Salt> saltService;
+	private SaltService<Salt> saltService;
 	
 	
 	@RequestMapping("checkName")

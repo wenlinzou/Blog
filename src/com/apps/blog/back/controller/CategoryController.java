@@ -15,7 +15,7 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Category;
-import com.apps.blog.back.service.impl.CategoryServiceImpl;
+import com.apps.blog.back.service.CategoryService;
 
 @Controller
 @RequestMapping("/category")
@@ -24,7 +24,7 @@ public class CategoryController extends BaseAction {
 
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
-	private CategoryServiceImpl<Category> categoryService;
+	private CategoryService<Category> categoryService;
 	
 	/**
 	 * 跳转到数据展示及操作页面，添加列表数据到页面。
