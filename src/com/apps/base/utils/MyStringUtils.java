@@ -7,8 +7,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MyStringUtils {
+	private static final String FRISTDAY = "01";
+	
+	private static final String[] month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	
+	private static final String[] shortMonth = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	
 	//使用时间恒定的比较函数，可以让攻击者摸不着头脑
 	public static boolean slowEquals(byte[] a, byte[] b){
 		int diff = a.length ^ b.length;
@@ -57,7 +64,7 @@ public class MyStringUtils {
 		}
 		return list;
 	}
-	public static List<String> queryAllMonth(List<Date> dates) {
+	/*public static List<String> queryAllMonth(List<Date> dates) {
 		List<String> list = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		for (int i = 0; i < dates.size(); i++) {
@@ -69,7 +76,7 @@ public class MyStringUtils {
 			}
 		}
 		return list;
-	}
+	}*/
 	public static String queryMonth(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		if(null!=date){
@@ -80,22 +87,23 @@ public class MyStringUtils {
 	}
 	
 	
-	public static List<String> arrangeEnglishMonth(List<String> strs){
-		List<String> list = new ArrayList<String>();
+	//January 2016
+	public static Map<String, String> arrangeEnglishMonth(List<String> strs){
+		Map<String, String> map = new TreeMap<String, String>().descendingMap();
 		for (int i = 0; i < strs.size(); i++) {
 			StringBuilder sb = new StringBuilder();
 			String monthstr = strs.get(i).substring(4, strs.get(i).length());
-			for (MonthEnum mo : MonthEnum.values()) {
-				if(monthstr.equals(mo.getMonth())){
-					sb.append(mo);
-					sb.append(" ").append(strs.get(i).substring(0, 4));
-					list.add(sb.toString());
-				}
-			}
+			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
+			int monthIndex = Integer.parseInt(monthstr)  - 1;
+			sb.append(month[monthIndex]);
+			sb.append(" ").append(strs.get(i).substring(0, 4));
+			map.put(strs.get(i) + FRISTDAY, sb.toString());
 		}
-		return list;
+		
+		return map;
 	}
 	
+	//暂不使用
 	public static Map<String, String> arrangeEnglishMonth(List<String> strs, Integer ismap){
 		Map<String, String> map = new HashMap<String, String>();
 		for (int i = 0; i < strs.size(); i++) {
@@ -107,6 +115,7 @@ public class MyStringUtils {
 					sb.append(mo);
 					sb.append(" ").append(strs.get(i).substring(0, 4));
 					map.put(strs.get(i)+"01", sb.toString());
+					break;
 				}
 			}
 		}
@@ -118,7 +127,7 @@ public class MyStringUtils {
 		return sdf.parse(str);
 	}
 	
-	public static List<String> arrangeEnglishShortMonth(List<Date> dates){
+	/*public static List<String> arrangeEnglishShortMonth(List<Date> dates){
 		List<String> strs = queryAllMonth(dates);
 		List<String> list = new ArrayList<String>();
 		for (int i = 0; i < strs.size(); i++) {
@@ -134,8 +143,22 @@ public class MyStringUtils {
 			}
 		}
 		return list;
-	}
+	}*/
+
 	public static String arrangeEnglishShortMonth(Date date){
+		String strs = queryMonth(date);
+		StringBuilder sb = new StringBuilder();
+		if(!isNull(strs)){
+			String monthstr = strs.substring(4, strs.length());
+			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
+			int shortmonthIndex = Integer.parseInt(monthstr) - 1;
+			sb.append(shortMonth[shortmonthIndex]);
+		}
+		return sb.toString();
+	}
+	
+	//暂不使用
+	public static String arrangeEnglishShortMonth(Date date, int isshort){
 		String strs = queryMonth(date);
 		StringBuilder sb = new StringBuilder();
 		if(!isNull(strs)){

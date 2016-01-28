@@ -1,6 +1,8 @@
 package com.apps.blog.back.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +16,6 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
-import com.apps.blog.back.service.ArticleService;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 
 @Controller
@@ -24,7 +25,7 @@ public class ArticleController extends BaseAction {
 
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
-	private ArticleService<Article> articleService;
+	private ArticleServiceImpl<Article> articleService;
 	
 	
 	@RequestMapping("/queryAll")
@@ -62,6 +63,8 @@ public class ArticleController extends BaseAction {
 				return redirctStr;
 			}
 		}
+		
+		
 		return "back/articleBack";
 	}
 	
@@ -84,6 +87,14 @@ public class ArticleController extends BaseAction {
 				return redirctStr;
 			}
 		}
+		
+		List<Article> articleMonthList = articleService.queryAllSortDate();
+		List<String> dateList = articleService.getAllDate(articleMonthList);
+
+		Map<String, String> monthMap = new HashMap<String, String>();
+		monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+		request.getSession().setAttribute("monthMap", monthMap);
+		
 		return "back/articleBack";
 	}
 }

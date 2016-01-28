@@ -119,8 +119,9 @@ public class ArticleFrontController extends BaseAction {
 		if(null == request.getSession().getAttribute("monthMap")){
 			List<Article> articleMonthList = articleService.queryAllSortDate();
 			List<String> dateList = articleService.getAllDate(articleMonthList);
+
 			Map<String, String> monthMap = new HashMap<String, String>();
-			monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+			monthMap = MyStringUtils.arrangeEnglishMonth(dateList);
 			request.getSession().setAttribute("monthMap", monthMap);
 		}
 		if(null == request.getSession().getAttribute("categoryList")){
@@ -263,8 +264,12 @@ public class ArticleFrontController extends BaseAction {
 			
 			model.addAttribute("articleList", articleList);
 			
-			List<Category> categoryList = categoryService.queryAll();
-			model.addAttribute("categoryList", categoryList);
+			/*List<Category> categoryList = categoryService.queryAll();
+			model.addAttribute("categoryList", categoryList);*/
+			if(null == request.getSession().getAttribute("categoryList")){
+				List<Category> categoryList = categoryService.queryAll();
+				request.getSession().setAttribute("categoryList", categoryList);
+			}
 		}
 			return "front/articleIndex";
 	}
