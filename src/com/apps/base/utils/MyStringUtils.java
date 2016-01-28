@@ -64,19 +64,7 @@ public class MyStringUtils {
 		}
 		return list;
 	}
-	/*public static List<String> queryAllMonth(List<Date> dates) {
-		List<String> list = new ArrayList<String>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-		for (int i = 0; i < dates.size(); i++) {
-			if(null!=dates.get(i)){
-				String temp = sdf.format(dates.get(i));
-				//if(!list.contains(temp)){
-					list.add(temp);
-				//}
-			}
-		}
-		return list;
-	}*/
+
 	public static String queryMonth(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		if(null!=date){
@@ -127,23 +115,6 @@ public class MyStringUtils {
 		return sdf.parse(str);
 	}
 	
-	/*public static List<String> arrangeEnglishShortMonth(List<Date> dates){
-		List<String> strs = queryAllMonth(dates);
-		List<String> list = new ArrayList<String>();
-		for (int i = 0; i < strs.size(); i++) {
-			StringBuilder sb = new StringBuilder();
-			String monthstr = strs.get(i).substring(4, strs.get(i).length());
-			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
-			for (MonthShortEnum mo : MonthShortEnum.values()) {
-				if(monthstr.equals(mo.getMonth())){
-					sb.append(mo);
-					//sb.append(" ").append(strs.get(i).substring(0, 4));
-					list.add(sb.toString());
-				}
-			}
-		}
-		return list;
-	}*/
 
 	public static String arrangeEnglishShortMonth(Date date){
 		String strs = queryMonth(date);
