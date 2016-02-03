@@ -60,29 +60,28 @@ public class CommentFrontController extends BaseAction {
 		String userLogIP = request.getRemoteAddr();
 		log.info("front-comment visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
-		Comment c = new Comment();
-		if(null != articleid){
+		String jumpjsp = "queryAllArticlePage.shtml";
+		if((null != articleid) && (!MyStringUtils.isNull(comment)) && (!MyStringUtils.isNull(visitname) && (!MyStringUtils.isNull(email)))){
+			Comment c = new Comment();
 			c.setArticleid(articleid);
-		}
-		if(!MyStringUtils.isNull(comment)){
+			
 			//过滤敏感词
 			comment = WordsFilterUtils.wordFilter(comment);
 			c.setComment(comment);
-		}
-		if(!MyStringUtils.isNull(visitname)){
+			
 			//过滤敏感词
 			visitname = WordsFilterUtils.wordFilter(visitname);
 			c.setVisitname(visitname);
-		}
-		if(!MyStringUtils.isNull(email)){
+			
 			c.setEmail(email);
+			c.setIsshow(IS_SHOW);
+			commentService.add(c);
+			
+			if(null != articleid){
+				jumpjsp = "queryDetailById.shtml?id=" + articleid;
+			}
 		}
-		c.setIsshow(IS_SHOW);
-		commentService.add(c);
-		String jumpjsp = "queryAllArticlePage.shtml";
-		if(null != articleid){
-			jumpjsp = "queryDetailById.shtml?id=" + articleid;
-		}
+		
 		return "redirect:/articleFront/" + jumpjsp;
 	}
 	
