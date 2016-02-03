@@ -25,9 +25,6 @@ import com.apps.blog.back.service.impl.CommentServiceImpl;
 @RequestMapping("/commentFront")
 public class CommentFrontController extends BaseAction {
 	private final int IS_SHOW = 1;
-	/*private final int START_PAGE = 1;
-	private final int LOGOUT_USER = 1;
-	private final int PAGE_SIZE = 5;*/
 	private final static Logger log = Logger.getLogger(CommentFrontController.class);
 
 	@Autowired(required = false)
@@ -61,7 +58,7 @@ public class CommentFrontController extends BaseAction {
 	public String add(HttpServletRequest request, Integer articleid, String comment, String visitname, String email, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("front-comment visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		Comment c = new Comment();
 		if(null != articleid){

@@ -33,8 +33,6 @@ public class CommentController extends BaseAction {
 	@RequestMapping("/queryListByArticle")
 	public String queryListByArticle(HttpServletRequest request, Integer articleid, Model model) throws Exception {
 		//记录访问者的IP
-		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		String jumpjsp = "redirect:/article/queryAll.do";
 		if(null != articleid){
 			Comment c = new Comment();
@@ -55,7 +53,7 @@ public class CommentController extends BaseAction {
 	public String updateCommentShow(HttpServletRequest request, Integer id, Integer articleid, Integer isshow, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-commit updateView IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		String jumpjsp = "redirect:/article/queryAll.do";
 		if(null != id && null != isshow){
 			Comment c = new Comment();

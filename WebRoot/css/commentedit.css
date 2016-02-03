@@ -11,9 +11,6 @@ body{
 	font-weight: bold;
 }
 
-.currentBtn{
-	background-color: #FEC765;
-}
 .currentBtnPass{
 	background-color: #7395E9;
 	color: white;
@@ -34,33 +31,10 @@ body{
 	width:470px;
 	margin-top: 5px;
 }
-.inputright{
-	width:800px;
-}
 
-.commentrightcont{
-	height:500px;
-	width:800px;
-}
-.comment ul{
-	margin:0px;
-	padding:0px;
-	overflow: hidden;
-    float: left;
-	
-}
 input{
 	border: none;
 	width: 70px;
 	height:23px;
 	border-radius:3px;
-}
-.title li{
-	width: 170px;
-	height:23px;
-	background-color: #E4F88C;
-	text-align: center;
-	border-radius:3px;
-	line-height: 23px;
-	color:white;
 }
