@@ -114,3 +114,9 @@
 .commentCont{
 	font-size:15px;line-height: 21px;
 }
+
+dl dt{
+	padding-left: 35px;
+	background: url(../plugjs/front/images/marker.png) 12px 6px no-repeat;
+}
+

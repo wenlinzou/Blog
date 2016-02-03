@@ -123,16 +123,19 @@
 		</div>
 
 
+		<c:if test="${!empty comments}">
 		<div class="commentStyle">
 		<h3>Comments</h3>
 			<c:forEach items="${comments }" var="comment">
 			<dl>
-				<dt>&nbsp;&nbsp;<span class="commentTitle">${comment.visitname }</span>&nbsp;
+				<dt><span class="commentTitle">${comment.visitname }</span>&nbsp;
 					<span><fmt:formatDate value="${comment.date }" type="both" dateStyle="long" timeStyle="long"/></span></dt>
 				<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentCont">${comment.comment }</span></dd>
 			</dl>
 			</c:forEach>
 		</div>
+		</c:if>
+		
       </div>
      
     </div>
