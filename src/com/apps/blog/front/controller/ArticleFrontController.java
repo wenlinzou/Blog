@@ -224,7 +224,8 @@ public class ArticleFrontController extends BaseAction {
 			c.setArticleid(id);
 			c.setIsshow(IS_SHOW);
 			List<Comment> commentLists = commentService.queryListByArticle(c);
-			model.addAttribute("comments", commentLists);
+			if(commentLists.size()>0)
+				model.addAttribute("comments", commentLists);
 			
 			if(null == request.getSession().getAttribute("monthMap")){
 				List<Article> articleMonthList = articleService.queryAllSortDate();
