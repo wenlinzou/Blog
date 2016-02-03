@@ -19,12 +19,16 @@
 <link rel="shortcut icon"
 	href="<%=basePath%>plugjs/front/images/favicon.ico" />
 <link rel="stylesheet" href="<%=basePath%>plugjs/front/css/style.css">
+<link rel="stylesheet" href="<%=basePath%>css/articleDetail.css">
+
 <script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery-migrate-1.1.1.js"></script>
 <script src="<%=basePath%>plugjs/front/js/superfish.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery.equalheights.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery.easing.1.3.js"></script>
 <script src="<%=basePath%>plugjs/front/js/jquery.ui.totop.js"></script>
+
+<script src="<%=basePath%>js/articleDetail.js"></script>
 <script>
 	$(window).load(function() {
 		$().UItoTop({
@@ -84,8 +88,51 @@
         <div class="extra_wrapper">
           ${article.cont }
           <br>
-          <a onclick="window.history.go(-1)" class="btn">Back</a>
+          <!-- <a onclick="window.history.go(-1)" class="btn">Back</a> -->
         </div>
+        
+        <div>
+		<form id="saveForm" onsubmit="return checkName();" method="post" class="basic-grey">
+		<h1>Contact Form
+		<span>Please fill all the texts in the fields.</span>
+		</h1>
+		<label>
+		<input type="hidden" name="articleid" value='${article.id }'/>
+		<span>Your Name :</span>
+		<input id="name" type="text" name="visitname" placeholder="Your Full Name" />
+		</label>
+		<label>
+		<span>Your Email :</span>
+		<input id="email" type="email" name="email" placeholder="Valid Email Address" />
+		</label>
+		<label>
+		<span>Message :</span>
+		<textarea id="message" name="comment" placeholder="Your Message to Us"></textarea>
+		</label>
+		<!-- <label>
+		<span>Subject :</span><select name="selection">
+		<option value="Job Inquiry">Job Inquiry</option>
+		<option value="General Question">General Question</option>
+		</select>
+		</label> -->
+		<label>
+		<span>&nbsp;</span>
+		<input type="submit" class="button" value="Send" />
+		</label>
+		</form>
+		</div>
+
+
+		<div class="commentStyle">
+		<h3>Comments</h3>
+			<c:forEach items="${comments }" var="comment">
+			<dl>
+				<dt>&nbsp;&nbsp;<span class="commentTitle">${comment.visitname }</span>&nbsp;
+					<span><fmt:formatDate value="${comment.date }" type="both" dateStyle="long" timeStyle="long"/></span></dt>
+				<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentCont">${comment.comment }</span></dd>
+			</dl>
+			</c:forEach>
+		</div>
       </div>
      
     </div>

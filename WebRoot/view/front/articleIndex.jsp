@@ -97,7 +97,7 @@
           <br>
           </div>
           <!-- target="_blank" -->
-         <a href="<%=basePath%>articleFront/queryDetailById.shtml?id=${article.id}" class="btn">Details</a>
+         <a target="_blank" href="<%=basePath%>articleFront/queryDetailById.shtml?id=${article.id}" class="btn">Details</a>
         </div>
        <br>
       </div>

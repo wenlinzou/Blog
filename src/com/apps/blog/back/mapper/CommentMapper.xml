@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apps.blog.back.dao.CommentDao">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="com.apps.blog.back.bean.Comment">
+	</resultMap>
+
+	
+	<!-- 插入记录 		添加时，除了密码和注册时间是有sql语句写死的，其他的数据都是从表单提交过来的。
+		初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
+	<insert id="add" parameterType="Object" >
+		insert into comment
+		(articleid, comment, date, visitname, email, isshow)
+		values
+		(#{articleid}, #{comment}, now(), #{visitname}, #{email}, #{isshow})
+	</insert>
+	
+	<select id="queryCommentByName" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where visitname=#{visitname}
+	</select>
+	
+	<!-- 删除记录 -->
+	<update id="delete" parameterType="Object">
+		update comment set isshow=0 where id=#{id}
+	</update>
+	
+	<!-- 根据一些条件查询 -->
+	<select id="queryListByArticle" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where 1=1 
+			<if test="articleid != null  ">
+				and articleid=#{articleid}
+			</if>
+			<if test="isshow != null  ">
+				and isshow=#{isshow}
+			</if>
+		order by date desc
+	</select>
+	
+	<!-- 根据id，拼接修改记录 -->
+	<update id="update" parameterType="Object" >
+		update comment set 
+		<trim suffixOverrides=",">
+			<if test="articleid != null  ">
+				articleid=#{articleid},
+			</if>
+			<if test="comment != null  ">
+				comment=#{comment},
+			</if>
+			<if test="visitname != null  ">
+				visitname=#{visitname},
+			</if>
+			<if test="email != null ">
+				email = #{email},
+			</if>
+			<if test="isshow != null ">
+				isshow = #{isshow},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
+	
+	<!-- 查询全部 -->
+	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where commentid = #{commentid} order by date desc
+	</select>
+	
+	<!-- 查询全部 按照时间倒叙 -->
+	<select id="queryAllSortDate" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where isleaf = 1 order by pdate desc
+	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where id=#{id}
+	</select>
+	
+	<!-- 根据一些条件查询 -->
+	<select id="queryByThing" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where 1=1 
+			<!-- 类别 -->
+			<if test="pid != null  ">
+				and pid=#{pid}
+			</if>
+			<if test="pdate != null  ">
+				and month(pdate)=month(#{pdate})
+			</if>
+			<if test="isleaf != null  ">
+				and isleaf=#{isleaf}
+			</if>
+		order by pdate desc
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="queryCountByPage" resultType="java.lang.Integer" parameterType="Object">
+		select count(1) from comment where 1=1 
+			<if test="articleid != null  ">
+				and articleid=#{articleid}
+			</if>
+			<if test="isshow != null  ">
+				and isshow=#{isshow}
+			</if>
+			order by date desc
+			<if test="pager.orderCondition != null and pager.orderCondition != ''">
+				${pager.orderCondition} 
+			</if>
+			<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+				${pager.mysqlQueryCondition} 
+			</if>
+	</select>
+	
+	<select id="queryListByPage" resultMap="BaseResultMap" parameterType="Object">
+		select * from comment where 1=1 
+			<if test="articleid != null  ">
+				and articleid=#{articleid}
+			</if>
+			<if test="isshow != null  ">
+				and isshow=#{isshow}
+			</if>
+			order by date desc
+			<if test="pager.orderCondition != null and pager.orderCondition != ''">
+				${pager.orderCondition} 
+			</if>
+			<if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''">
+				${pager.mysqlQueryCondition} 
+			</if>
+	</select>
+	
+	
+
+	
+	
+	<!-- 学生 列表总数 -->
+	<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+		select count(1) from comment
+	</select>
+	
+
+</mapper>   

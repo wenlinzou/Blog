@@ -35,6 +35,13 @@ public class ArticleController extends BaseAction {
 		return "back/artcileBack";
 	}
 	
+	@RequestMapping("/queryAllComment")
+	public String queryAllComment(Model model) throws Exception {
+		List<Article> articleList = articleService.queryAll();
+		model.addAttribute("articleList", articleList);
+		return "back/commentBack";
+	}
+	
 	@RequestMapping("/queryById")
 	public String queryById(Integer id, Model model) throws Exception {
 		if(null != id){
