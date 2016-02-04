@@ -1,6 +1,7 @@
 package com.apps.blog.front.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,7 @@ public class CommentFrontController extends BaseAction {
 	
 	@RequestMapping("checkName")
 	@ResponseBody
-	public Map<String, Object> checkName(String visitname, Integer articleid, String comment, String email){
+	public Map<String, Object> checkName(HttpServletRequest request, String visitname, Integer articleid, String comment, String email){
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean visitnameisnull = MyStringUtils.isNull(visitname);
 		if(!visitnameisnull){
@@ -45,7 +46,27 @@ public class CommentFrontController extends BaseAction {
 			Comment commentnameTemp = commentService.queryCommentByName(c);
 			if(null == commentnameTemp){
 				map.put("canSave", true);
-				map.put("jumpUrl", "commentFront/add.do?");
+				map.put("msg", "commented");
+				//add comment
+				if((null != articleid) && (!MyStringUtils.isNull(comment)) && (!MyStringUtils.isNull(visitname) && (!MyStringUtils.isNull(email)))){
+					c.setArticleid(articleid);
+					
+					//过滤敏感词
+					comment = WordsFilterUtils.wordFilter(comment);
+					c.setComment(comment);
+					
+					//过滤敏感词
+					visitname = WordsFilterUtils.wordFilter(visitname);
+					c.setVisitname(visitname);
+					
+					c.setEmail(email);
+					c.setIsshow(IS_SHOW);
+					commentService.add(c);
+					
+					String userLogIP = request.getRemoteAddr();
+					log.info("front-comment add visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+				}
+				
 			} else {
 				map.put("canSave", false);
 				map.put("msg", "existed");
@@ -54,35 +75,33 @@ public class CommentFrontController extends BaseAction {
 		return map;
 	}
 	
-	@RequestMapping("/add")
-	public String add(HttpServletRequest request, Integer articleid, String comment, String visitname, String email, Model model) throws Exception {
+	
+	@RequestMapping("/queryCommectArticleAjax")
+	@ResponseBody
+	public Map<String, Object> queryCommectArticleAjax(HttpServletRequest request, Integer articleid, Model model) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("front-comment visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
-		String jumpjsp = "queryAllArticlePage.shtml";
-		if((null != articleid) && (!MyStringUtils.isNull(comment)) && (!MyStringUtils.isNull(visitname) && (!MyStringUtils.isNull(email)))){
+		if((null != articleid)){
 			Comment c = new Comment();
 			c.setArticleid(articleid);
 			
-			//过滤敏感词
-			comment = WordsFilterUtils.wordFilter(comment);
-			c.setComment(comment);
-			
-			//过滤敏感词
-			visitname = WordsFilterUtils.wordFilter(visitname);
-			c.setVisitname(visitname);
-			
-			c.setEmail(email);
 			c.setIsshow(IS_SHOW);
 			commentService.add(c);
 			
 			if(null != articleid){
-				jumpjsp = "queryDetailById.shtml?id=" + articleid;
+				List<Comment> commentLists = commentService.queryListByArticle(c);
+				if(commentLists.size()>0){
+					map.put("comments", commentLists);
+				}
 			}
 		}
 		
-		return "redirect:/articleFront/" + jumpjsp;
+		return map;
 	}
+	
 	
 }

@@ -92,12 +92,12 @@
         </div>
         
         <div>
-		<form id="saveForm" onsubmit="return checkName();" method="post" class="basic-grey">
+		<form id="saveForm"  method="post" class="basic-grey">
 		<h1>Contact Form
 		<span>Please fill all the texts in the fields.</span>
 		</h1>
 		<label>
-		<input type="hidden" name="articleid" value='${article.id }'/>
+		<input type="hidden" name="articleid" value='${article.id }' id="articleid"/>
 		<span>Your Name :</span>
 		<input id="name" type="text" name="visitname" placeholder="Your Full Name" />
 		</label>
@@ -117,24 +117,26 @@
 		</label> -->
 		<label>
 		<span>&nbsp;</span>
-		<input type="submit" class="button" value="Send" />
+		<input type="button" onclick="checkName();" class="button" value="Send" />
 		</label>
 		</form>
 		</div>
 
 
-		<c:if test="${!empty comments}">
-		<div class="commentStyle">
-		<h3>Comments</h3>
-			<c:forEach items="${comments }" var="comment">
+		<%-- <c:if test="${!empty comments}"> --%>
+		<div class="commentStyle" id="commentDiv">
+			<h3>Comments</h3>
+			<div id="comtitles">
+			<%-- <c:forEach items="${comments }" var="comment">
 			<dl>
 				<dt><span class="commentTitle">${comment.visitname }</span>&nbsp;
 					<span><fmt:formatDate value="${comment.date }" type="both" dateStyle="long" timeStyle="long"/></span></dt>
 				<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="commentCont">${comment.comment }</span></dd>
 			</dl>
-			</c:forEach>
+			</c:forEach> --%>
+			</div>
 		</div>
-		</c:if>
+		<%-- </c:if> --%>
 		
       </div>
      

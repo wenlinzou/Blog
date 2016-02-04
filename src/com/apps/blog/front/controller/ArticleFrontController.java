@@ -220,12 +220,12 @@ public class ArticleFrontController extends BaseAction {
 			model.addAttribute("article", article);
 			
 			//文章评论
-			Comment c = new Comment();
+			/*Comment c = new Comment();
 			c.setArticleid(id);
 			c.setIsshow(IS_SHOW);
 			List<Comment> commentLists = commentService.queryListByArticle(c);
 			if(commentLists.size()>0)
-				model.addAttribute("comments", commentLists);
+				model.addAttribute("comments", commentLists);*/
 			
 			if(null == request.getSession().getAttribute("monthMap")){
 				List<Article> articleMonthList = articleService.queryAllSortDate();

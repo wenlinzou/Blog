@@ -1,3 +1,9 @@
+/*window.onbeforeunload = function(event) {
+	if(confirm("确定离开此页面吗？")){
+		window.location.href = "user/loginOut.do";
+	}
+}*/
+
 function $name(inputid) {
 	return document.getElementById(inputid);
 }
