@@ -21,7 +21,16 @@ public class Article {
 	
 	private String shortmon;
 	
+	private Integer comments;
 	
+	
+	
+	public Integer getComments() {
+		return comments;
+	}
+	public void setComments(Integer comments) {
+		this.comments = comments;
+	}
 	public Integer getClick() {
 		return click;
 	}

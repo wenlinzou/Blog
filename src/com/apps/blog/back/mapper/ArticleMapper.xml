@@ -37,6 +37,13 @@
 		select * from article  order by pdate desc
 	</select>
 	
+	<select id="queryAllComment" resultMap="BaseResultMap" parameterType="Object">
+		SELECT a.*,count(1) 'comments' from comment c ,article a
+		where a.id = c.articleid
+		GROUP BY c.articleid
+		ORDER BY a.pdate desc
+	</select>
+	
 	
 	<!-- 查询全部 按照时间倒叙 -->
 	<select id="queryAllSortDate" resultMap="BaseResultMap" parameterType="Object">

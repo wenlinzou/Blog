@@ -105,4 +105,9 @@ public class ArticleServiceImpl<T> extends BaseService<T> implements ArticleServ
 		return dateList;
 	}
 
+	@Override
+	public List<Article> queryAllComment() {
+		return articleDao.queryAllComment();
+	}
+
 }

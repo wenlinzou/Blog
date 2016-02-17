@@ -54,7 +54,7 @@ public class ArticleController extends BaseAction {
 	
 	@RequestMapping("/queryAllComment")
 	public String queryAllComment(Model model) throws Exception {
-		List<Article> articleList = articleService.queryAll();
+		List<Article> articleList = articleService.queryAllComment();
 		model.addAttribute("articleList", articleList);
 		return "back/commentBack";
 	}
