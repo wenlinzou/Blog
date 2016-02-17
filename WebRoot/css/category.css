@@ -49,3 +49,7 @@ p{
 	color:white;
 	border-radius:3px;
 }
+input{
+	border: none;
+	border-radius: 3px;
+}
