@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</c:if>
 				</li>
 				<li>
-					<a href="<%=basePath%>comment/queryListByArticle.do?articleid=${article.id }">评论</a>
+					<a href="<%=basePath%>comment/queryListByArticle.do?articleid=${article.id }">${article.comments}评论</a>
 				</li>
 			</ul>
 		</c:forEach>
