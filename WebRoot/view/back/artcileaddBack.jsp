@@ -33,21 +33,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="article">
 		<ul class="articleleft">
 			<li>类别</li>
-			<li>类型</li>
+			<li>置顶</li>
 			<li>标题</li>
 			<li class="articleleftcont">内容</li>
-			<li>可见</li>
-			<li></li>
+			<li>状态</li>
+			<li>操作</li>
 		</ul>
 		<form action="<%=basePath%>article/add.do" method="post">
 		<ul class="articleright">
-			<li><input type="text" name="pid"/></li>
-			<li><input type="text" name="rootid"/></li>
+			<li>
+				<select name="pid">
+					<c:forEach items="${categoryList }" var="category">
+					<option value='${category.id }' >${category.name }</option>
+					</c:forEach>
+				</select>
+			</li>
+			<li>
+				<select name="rootid">
+					<option value="0">正常</option>
+					<option value="1">置顶</option>
+				</select>
+			</li>
 			<li><input class="inputright" type="text" name="title"/></li>
 			<li class="cont">
 				<script type="text/plain" id="contue" name="cont" style="width:800px;height:500px;"></script>
 			</li>
-			<li><input type="text" name="isleaf"/></li>
+			<li><!-- <input type="text" name="isleaf"/> -->
+				<select name="isleaf">
+					<option value="1">可见</option>
+					<option value="0">隐藏</option>
+				</select>
+			</li>
 			<li><input type="submit" value="添加"/><input type="button" value="返回"onclick="window.history.go(-1)" /></li>
 			
 		</ul>

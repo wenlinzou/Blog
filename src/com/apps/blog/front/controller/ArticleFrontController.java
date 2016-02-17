@@ -31,7 +31,7 @@ import com.apps.blog.back.service.impl.CommentServiceImpl;
 @Controller
 @RequestMapping("/articleFront")
 public class ArticleFrontController extends BaseAction {
-	private final int IS_SHOW = 1;
+	private final int IS_TOP = 1;
 	private final int START_PAGE = 1;
 	private final int LOGOUT_USER = 1;
 	private final int PAGE_SIZE = 5;
@@ -112,6 +112,7 @@ public class ArticleFrontController extends BaseAction {
 			page.setIsleaf(LOGOUT_USER);
 		}
 		page.setRows(PAGE_SIZE);
+		page.setRootid(IS_TOP);
 		
 		List<Article> articleList = articleService.queryListByPage(page);
 		for (int i = 0; i < articleList.size(); i++) {

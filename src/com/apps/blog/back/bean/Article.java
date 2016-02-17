@@ -22,8 +22,6 @@ public class Article {
 	private String shortmon;
 	
 	
-	
-	
 	public Integer getClick() {
 		return click;
 	}

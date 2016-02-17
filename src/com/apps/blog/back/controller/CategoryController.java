@@ -44,6 +44,10 @@ public class CategoryController extends BaseAction {
 			category.setName(name);
 			categoryService.add(category);
 		}
+		//增加category update categoryList session
+		List<Category> categoryList = categoryService.queryAll();
+		request.getSession().setAttribute("categoryList", categoryList);
+		
 		String redirctStr = "redirect:/category/queryAll.do";
 		return redirctStr;
 	}
@@ -77,7 +81,11 @@ public class CategoryController extends BaseAction {
 				categoryService.update(category);
 				
 				//清空session categoryList
-				request.getSession().setAttribute("categoryList", null);
+				//request.getSession().setAttribute("categoryList", null);
+				
+				//修改category update categoryList session
+				List<Category> categoryList = categoryService.queryAll();
+				request.getSession().setAttribute("categoryList", categoryList);
 				
 				String redirctStr = "redirect:/category/queryAll.do";
 				return redirctStr;

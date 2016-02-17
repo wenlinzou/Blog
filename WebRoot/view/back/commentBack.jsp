@@ -27,13 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
 	<%@include file="HeadTemplate.jsp"%>
 	<!-- <input type="button" onclick="showAddBtn();" value="添加"/> -->
-	<a href="<%=basePath %>article/queryAllComment.do">刷新</a>
+	<input type="button" value="刷新" onclick="javascript:history.go(0);"/>
 	<div class="comment">
 		<ul class="title">
 			<li>编号</li>
 			<li>标题</li>
 			<li>时间</li>
-			<li>可见</li>
+			<li>状态</li>
 			<li>操作</li>
 		</ul>
 		<c:forEach items="${articleList }" var="article">
@@ -41,7 +41,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li>${article.id }</li>
 				<li>${article.title }</li>
 				<li><fmt:formatDate value="${article.pdate }" pattern="yyyy-MM-dd HH:mm:ss" /></li>
-				<li>${article.isleaf }</li>
+				<li>
+					<c:if test="${article.isleaf==1 }">
+						<input type="button" value="SHOW" class="currentBtnShow" />
+					</c:if>
+					<c:if test="${article.isleaf==0 }">
+						<input type="button" value="HIDDEN" class="currentBtnHidden" />
+					</c:if>
+				</li>
 				<li>
 					<a href="<%=basePath%>comment/queryListByArticle.do?articleid=${article.id }">评论</a>
 				</li>

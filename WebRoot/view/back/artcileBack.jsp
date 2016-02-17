@@ -15,6 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/article.css">
+	
+	<script type="text/javascript" src="<%=basePath%>js/articleBack.js"></script>
   </head>
   
   <body>
@@ -26,28 +28,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <c:if test="${!empty user}">
   
 	<%@include file="HeadTemplate.jsp"%>
-	<!-- <input type="button" onclick="showAddBtn();" value="添加"/> -->
-	<a href="<%=basePath %>view/back/artcileaddBack.jsp">添加</a>
+	<input type="button" value="添加" onclick="addArticle();"/>
 	<div class="article">
 		<ul class="title">
 			<li>编号</li>
 			<li>类别</li>
-			<li>类型</li>
+			<li>置顶</li>
 			<li>标题</li>
 			<!-- <li>内容</li> -->
 			<li>时间</li>
-			<li>可见</li>
+			<li>状态</li>
 			<li>操作</li>
 		</ul>
 		<c:forEach items="${articleList }" var="article">
 			<ul>
 				<li>${article.id }</li>
-				<li>${article.pid }</li>
-				<li>${article.rootid }</li>
+				<li>
+					<select>
+						<c:forEach items="${categoryList }" var="category">
+						<option value='${category.id }' <c:if test='${category.id==article.pid }'>selected="selected"</c:if>>${category.name }</option>
+						</c:forEach>
+					</select>
+				</li>
+				<li>
+					<c:if test="${article.rootid==1 }">
+						<input type="button" value="ON" class="currentBtnTop" onclick="updateArticleIsTop('<%=basePath%>', ${article.id}, 0);" />
+					</c:if>
+					<c:if test="${article.rootid==0 }">
+						<input type="button" value="OFF" class="currentBtnNormal" onclick="updateArticleIsTop('<%=basePath%>', ${article.id}, 1);" />
+					</c:if>
+				</li>
 				<li>${article.title }</li>
 				<%-- <li>${article.cont }</li> --%>
 				<li><fmt:formatDate value="${article.pdate }" pattern="yyyy-MM-dd HH:mm:ss" /></li>
-				<li>${article.isleaf }</li>
+				<li>
+					<c:if test="${article.isleaf==1 }">
+						<input type="button" value="SHOW" class="currentBtnShow" onclick="updateArticleView('<%=basePath%>', ${article.id}, 0);" />
+					</c:if>
+					<c:if test="${article.isleaf==0 }">
+						<input type="button" value="HIDDEN" class="currentBtnHidden" onclick="updateArticleView('<%=basePath%>', ${article.id}, 1);" />
+					</c:if>
+				</li>
 				<li><a href="<%=basePath%>article/queryById.do?id=${article.id }">修改</a></li>
 			</ul>
 		</c:forEach>

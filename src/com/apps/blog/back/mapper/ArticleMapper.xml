@@ -33,8 +33,10 @@
 	
 	<!-- 查询全部 -->
 	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
-		select * from article order by pdate desc
+		<!-- select * from article order by pdate desc -->
+		select * from article  order by pdate desc
 	</select>
+	
 	
 	<!-- 查询全部 按照时间倒叙 -->
 	<select id="queryAllSortDate" resultMap="BaseResultMap" parameterType="Object">
@@ -118,7 +120,13 @@
 			<if test="isleaf != null  ">
 				and isleaf=#{isleaf}
 			</if>
-			order by pdate desc
+			ORDER BY
+			<if test="rootid != null  ">
+				rootid=#{rootid} desc, 
+			</if>
+			<!-- 置顶文章 -->
+			pdate desc
+			<!-- order by pdate desc -->
 			<if test="pager.orderCondition != null and pager.orderCondition != ''">
 				${pager.orderCondition} 
 			</if>

@@ -34,23 +34,39 @@
 			<input type="hidden" value='${article.id }' name="id" />
 			<ul class="articleleft">
 				<li>类别</li>
-				<li>类型</li>
+				<li>置顶</li>
 				<li>标题</li>
 				<li class="articleleftcont">内容</li>
 				<li>时间</li>
-				<li>可见</li>
+				<li>状态</li>
 				<li>操作</li>
 			</ul>
 
 			<ul class="articleright">
-				<li><input type="text" value='${article.pid }'	name="pid" /></li>
-				<li><input type="text" value='${article.rootid }'	name="rootid" /></li>
+				<li>
+					<select name="pid">
+						<c:forEach items="${categoryList }" var="category">
+						<option value='${category.id }' <c:if test='${category.id==article.pid }'>selected="selected"</c:if>>${category.name }</option>
+						</c:forEach>
+					</select>
+				</li>
+				<li>
+					<select name="rootid">
+						<option value="1" <c:if test='${article.rootid==0 }'>selected="selected"</c:if>>正常</option>
+						<option value="0" <c:if test='${article.rootid==1 }'>selected="selected"</c:if>>置顶</option>
+					</select>
+				</li>
 				<li><input type="text" class="inputright"  value='${article.title }'	name="title" /></li>
 				<li  class="cont">
 					<script type="text/plain" id="contue" name="cont" style="width:800px;height:500px;">${article.cont }</script>
 				</li>
 				<li><fmt:formatDate value="${article.pdate }" pattern="yyyy-MM-dd HH:mm:ss" /></li>
-				<li><input type="text" value='${article.isleaf }' name="isleaf" /></li>
+				<li>
+					<select name="isleaf">
+						<option value="1" <c:if test='${article.isleaf==1 }'>selected="selected"</c:if>>可见</option>
+						<option value="0" <c:if test='${article.isleaf==0 }'>selected="selected"</c:if>>隐藏</option>
+					</select>
+				</li>
 				<li><input type="submit" value="修改" /><input type="button" value="返回"onclick="window.history.go(-1)" /></li>
 			</ul>
 		</form>

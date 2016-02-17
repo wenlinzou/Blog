@@ -16,7 +16,9 @@ import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
+import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
+import com.apps.blog.back.service.impl.CategoryServiceImpl;
 
 @Controller
 @RequestMapping("/article")
@@ -26,12 +28,27 @@ public class ArticleController extends BaseAction {
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
 	private ArticleServiceImpl<Article> articleService;
+	@Autowired(required = false)
+	private CategoryServiceImpl<Category> categoryService;
 	
+	@RequestMapping("/queryLoadAdd")
+	public String queryLoadAdd(HttpServletRequest request, Model model) throws Exception {
+		if(null == request.getSession().getAttribute("categoryList")){
+			List<Category> categoryList = categoryService.queryAll();
+			request.getSession().setAttribute("categoryList", categoryList);
+		}
+		return "back/artcileaddBack";
+	}
 	
 	@RequestMapping("/queryAll")
-	public String queryAll(Model model) throws Exception {
+	public String queryAll(HttpServletRequest request, Model model) throws Exception {
 		List<Article> articleList = articleService.queryAll();
 		model.addAttribute("articleList", articleList);
+		
+		if(null == request.getSession().getAttribute("categoryList")){
+			List<Category> categoryList = categoryService.queryAll();
+			request.getSession().setAttribute("categoryList", categoryList);
+		}
 		return "back/artcileBack";
 	}
 	
@@ -57,7 +74,7 @@ public class ArticleController extends BaseAction {
 		log.info("back-article update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		if(null != id){
-			if(!MyStringUtils.isNull(title)){
+//			if(!MyStringUtils.isNull(title)){
 				Article article = new Article();
 				article.setId(id);
 				article.setPid(pid);
@@ -68,7 +85,7 @@ public class ArticleController extends BaseAction {
 				articleService.update(article);
 				String redirctStr = "redirect:/article/queryAll.do";
 				return redirctStr;
-			}
+//			}
 		}
 		
 		

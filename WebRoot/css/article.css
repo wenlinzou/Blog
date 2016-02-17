@@ -30,6 +30,37 @@ p{
 	line-height: 23px;
 	color:white;
 }
+.currentBtnShow{
+	background-color: #7395E9;
+	color: white;
+}
+.currentBtnHidden{
+	background-color: #FFAFA2;
+}
+.currentBtnTop{
+	background-color: #88DCAD;
+	color: white;
+}
+.currentBtnNormal{
+	background-color:#FF5C54;
+	color: white;
+}
+input{
+	border: none;
+	border-radius: 3px;
+}
+.article ul li a {
+	display:block;/*将a设置为块级元素*/
+	text-decoration: none;
+	width:50px;
+	height:20px;
+	text-align:center;
+	font-size:17px;
+	background-color:#98BBF0;
+	line-height:20px; 
+	color:white;
+	border-radius:3px;
+}
 /* .css1{
 color:#6699ff;border:1px #ff8000 dashed;
 margin-bottom:20px;
