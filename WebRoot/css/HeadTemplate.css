@@ -2,10 +2,12 @@
 	list-style-type: none;
 	float: left;
 	width: 150px;
-	height:23px;
+	height:28px;
 	border-radius:3px;
 	text-align: center;
 	margin-left: 3px;
+	font:20px/1.4em 黑体;
+	/*顺序：font-style | font-variant | font-weight | font-size | line-height | font-family*/
 }
 .headTemplate ul{
 	margin:0px;

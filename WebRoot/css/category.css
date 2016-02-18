@@ -9,7 +9,7 @@ p{
 .category ul li {
 	list-style-type: none;
 	float: left;
-	width: 170px;
+	width: 190px;
 	height:23px;
 }
 .category ul{
@@ -18,7 +18,7 @@ p{
 	overflow: hidden;
 }
 .title li{
-	width: 170px;
+	width: 190px;
 	height:23px;
 	background-color: #FFDC76;
 	text-align: center;
@@ -34,7 +34,7 @@ p{
 .addCategory ul li {
 	list-style-type: none;
 	float: left;
-	width: 170px;
+	width: 190px;
 	height:23px;
 }
 .category ul li a {
@@ -52,4 +52,7 @@ p{
 input{
 	border: none;
 	border-radius: 3px;
+}
+.inputadd{
+	border:1px solid #FFDC76;
 }

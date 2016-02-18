@@ -24,16 +24,17 @@
    <c:if test="${!empty user}">
    
 	<%@include file="HeadTemplate.jsp"%>
+	<input type="button" value="刷新" onclick="javascript:history.go(0);"/>
 	<div class="category">
 		<form action="<%=basePath%>category/update.do" method="post">
 			<input type="hidden" value='${category.id }' name="id" />
-			<ul>
+			<ul class="title">
 				<li>名称</li>
 				<li>操作</li>
 			</ul>
 
 			<ul>
-				<li><input type="text" value='${category.name }' name="name" /></li>
+				<li><input class="inputadd" type="text" value='${category.name }' name="name" /></li>
 				<li><input type="submit" value="修改" /><input type="button" value="返回"onclick="window.history.go(-1)" /></li>
 			</ul>
 		</form>

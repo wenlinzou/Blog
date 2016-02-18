@@ -49,9 +49,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form onsubmit="return checkName();" method="post" id="saveForm">
 		<ul><li>名称</li><li>密码</li><li>昵称</li></ul>
 		<ul>
-			<li><input type="text" name="username"/></li>
-			<li><input type="text" name="password"/></li>
-			<li><input type="text" name="nickname"/></li>
+			<li><input class="inputadd" type="text" name="username"/></li>
+			<li><input class="inputadd" type="text" name="password"/></li>
+			<li><input class="inputadd" type="text" name="nickname"/></li>
 			<li><input type="submit" value="添加"/></li>
 		</ul>
 		</form>

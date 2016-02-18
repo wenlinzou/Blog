@@ -42,9 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div id="showAddCategoryDiv" class="addCategory" style="display: none;">
 		<form action="<%=basePath%>category/save.do" method="post">
-		<ul><li>名称</li></ul>
-		<ul>
-			<li><input type="text" name="name"/></li>
+		<ul><li></li><li>名称</li></ul>
+		<ul><li></li>
+			<li><input class="inputadd" type="text" name="name"/></li>
 			<li><input type="submit" value="添加"/></li>
 		</ul>
 		</form>

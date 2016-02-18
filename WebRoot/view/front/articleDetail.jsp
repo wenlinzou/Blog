@@ -82,7 +82,7 @@
         <time datetime="2013-01-01"><fmt:formatDate value="${article.pdate}" type="time" pattern="dd"/><br/>${article.shortmon }</time>
         <div class="extra_wrapper">
           <div class="text1 upp">${article.title }</div>
-          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">Views Comment(s)&nbsp;${article.click }</a></div>
+          <div class="links">Posted by <a href="javascript:void(0);">wenlinzou</a><a href="#" class="comment">View(s)&nbsp;${article.click }</a></div>
         </div>
         <div class="clear"></div>
         <div class="extra_wrapper">
@@ -142,7 +142,7 @@
      
     </div>
     <div class="grid_3">
-      <h3>类别</h3>
+      <h3>CATEGORIES</h3>
       <ul class="list2 l1">
       
       	<c:forEach items="${categoryList }" var="category">
@@ -150,7 +150,7 @@
         </c:forEach>
         
       </ul>
-      <h3>存档</h3>
+      <h3>ARCHIVE</h3>
       <ul class="list2 l1">
         <!-- <li><a href="#">August 2012</a></li> -->
         <c:forEach items="${monthMap }" var="months">
