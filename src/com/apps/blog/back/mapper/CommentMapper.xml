@@ -16,7 +16,9 @@
 	</insert>
 	
 	<select id="queryCommentByName" resultMap="BaseResultMap" parameterType="Object">
-		select * from comment where visitname=#{visitname}
+		select * from comment where 1=1 
+		and articleid=#{articleid}
+		and visitname=#{visitname}
 	</select>
 	
 	<!-- 删除记录 -->

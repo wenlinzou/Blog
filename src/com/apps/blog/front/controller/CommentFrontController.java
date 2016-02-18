@@ -42,6 +42,7 @@ public class CommentFrontController extends BaseAction {
 		boolean visitnameisnull = MyStringUtils.isNull(visitname);
 		if(!visitnameisnull){
 			Comment c = new Comment();
+			if(null!=articleid)c.setArticleid(articleid);
 			c.setVisitname(visitname);
 			Comment commentnameTemp = commentService.queryCommentByName(c);
 			if(null == commentnameTemp){
