@@ -44,7 +44,7 @@ input{
 .comment ul li a {
 	display:block;/*将a设置为块级元素*/
 	text-decoration: none;
-	width:70px;
+	width:66px;
 	height:20px;
 	text-align:center;
 	font-size:17px;

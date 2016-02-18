@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>标题</li>
 			<li>时间</li>
 			<li>状态</li>
-			<li>操作</li>
+			<li>评论</li>
 		</ul>
 		<c:forEach items="${articleList }" var="article">
 			<ul>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</c:if>
 				</li>
 				<li>
-					<a href="<%=basePath%>comment/queryListByArticle.do?articleid=${article.id }">${article.comments}评论</a>
+					<a href="<%=basePath%>comment/queryListByArticle.do?articleid=${article.id }">${article.comments}条</a>
 				</li>
 			</ul>
 		</c:forEach>
