@@ -110,9 +110,13 @@ public class MyStringUtils {
 		return map;
 	}
 	
-	public static Date strTransDate(String str) throws ParseException{
+	public static Date strTransDate(String str){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		return sdf.parse(str);
+		try {
+			return sdf.parse(str);
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 	
 
