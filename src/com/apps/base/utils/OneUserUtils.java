@@ -28,7 +28,7 @@ public class OneUserUtils {
 		}
 		loginUsers.add(loginUser);
 		
-		printList("addUser", loginUsers);
+		printList("session list addUser", loginUsers);
 	}
 	
 	public static void removeLogUser(User logoutUser){
@@ -39,19 +39,22 @@ public class OneUserUtils {
 			for (int i = 0; i < loginUsers.size(); i++) {
 				if(logoutUser.getId() == loginUsers.get(i).getId()){
 					loginUsers.remove(logoutUser);
+System.out.println("session list removeUser:" + logoutUser.getId() + " - " + logoutUser.getUsername());					
+					break;
 				}
 			}
 		}
-		printList("removeLogUser", loginUsers);
+		printList("hasUser", loginUsers);
 	}
 	
 	
 	public static void printList(String method, List<User> lists){
+System.out.println(method + " size:" + lists.size() + "\n---start---");
 		if(null!=lists && lists.size()>0){
-			System.out.println(method);
 			for (int i = 0; i < lists.size(); i++) {
-				System.out.println(lists.get(i).getId()+"\t"+lists.get(i).getUsername());
+System.out.println(lists.get(i).getId()+"\t"+lists.get(i).getUsername());
 			}
 		}
+System.out.println("---end---");		
 	}
 }
