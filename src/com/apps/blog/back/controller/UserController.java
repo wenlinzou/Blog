@@ -130,13 +130,6 @@ public class UserController extends BaseAction {
 					}
 				}
 			}
-			/*user.setPassword(password);
-			boolean canLogin = userService.login(user);
-			if(canLogin){
-				request.getSession(true).setAttribute("user", user);
-				String redirctStr = "redirect:/user/queryAll.do";
-				return redirctStr;
-			}*/
 		}
 		return jumpJsp;
 	}
@@ -185,5 +178,39 @@ public class UserController extends BaseAction {
 			}
 		}
 		return "back/userBack";
+	}
+	
+	@RequestMapping("/updatePwd")
+	@ResponseBody
+	public Map<String,String> updatePwd(HttpServletRequest request, String password,Integer id, Model model){
+		Map<String, String> map = new HashMap<String, String>();
+		//记录访问者的IP
+		String userLogIP = request.getRemoteAddr();
+		log.info("back-user update passwod IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		
+		map.put("message", "修改失败!");
+		if(null!=id){
+			User user = new User();
+			if(!MyStringUtils.isNull(password) && null!=id){
+				user.setId(id);
+				//将MD5+salt的MD5值放入password中,生成一个新的salt
+				String saltUpdateStr = MD5Utils.salt();
+				password = MD5Utils.md5Salt(password, saltUpdateStr);
+				
+				//update user password
+				user.setPassword(password);
+				userService.update(user);
+				//update salt salt by userid
+				Salt salt = new Salt();
+				salt.setSalt(saltUpdateStr);
+				salt.setUserid(id);
+				saltService.update(salt);
+				
+				map.put("message", "修改成功!");
+				
+			}
+		}
+		return map;
+//		return "back/userBack";
 	}
 }

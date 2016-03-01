@@ -78,6 +78,9 @@
 		 <if test="nickname != null  ">
 			nickname=#{nickname}
 		</if>
+		 <if test="password != null  ">
+			password=#{password}
+		</if>
 		where id=#{id}
 	</update>
 	

@@ -56,3 +56,41 @@ input{
 .inputadd{
 	border:1px solid #FD5B56;
 }
+
+.alert{
+	width:40%;
+	height:290px;
+	background:white;
+	border-radius:5px;
+	z-index:10;
+	position:absolute;
+	top:100px;
+	left:30%;
+	display:none;
+	padding-top:40px;
+	
+}
+.mask{
+	width:100%;
+	position:fixed;
+	height:100%;
+	z-index:9;
+	background:rgba(0,0,0,0.4);
+	top:0;
+	left:0;
+	display:none;
+}
+.updatepwd_btn{
+	background-color: #6D94F3;
+	color:white;
+}
+.errormsg{
+	color:red;
+}
+
+.form{width:80%; margin:auto;}
+.input-box{width:100%; margin:20px 0;line-height:36px;}
+.input-box input{width:80%;float:right;border:1px solid #eee;height:36px;}
+.confirm_btn{width:100%;height:36px; background:#fb6968; text-align:center;border:none;margin-top:40px;
+font-size:18px; color:#eee;font-family:'微软雅黑';
+}

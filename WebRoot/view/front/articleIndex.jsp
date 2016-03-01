@@ -198,7 +198,8 @@
       <a href="#"></a>
     </div>
       <div class="copy">
-     &copy; Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a>
+      	<a target="_blank" href="http://www.miitbeian.gov.cn/">苏ICP备16007444号</a>
+     &copy; Copyright &copy; 2016.Wenlinzou All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a>
      </div></div>
      <div class="clear"></div>
   </div>
