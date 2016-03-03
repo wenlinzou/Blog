@@ -2,6 +2,22 @@
 	articleAjax(1);
 };*/
 
+
+$(document).keyup(function(event){
+	 if (event.keyCode == 13) {
+		 searchWord();
+	 }
+});
+function searchWord(){
+	var word = document.getElementById("keyword").value;
+	if(word==''){
+		window.location.href="articleFront/queryAllArticlePage.shtml";
+	}else{
+		window.location.href="articleFront/queryAllArticlePage.shtml?keyword=" + word;
+	}
+}
+
+
 function articleAjax(page){
 	$.ajax({
 		type : 'POST',

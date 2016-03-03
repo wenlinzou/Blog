@@ -23,8 +23,16 @@ public class Article {
 	
 	private Integer comments;
 	
+	private String keyword;
 	
 	
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public Integer getComments() {
 		return comments;
 	}

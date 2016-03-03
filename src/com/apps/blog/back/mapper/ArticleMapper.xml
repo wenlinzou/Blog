@@ -107,6 +107,11 @@
 			<if test="isleaf != null  ">
 				and isleaf=#{isleaf}
 			</if>
+			
+			<if test="keyword != null  ">
+				and ( title like CONCAT('%','${keyword}','%' ) or cont like CONCAT('%','${keyword}','%' ) )  
+			</if>
+			
 			<if test="pager.orderCondition != null and pager.orderCondition != ''">
 				${pager.orderCondition} 
 			</if>
@@ -127,6 +132,10 @@
 			<if test="isleaf != null  ">
 				and isleaf=#{isleaf}
 			</if>
+			<if test="keyword != null  ">
+				and ( title like CONCAT('%','${keyword}','%' ) or cont like CONCAT('%','${keyword}','%' ) )  
+			</if>
+			
 			ORDER BY
 			<if test="rootid != null  ">
 				rootid=#{rootid} desc, 

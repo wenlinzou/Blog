@@ -114,7 +114,7 @@
 			<c:forEach begin="1" end="${pageData.pager.pageCount }" varStatus="status">
 				<c:if test="${status.count > (pageData.page - 3) && status.count < (pageData.page + 3) }">
 					<%-- <li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>" <c:if test="${status.count == pageData.page }">class="currentPage"</c:if> >${status.count }</a></li> --%>
-					<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if>"
+					<li><a href="<%=basePath%>articleFront/queryAllArticlePage.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if><c:if test='${!empty keyword }'>&keyword=${keyword }</c:if>"
 						<c:if test="${status.count == pageData.page && pageData.page%2==0 }">class="currentPageOdd"</c:if>
 						<c:if test="${status.count == pageData.page && pageData.page%2!=0 }">class="currentPageEven"</c:if> > ${status.count }</a>
 					</li>
@@ -177,10 +177,15 @@
         <li><a href="#">Family Travel</a></li>
       </ul>
     </div>
-    <div class="grid_2">
+    <!-- <div class="grid_2">
       <h4>Contact Us:</h4>
       TEL: 1-800-234-5678<br><a href="#">info@demolink.org</a>
-     
+    </div> -->
+    <div class="grid_2" id="searchKey">
+        <h4>
+        <input class="serach_input" placeholder="Keyword ..." type="text" id="keyword"/>
+        </h4>
+        <input class="serach_btn" type="button" value="Search" name="name" onclick="searchWord();"/>
     </div>
     <div class="clear"></div>
     </div>
@@ -206,6 +211,6 @@
 
 </footer>
 
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+<!-- <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div> -->
 </body>
 </html>

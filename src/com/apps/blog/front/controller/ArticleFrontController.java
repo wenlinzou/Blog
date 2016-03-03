@@ -84,7 +84,7 @@ public class ArticleFrontController extends BaseAction {
 	}
 	
 	@RequestMapping("/queryAllArticlePage")
-	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, HttpServletRequest request, Model model) throws Exception {
+	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, String keyword, HttpServletRequest request, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		boolean isLowSpider = IPUtils.checkSpider(userLogIP);
@@ -92,13 +92,16 @@ public class ArticleFrontController extends BaseAction {
 			return "error/spider";
 		}
 		
-		
 		if(null!= page.getPage() && page.getPage() == START_PAGE){
 			log.info("front-article page-visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));			
 		}else		
 			log.info("-currentpage : " + page.getPage());
+		
 		if(null != pid){
 			page.setPid(pid);
+		}
+		if(!MyStringUtils.isNull(keyword)){
+			page.setKeyword(keyword);
 		}
 		if(!MyStringUtils.isNull(date)){
 			Date pdate = MyStringUtils.strTransDate(date);
@@ -139,6 +142,9 @@ public class ArticleFrontController extends BaseAction {
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageData", page);
 		
+		if(!MyStringUtils.isNull(keyword)){
+			model.addAttribute("keyword", keyword);
+		}
 		if(!MyStringUtils.isNull(date)){
 			model.addAttribute("date", date);
 		}

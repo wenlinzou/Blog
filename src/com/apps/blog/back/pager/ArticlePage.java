@@ -19,7 +19,17 @@ public class ArticlePage extends BasePage{
 	
 	private String shortmon;
 	
+	private String keyword;
 	
+	
+	
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public String getImg() {
 		return img;
 	}
