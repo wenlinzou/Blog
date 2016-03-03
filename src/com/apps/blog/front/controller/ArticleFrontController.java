@@ -102,6 +102,7 @@ public class ArticleFrontController extends BaseAction {
 		}
 		if(!MyStringUtils.isNull(keyword)){
 			page.setKeyword(keyword);
+			log.info("-keyword : " + keyword);
 		}
 		if(!MyStringUtils.isNull(date)){
 			Date pdate = MyStringUtils.strTransDate(date);
