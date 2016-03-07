@@ -95,7 +95,7 @@ public class ArticleFrontController extends BaseAction {
 			return "error/spider";
 		}*/
 		boolean isBrowser = BrowserActiveUtils.isBrowserActive(user_agent);
-		if(isBrowser){
+		if(!isBrowser){
 			log.info("front-article user_agent : " + user_agent);		
 			return "error/spider";
 		}
