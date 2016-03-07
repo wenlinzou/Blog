@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.BrowserActiveUtils;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
@@ -85,10 +86,17 @@ public class ArticleFrontController extends BaseAction {
 	
 	@RequestMapping("/queryAllArticlePage")
 	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, String keyword, HttpServletRequest request, Model model) throws Exception {
+		String user_agent = request.getHeader("user-agent");
+
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		boolean isLowSpider = IPUtils.checkSpider(userLogIP);
+		/*boolean isLowSpider = IPUtils.checkSpider(userLogIP);
 		if(isLowSpider){
+			return "error/spider";
+		}*/
+		boolean isBrowser = BrowserActiveUtils.isBrowserActive(user_agent);
+		if(isBrowser){
+			log.info("front-article user_agent : " + user_agent);		
 			return "error/spider";
 		}
 		

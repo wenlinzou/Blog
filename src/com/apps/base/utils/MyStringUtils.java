@@ -16,6 +16,32 @@ public class MyStringUtils {
 	
 	private static final String[] shortMonth = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	
+	public static String[] splitWordWithSpace(String strs){
+		if(strs.indexOf(" ")>0){
+			String[] words = strs.split(" ");
+			return words;
+		}
+		return null;
+	}
+	//包含斜杠
+	public static String[] hasSlashStrs(String[] inputStrs){
+		List<String> lists = new ArrayList<String>();
+		if(null != inputStrs && inputStrs.length>0){
+			for (int i = 0; i < inputStrs.length; i++) {
+				if(inputStrs[i].indexOf("/")>0){
+					lists.add(inputStrs[i]);
+				}
+			}
+			if(lists.size()>0){
+				String[] strs = new String[lists.size()];
+				for (int i = 0; i < strs.length; i++) {
+					strs[i] = lists.get(i);
+				}
+				return strs;
+			}
+		}
+		return null;
+	}
 	//使用时间恒定的比较函数，可以让攻击者摸不着头脑
 	public static boolean slowEquals(byte[] a, byte[] b){
 		int diff = a.length ^ b.length;
