@@ -32,6 +32,7 @@ public class UserController extends BaseAction {
 	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
 	private UserService<User> userService;
+	
 	@Autowired(required = false)
 	private SaltService<Salt> saltService;
 	
@@ -90,6 +91,7 @@ public class UserController extends BaseAction {
 				salt.setSalt(saltStr);
 				salt.setUserid(loginuser.getId());
 				saltService.add(salt);
+				
 			}
 		}
 		String redirctStr = "redirect:/user/queryAll.do";

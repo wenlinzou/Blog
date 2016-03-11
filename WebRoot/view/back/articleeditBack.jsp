@@ -52,8 +52,8 @@
 				</li>
 				<li>
 					<select name="rootid">
-						<option value="1" <c:if test='${article.rootid==0 }'>selected="selected"</c:if>>正常</option>
-						<option value="0" <c:if test='${article.rootid==1 }'>selected="selected"</c:if>>置顶</option>
+						<option value="0" <c:if test='${article.rootid==0 }'>selected="selected"</c:if>>正常</option>
+						<option value="1" <c:if test='${article.rootid==1 }'>selected="selected"</c:if>>置顶</option>
 					</select>
 				</li>
 				<li><input type="text" class="inputright"  value='${article.title }'	name="title" /></li>

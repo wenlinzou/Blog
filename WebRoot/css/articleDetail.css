@@ -1,3 +1,6 @@
+h1{
+	
+}
 .basic-grey {
 	margin-top:50px;
 	margin-bottom:50px;
@@ -119,4 +122,6 @@ dl dt{
 	padding-left: 35px;
 	background: url(../plugjs/front/images/marker.png) 12px 6px no-repeat;
 }
-
+p{
+	font-size:17px;
+}

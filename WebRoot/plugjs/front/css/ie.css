@@ -1,7 +1,8 @@
 /**/
-@import url(//fonts.googleapis.com/css?family=Pathway+Gothic+One);
-@import url(//fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
-
+/* @import url(//fonts.googleapis.com/css?family=Pathway+Gothic+One);
+@import url(//fonts.googleapis.com/css?family=Open+Sans+Condensed:300); */
+@import "css.css";
+@import "css1.css";
 
 
 #tabs ul li, .newsletter_title, #newsletter input, a.btn, ul.list1 .count, .blog time  { behavior:url(js/PIE.htc); position:relative;}
