@@ -30,6 +30,11 @@
 		<listener-class>com.apps.blog.front.controller.CountLineListener</listener-class>   
 	</listener>
 	
+	<listener>  
+  		<listener-class>com.apps.base.utils.TaskManager</listener-class>  
+	 </listener>  
+	
+	
 <!-- 字符集过滤器 -->
   <filter>
     <filter-name>encodingFilter</filter-name>
