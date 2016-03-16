@@ -15,6 +15,7 @@ public class TaskManager implements ServletContextListener {
 	
 	
 	//每天的毫秒
+	@SuppressWarnings("deprecation")
 	public static final long PERIOD_DAY = DateUtils.MILLIS_IN_DAY;
 	
 	
@@ -26,11 +27,9 @@ public class TaskManager implements ServletContextListener {
 		currentDay.add(Calendar.DAY_OF_MONTH, num);
 		return currentDay.getTime();
 	}
-
+  
 	//一周的毫秒
 	public static final long PERIOD_WEEK = PERIOD_DAY * 7;
-	
-	//十秒
 	
 	//无延迟
 	public static final long NO_DELAY = 0;
@@ -71,9 +70,5 @@ public class TaskManager implements ServletContextListener {
 		//定时器销毁
 		timer.cancel();
 	}
-
-	
-	
-	
 
 }
