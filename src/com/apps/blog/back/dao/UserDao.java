@@ -8,7 +8,6 @@ import com.apps.blog.back.bean.User;
 
 public interface UserDao<T> extends BaseDao<T>{
 	public void add(User user);
-//	public int login(User user);
 	public User queryUserByName(User user);
 	public User queryUser(User user);
 	

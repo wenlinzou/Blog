@@ -44,10 +44,6 @@
 		values (#{username}, #{password}, #{nickname})
 	</insert>
 	
-	<!-- 后台用户登陆 -->
-	<!-- <select id="login" resultType="java.lang.Integer" parameterType="Object">
-		select count(1) from user where username=#{username} and password=#{password}
-	</select> -->
 	<select id="queryUser" resultMap="BaseResultMap" parameterType="Object">
 		select * from user where username=#{username} and password=#{password}
 	</select>
@@ -85,60 +81,4 @@
 	</update>
 	
 	
-	<select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
-		select * from article;
-			<!-- <include refid="Base_Column_List" /> -->
-			<!-- , 
-			
-		<include refid="Example_Where_Clause" /> -->
-	</select>
-	
-	
-	<!-- 根据id，拼接修改记录，注册时间不要，密码不要 -->
-	<update id="updateBySelective" parameterType="Object" >
-		update t_student set 
-		<trim suffixOverrides=",">
-			<if test="g_id != null  ">
-				g_id=#{g_id},
-			</if>
-			<if test="s_id != null  ">
-				s_id=#{s_id},
-			</if>
-			<if test="ml_id != null  ">
-				ml_id=#{ml_id},
-			</if>
-			<if test="stu_logname != null  ">
-				stu_logname=#{stu_logname},
-			</if>
-			<if test="stu_email != null  ">
-				stu_email=#{stu_email},
-			</if>
-			<if test="stu_name != null ">
-				stu_name = #{stu_name},
-			</if>
-			<if test="stu_sex != null ">
-				stu_sex = #{stu_sex},
-			</if>
-			<if test="stu_age != null ">
-				stu_age = #{stu_age},
-			</if>
-		</trim>
-		 where stu_id=#{id}
-	</update>
-	
-
-
-	
-	 <!-- 根据 id 查询密码，用于比较密码 -->
-	<!--<select id="queryPwdById" resultType="String" parameterType="java.lang.Integer">
-		select stu_pwd from t_student where stu_id=#{id} and stu_delsta=1 
-	</select> -->
-	
-	<!-- 学生 列表总数 -->
-	<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
-		select count(1) from article
-	</select>
-
-	
-
 </mapper>   

@@ -95,19 +95,4 @@
 		 where stu_id=#{id}
 	</update>
 	
-
-
-	
-	 <!-- 根据 id 查询密码，用于比较密码 -->
-	<!--<select id="queryPwdById" resultType="String" parameterType="java.lang.Integer">
-		select stu_pwd from t_student where stu_id=#{id} and stu_delsta=1 
-	</select> -->
-	
-	<!-- 学生 列表总数 -->
-	<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
-		select count(1) from article
-	</select>
-
-	
-
 </mapper>   

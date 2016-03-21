@@ -1,20 +1,14 @@
 package com.apps.blog.back.service.impl;
 
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apps.base.BaseService;
-import com.apps.base.utils.MyStringUtils;
-import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Comment;
 import com.apps.blog.back.dao.CommentDao;
-import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.pager.CommentPage;
 import com.apps.blog.back.service.CommentService;
 
@@ -22,7 +16,6 @@ import com.apps.blog.back.service.CommentService;
 @Service("commentServiceImpl")
 public class CommentServiceImpl<T> extends BaseService<T> implements CommentService<T> {
 
-	private final static Logger log = Logger.getLogger(CommentServiceImpl.class);
 	@Autowired
     private CommentDao<T> commentDao;
 	

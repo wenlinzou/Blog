@@ -3,7 +3,6 @@ package com.apps.blog.back.service.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,6 @@ import com.apps.blog.back.service.UserService;
 @Service("userServiceImpl")
 public class UserServiceImpl<T> extends BaseService<T> implements UserService<User> {
 
-	private final static Logger log = Logger.getLogger(UserServiceImpl.class);
 	@Autowired
     private UserDao<T> userDao;
 	

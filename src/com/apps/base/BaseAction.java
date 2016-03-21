@@ -64,6 +64,7 @@ public class BaseAction{
 		return rootMap;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ModelAndView forword(String viewName,Map context){
 		return new ModelAndView(viewName,context); 
 	}

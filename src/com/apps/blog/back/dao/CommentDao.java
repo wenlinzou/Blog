@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.apps.base.BaseDao;
 import com.apps.blog.back.bean.Comment;
-import com.apps.blog.back.bean.User;
 import com.apps.blog.back.pager.CommentPage;
 
 

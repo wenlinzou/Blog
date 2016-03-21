@@ -134,11 +134,5 @@
 	
 
 	
-	
-	<!-- 学生 列表总数 -->
-	<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
-		select count(1) from comment
-	</select>
-	
 
 </mapper>   

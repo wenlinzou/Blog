@@ -2,7 +2,6 @@ package com.apps.blog.back.service.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,6 @@ import com.apps.blog.back.service.CategoryService;
 @Service("categoryServiceImpl")
 public class CategoryServiceImpl<T> extends BaseService<T>  implements CategoryService<Category> {
 	
-	private final static Logger log = Logger.getLogger(CategoryServiceImpl.class);
 	@Autowired
     private CategoryDao<T> categoryDao;
 	

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,6 @@ import com.apps.blog.back.service.ArticleService;
 @Service("articleServiceImpl")
 public class ArticleServiceImpl<T> extends BaseService<T> implements ArticleService<T> {
 
-	private final static Logger log = Logger.getLogger(ArticleServiceImpl.class);
 	@Autowired
     private ArticleDao<T> articleDao;
 	

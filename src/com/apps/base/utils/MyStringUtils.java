@@ -12,10 +12,11 @@ import java.util.TreeMap;
 public class MyStringUtils {
 	private static final String FRISTDAY = "01";
 	
-	private static final String[] month = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	private static final String[] MONTH = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	
-	private static final String[] shortMonth = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	private static final String[] SHORT_MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	
+	//根据空格拆分字符串
 	public static String[] splitWordWithSpace(String strs){
 		if(strs.indexOf(" ")>0){
 			String[] words = strs.split(" ");
@@ -109,7 +110,7 @@ public class MyStringUtils {
 			String monthstr = strs.get(i).substring(4, strs.get(i).length());
 			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
 			int monthIndex = Integer.parseInt(monthstr)  - 1;
-			sb.append(month[monthIndex]);
+			sb.append(MONTH[monthIndex]);
 			sb.append(" ").append(strs.get(i).substring(0, 4));
 			map.put(strs.get(i) + FRISTDAY, sb.toString());
 		}
@@ -145,7 +146,7 @@ public class MyStringUtils {
 		}
 	}
 	
-
+	//01-->Jan
 	public static String arrangeEnglishShortMonth(Date date){
 		String strs = queryMonth(date);
 		StringBuilder sb = new StringBuilder();
@@ -153,7 +154,7 @@ public class MyStringUtils {
 			String monthstr = strs.substring(4, strs.length());
 			monthstr = monthstr.startsWith("0")?monthstr.substring(1):monthstr;
 			int shortmonthIndex = Integer.parseInt(monthstr) - 1;
-			sb.append(shortMonth[shortmonthIndex]);
+			sb.append(SHORT_MONTH[shortmonthIndex]);
 		}
 		return sb.toString();
 	}
