@@ -43,12 +43,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	</div>	
 	
-  	<%-- <form action="<%=basePath %>user/login.shtml" method="post">
-  		username:<input type="text" name="username"/>
-  		<br/>
-  		password:<input type="password" name="password"/>
-  		<br/>
-  		<input type="submit" value="登陆"/>
-  	</form> --%>
 </body>
 </html>

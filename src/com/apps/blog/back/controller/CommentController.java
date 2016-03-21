@@ -16,7 +16,11 @@ import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Comment;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CommentServiceImpl;
-
+/**
+ * 评论操作类
+ * @author Pet
+ *
+ */
 @Controller
 @RequestMapping("/comment")
 public class CommentController extends BaseAction {
@@ -29,7 +33,14 @@ public class CommentController extends BaseAction {
 	@Autowired(required = false)
 	private CommentServiceImpl<Comment> commentService;
 	
-	
+	/**
+	 * 查询所有的文章
+	 * @param request
+	 * @param articleid 文章id
+	 * @param model
+	 * @return 所有含有评论文章jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryListByArticle")
 	public String queryListByArticle(HttpServletRequest request, Integer articleid, Model model) throws Exception {
 		//记录访问者的IP
@@ -49,6 +60,17 @@ public class CommentController extends BaseAction {
 		}
 		return jumpjsp;
 	}
+	
+	/**
+	 * 修改文章对应评论是否显示
+	 * @param request
+	 * @param id 评论id
+	 * @param articleid 文章id
+	 * @param isshow 是否显示
+	 * @param model
+	 * @return 当前文章jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/updateCommentShow")
 	public String updateCommentShow(HttpServletRequest request, Integer id, Integer articleid, Integer isshow, Model model) throws Exception {
 		//记录访问者的IP

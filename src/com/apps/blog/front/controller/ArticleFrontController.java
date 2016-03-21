@@ -1,6 +1,5 @@
 package com.apps.blog.front.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,11 @@ import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
 import com.apps.blog.back.service.impl.CommentServiceImpl;
-
+/**
+ * 文章博客前台操作类
+ * @author Pet
+ *
+ */
 @Controller
 @RequestMapping("/articleFront")
 public class ArticleFrontController extends BaseAction {
@@ -48,42 +51,17 @@ public class ArticleFrontController extends BaseAction {
 	private CommentServiceImpl<Comment> commentService;
 	
 	
-	@RequestMapping("/queryAllArticle")
-	public String queryAllArticle(HttpServletRequest request, Model model) throws Exception {
-		//记录访问者的IP
-		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-		
-		List<Article> articleList = articleService.queryAllSortDate();
-		List<Date> dates = new ArrayList<Date>(); 
-		for (int i = 0; i < articleList.size(); i++) {
-			Article a = articleList.get(i);
-			dates.add(a.getPdate());
-			String imgStr = MyStringUtils.queryImg(a.getCont());
-			if(!MyStringUtils.isNull(imgStr)){
-				articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
-			}
-			articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
-			
-		}
-		List<String> dateList = MyStringUtils.queryAllDiffMonth(dates);
-//		dateList = MyStringUtils.arrangeEnglishMonth(dateList);
-		
-		Map<String, String> monthMap = new HashMap<String, String>();
-		monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
-		
-		
-		List<Category> categoryList = categoryService.queryAll();
-//		model.addAttribute("monthMap", monthMap);
-		request.getSession().setAttribute("monthMap", monthMap);
-		
-		model.addAttribute("articleList", articleList);
-//		model.addAttribute("categoryList", categoryList);
-		request.getSession().setAttribute("categoryList", categoryList);
-		
-		return "front/articleIndex";
-	}
-	
+	/**
+	 * 查询所有分页文章
+	 * @param page 分页对象
+	 * @param pid 类别id
+	 * @param date 存档日期（年月）
+	 * @param keyword 关键字
+	 * @param request
+	 * @param model
+	 * @return 综合添加查询分页文章页面jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryAllArticlePage")
 	public String queryAllArticlePage(ArticlePage page, Integer pid, String date, String keyword, HttpServletRequest request, Model model) throws Exception {
 		String user_agent = request.getHeader("user-agent");
@@ -213,6 +191,14 @@ public class ArticleFrontController extends BaseAction {
 		return map;
 	}
 	
+	/**
+	 * 查询文章详情
+	 * @param request
+	 * @param id 文章id
+	 * @param model
+	 * @return 文章详情页面jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryDetailById")
 	public String queryDetailById(HttpServletRequest request, Integer id, Model model) throws Exception {
 		//记录访问者的IP
@@ -235,14 +221,6 @@ public class ArticleFrontController extends BaseAction {
 			articleService.updateClick(id);
 			model.addAttribute("article", article);
 			
-			//文章评论
-			/*Comment c = new Comment();
-			c.setArticleid(id);
-			c.setIsshow(IS_SHOW);
-			List<Comment> commentLists = commentService.queryListByArticle(c);
-			if(commentLists.size()>0)
-				model.addAttribute("comments", commentLists);*/
-			
 			if(null == request.getSession().getAttribute("monthMap")){
 				List<Article> articleMonthList = articleService.queryAllSortDate();
 				List<String> dateList = articleService.getAllDate(articleMonthList);
@@ -255,54 +233,8 @@ public class ArticleFrontController extends BaseAction {
 				request.getSession().setAttribute("categoryList", categoryList);
 			}
 			jumpjsp = "front/articleDetail";
-				
-			
-			//List<Category> categoryList = categoryService.queryAll();
-			//model.addAttribute("categoryList", categoryList);
 		}
 		return jumpjsp;
-	}
-	
-	@RequestMapping("/queryByThing")
-	public String queryByThing(HttpServletRequest request, Integer pid, String date, Model model) throws Exception {
-		//记录访问者的IP
-		String userLogIP = request.getRemoteAddr();
-		log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-		
-		Article artcile = new Article();
-		if(null != pid){
-			artcile.setPid(pid);
-		}
-		if(!MyStringUtils.isNull(date)){
-			Date pdate = MyStringUtils.strTransDate(date);
-			if(null!=pdate)
-				artcile.setPdate(pdate);
-		}
-		artcile.setIsleaf(1);
-		if(null!=artcile){
-			List<Article> articleList = articleService.queryByThing(artcile);
-			List<Date> dates = new ArrayList<Date>(); 
-			for (int i = 0; i < articleList.size(); i++) {
-				Article a = articleList.get(i);
-				dates.add(a.getPdate());
-				String imgStr = MyStringUtils.queryImg(a.getCont());
-				if(!MyStringUtils.isNull(imgStr)){
-					articleList.get(i).setImg(MyStringUtils.appendImgClass(imgStr));
-				}
-				articleList.get(i).setShortmon(MyStringUtils.arrangeEnglishShortMonth(a.getPdate()));
-			}
-			
-			
-			model.addAttribute("articleList", articleList);
-			
-			/*List<Category> categoryList = categoryService.queryAll();
-			model.addAttribute("categoryList", categoryList);*/
-			if(null == request.getSession().getAttribute("categoryList")){
-				List<Category> categoryList = categoryService.queryAll();
-				request.getSession().setAttribute("categoryList", categoryList);
-			}
-		}
-			return "front/articleIndex";
 	}
 	
 }

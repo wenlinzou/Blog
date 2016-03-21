@@ -19,18 +19,28 @@ import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
-
+/**
+ * 文章操作类
+ * @author Pet
+ *
+ */
 @Controller
 @RequestMapping("/article")
 public class ArticleController extends BaseAction {
 	private final static Logger log = Logger.getLogger(ArticleController.class);
 
-	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
 	private ArticleServiceImpl<Article> articleService;
 	@Autowired(required = false)
 	private CategoryServiceImpl<Category> categoryService;
 	
+	/**
+	 * 添加文章时，加载文章类别
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryLoadAdd")
 	public String queryLoadAdd(HttpServletRequest request, Model model) throws Exception {
 		if(null == request.getSession().getAttribute("categoryList")){
@@ -40,6 +50,13 @@ public class ArticleController extends BaseAction {
 		return "back/artcileaddBack";
 	}
 	
+	/**
+	 * 查询所有文章
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryAll")
 	public String queryAll(HttpServletRequest request, Model model) throws Exception {
 		List<Article> articleList = articleService.queryAll();
@@ -52,6 +69,12 @@ public class ArticleController extends BaseAction {
 		return "back/artcileBack";
 	}
 	
+	/**
+	 * 含有评论的所有文章
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryAllComment")
 	public String queryAllComment(Model model) throws Exception {
 		List<Article> articleList = articleService.queryAllComment();
@@ -59,6 +82,13 @@ public class ArticleController extends BaseAction {
 		return "back/commentBack";
 	}
 	
+	/**
+	 * 查询文章根据id
+	 * @param id 文章id
+	 * @param model
+	 * @return 当前文章页面jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryById")
 	public String queryById(Integer id, Model model) throws Exception {
 		if(null != id){
@@ -67,6 +97,20 @@ public class ArticleController extends BaseAction {
 		}
 		return "back/articleeditBack";
 	}
+	
+	/**
+	 * 修改文章信息
+	 * @param request
+	 * @param id 文章id
+	 * @param pid	类别id
+	 * @param rootid 是否置顶
+	 * @param title 标题
+	 * @param cont 内容
+	 * @param isleaf 是否可见
+	 * @param model
+	 * @return 所有文章页面jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/update")
 	public String update(HttpServletRequest request, Integer id, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
 		//记录访问者的IP
@@ -74,24 +118,34 @@ public class ArticleController extends BaseAction {
 		log.info("back-article update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
 		if(null != id){
-//			if(!MyStringUtils.isNull(title)){
-				Article article = new Article();
-				article.setId(id);
-				article.setPid(pid);
-				article.setRootid(rootid);
-				article.setTitle(title);
-				article.setCont(cont);
-				article.setIsleaf(isleaf);
-				articleService.update(article);
-				String redirctStr = "redirect:/article/queryAll.do";
-				return redirctStr;
-//			}
+			Article article = new Article();
+			article.setId(id);
+			article.setPid(pid);
+			article.setRootid(rootid);
+			article.setTitle(title);
+			article.setCont(cont);
+			article.setIsleaf(isleaf);
+			articleService.update(article);
+			String redirctStr = "redirect:/article/queryAll.do";
+			return redirctStr;
 		}
 		
 		
 		return "back/articleBack";
 	}
 	
+	/**
+	 * 添加文章信息
+	 * @param request
+	 * @param pid 类别id
+	 * @param rootid 是否置顶
+	 * @param title 标题
+	 * @param cont 内容
+	 * @param isleaf 是否可见
+	 * @param model
+	 * @return 查询所有文章，跳转所有文章页面jsp
+	 * @throws Exception
+	 */
 	@RequestMapping("/add")
 	public String add(HttpServletRequest request, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
 		//记录访问者的IP

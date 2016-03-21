@@ -16,21 +16,24 @@ import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.service.CategoryService;
-
+/**
+ * 文章类别操作类
+ * @author Pet
+ *
+ */
 @Controller
 @RequestMapping("/category")
 public class CategoryController extends BaseAction {
 	private final static Logger log = Logger.getLogger(CategoryController.class);
 
-	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
 	private CategoryService<Category> categoryService;
 	
 	/**
-	 * 跳转到数据展示及操作页面，添加列表数据到页面。
-	 * @param model
-	 * @return
-	 * @throws Exception 
+	 * 跳转到数据展示及操作页面，添加列表数据到页面。 
+	 * @param request
+	 * @param name 类别名称
+	 * @return 当前所有类别页面jsp
 	 */
 	@RequestMapping("/save")
 	public String save(HttpServletRequest request, String name){
@@ -52,6 +55,11 @@ public class CategoryController extends BaseAction {
 		return redirctStr;
 	}
 	
+	/**
+	 * 所有类别
+	 * @param model
+	 * @return 所有类别页面jsp
+	 */
 	@RequestMapping("/queryAll")
 	public String queryAll(Model model){
 		List<Category> list = categoryService.queryAll();
@@ -59,6 +67,12 @@ public class CategoryController extends BaseAction {
 		return "back/categoryBack";
 	}
 	
+	/**
+	 * 查询类别根据类别id
+	 * @param id 类别id
+	 * @param model
+	 * @return 当前修改页面jsp
+	 */
 	@RequestMapping("/queryById")
 	public String queryById(Integer id, Model model){
 		if(null!=id){
@@ -67,6 +81,15 @@ public class CategoryController extends BaseAction {
 		}
 		return "back/categoryeditBack";
 	}
+	
+	/**
+	 * 修改类别名称 
+	 * @param request
+	 * @param name 类别名称
+	 * @param id 类别id
+	 * @param model
+	 * @return 修改类别后所有类别页面jsp
+	 */
 	@RequestMapping("/update")
 	public String update(HttpServletRequest request, String name, Integer id, Model model){
 		//记录访问者的IP
@@ -80,9 +103,6 @@ public class CategoryController extends BaseAction {
 				category.setName(name);
 				categoryService.update(category);
 				
-				//清空session categoryList
-				//request.getSession().setAttribute("categoryList", null);
-				
 				//修改category update categoryList session
 				List<Category> categoryList = categoryService.queryAll();
 				request.getSession().setAttribute("categoryList", categoryList);
@@ -91,7 +111,6 @@ public class CategoryController extends BaseAction {
 				return redirctStr;
 			}
 		}
-		
 		return "back/categoryBack";
 	}
 }

@@ -21,7 +21,11 @@ import com.apps.base.utils.MyStringUtils;
 import com.apps.base.utils.WordsFilterUtils;
 import com.apps.blog.back.bean.Comment;
 import com.apps.blog.back.service.impl.CommentServiceImpl;
-
+/**
+ * 前端文章评论操作类
+ * @author Pet
+ *
+ */
 @Controller
 @RequestMapping("/commentFront")
 public class CommentFrontController extends BaseAction {
@@ -34,7 +38,15 @@ public class CommentFrontController extends BaseAction {
 	@Autowired(required = false)
 	
 	
-	
+	/**
+	 * 判断评论用户名是否已存在
+	 * @param request
+	 * @param visitname 用户评论名
+	 * @param articleid 文章id
+	 * @param comment 评论内容
+	 * @param email 邮箱
+	 * @return 评论用户名是否已存在ajax
+	 */
 	@RequestMapping("checkName")
 	@ResponseBody
 	public Map<String, Object> checkName(HttpServletRequest request, String visitname, Integer articleid, String comment, String email){
@@ -76,7 +88,14 @@ public class CommentFrontController extends BaseAction {
 		return map;
 	}
 	
-	
+	/**
+	 * 加载文章所有评论信息
+	 * @param request
+	 * @param articleid 文章id
+	 * @param model
+	 * @return 评论信息ajax
+	 * @throws Exception
+	 */
 	@RequestMapping("/queryCommectArticleAjax")
 	@ResponseBody
 	public Map<String, Object> queryCommectArticleAjax(HttpServletRequest request, Integer articleid, Model model) throws Exception {
@@ -103,6 +122,5 @@ public class CommentFrontController extends BaseAction {
 		
 		return map;
 	}
-	
 	
 }

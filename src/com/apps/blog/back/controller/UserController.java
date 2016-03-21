@@ -23,7 +23,11 @@ import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
 import com.apps.blog.back.service.SaltService;
 import com.apps.blog.back.service.UserService;
-
+/**
+ * 用户操作类
+ * @author Pet
+ *
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseAction {
@@ -35,7 +39,13 @@ public class UserController extends BaseAction {
 	@Autowired(required = false)
 	private SaltService<Salt> saltService;
 	
-	
+	/**
+	 * 检查用户登录名称是否已存在ajax
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param nickname 昵称
+	 * @return 用户是否可保存
+	 */
 	@RequestMapping("checkName")
 	@ResponseBody
 	public Map<String, Object> checkName(String username, String password, String nickname){
@@ -58,9 +68,11 @@ public class UserController extends BaseAction {
 	
 	/**
 	 * 跳转到数据展示及操作页面，添加列表数据到页面。
-	 * @param model
-	 * @return
-	 * @throws Exception 
+	 * @param request
+	 * @param username 用户名
+	 * @param password 密码
+	 * @param nickname 昵称
+	 * @return 跳转至查询所有用户方法
 	 */
 	@RequestMapping("/save")
 	public String save(HttpServletRequest request, String username, String password, String nickname){
@@ -96,6 +108,14 @@ public class UserController extends BaseAction {
 		String redirctStr = "redirect:/user/queryAll.do";
 		return redirctStr;
 	}
+	
+	/**
+	 * 用户登录
+	 * @param request
+	 * @param username 用户名
+	 * @param password 密码
+	 * @return 登录是否成功（当前页面or成功页面）jsp
+	 */
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request, String username, String password){
 		//记录访问者的IP
@@ -109,7 +129,7 @@ public class UserController extends BaseAction {
 			User user = new User();
 			user.setUsername(username);
 			User usernameTemp = userService.queryUserByName(user);
-			if(null!=usernameTemp){
+			if(null != usernameTemp){
 				String datapwd = usernameTemp.getPassword();
 				
 				//查找用户的salt
@@ -134,6 +154,12 @@ public class UserController extends BaseAction {
 		}
 		return jumpJsp;
 	}
+	
+	/**
+	 * 用户退出，删除session中的用户信息
+	 * @param request
+	 * @return 前台首页jsp
+	 */
 	@RequestMapping("/loginOut")
 	public String loginOut(HttpServletRequest request){
 		//记录访问者的IP
@@ -147,6 +173,12 @@ public class UserController extends BaseAction {
 		request.getSession().removeAttribute("user");
 		return "redirect:/articleFront/queryAllArticlePage.shtml";
 	}
+	
+	/**
+	 * 查询所有用户信息
+	 * @param model
+	 * @return 所有用户信息jsp
+	 */
 	@RequestMapping("/queryAll")
 	public String queryAll(Model model){
 		List<User> list = userService.queryAll();
@@ -154,6 +186,12 @@ public class UserController extends BaseAction {
 		return "back/userBack";
 	}
 	
+	/**
+	 * 根据用户id查询用户对象
+	 * @param id 用户id
+	 * @param model
+	 * @return 用户当前jsp
+	 */
 	@RequestMapping("/queryById")
 	public String queryById(Integer id, Model model){
 		if(null!=id){
@@ -162,6 +200,16 @@ public class UserController extends BaseAction {
 		}
 		return "back/usereditBack";
 	}
+	
+	/**
+	 * 修改用户对象
+	 * @param request
+	 * @param username 用户名
+	 * @param nickname 昵称
+	 * @param id 用户id
+	 * @param model
+	 * @return 用户当前jsp
+	 */
 	@RequestMapping("/update")
 	public String update(HttpServletRequest request, String username, String nickname, Integer id, Model model){
 		//记录访问者的IP
@@ -182,13 +230,21 @@ public class UserController extends BaseAction {
 		return "back/userBack";
 	}
 	
+	/**
+	 * 修改用户密码ajax
+	 * @param request
+	 * @param password 用户密码
+	 * @param id 用户id
+	 * @param model
+	 * @return 修改成功失败
+	 */
 	@RequestMapping("/updatePwd")
 	@ResponseBody
 	public Map<String,String> updatePwd(HttpServletRequest request, String password,Integer id, Model model){
 		Map<String, String> map = new HashMap<String, String>();
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-user update passwod IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+		log.info("back-user update passwod IP : " + userLogIP + " : " + IPUtils.getAddressByIP(userLogIP));
 		
 		map.put("message", "修改失败!");
 		if(null!=id){
@@ -209,10 +265,8 @@ public class UserController extends BaseAction {
 				saltService.update(salt);
 				
 				map.put("message", "修改成功!");
-				
 			}
 		}
 		return map;
-//		return "back/userBack";
 	}
 }
