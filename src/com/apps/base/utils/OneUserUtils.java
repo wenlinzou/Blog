@@ -3,9 +3,14 @@ package com.apps.base.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.apps.blog.back.bean.User;
 
 public class OneUserUtils {
+	
+	private final static Logger log = Logger.getLogger(OneUserUtils.class);
+	
 	private static List<User> loginUsers;
 	
 	public static boolean hasOldUser(User checkUser){
@@ -39,7 +44,7 @@ public class OneUserUtils {
 			for (int i = 0; i < loginUsers.size(); i++) {
 				if(logoutUser.getId() == loginUsers.get(i).getId()){
 					loginUsers.remove(logoutUser);
-System.out.println("session list removeUser:" + logoutUser.getId() + " - " + logoutUser.getUsername());					
+					log.info("session list removeUser:" + logoutUser.getId() + " - " + logoutUser.getUsername());
 					break;
 				}
 			}
@@ -49,12 +54,12 @@ System.out.println("session list removeUser:" + logoutUser.getId() + " - " + log
 	
 	
 	public static void printList(String method, List<User> lists){
-System.out.println(method + " size:" + lists.size() + "\n---start---");
+		log.info(method + " size:" + lists.size() + "---start---");
 		if(null!=lists && lists.size()>0){
 			for (int i = 0; i < lists.size(); i++) {
-System.out.println(lists.get(i).getId()+"\t"+lists.get(i).getUsername());
+				log.info(lists.get(i).getId()+"\t"+lists.get(i).getUsername());
 			}
 		}
-System.out.println("---end---");		
+		log.info("---end---");
 	}
 }

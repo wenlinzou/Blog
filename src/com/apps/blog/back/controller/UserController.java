@@ -29,7 +29,6 @@ import com.apps.blog.back.service.UserService;
 public class UserController extends BaseAction {
 	private final static Logger log = Logger.getLogger(UserController.class);
 
-	// 接口中写自己的方法的时候用的
 	@Autowired(required = false)
 	private UserService<User> userService;
 	
@@ -136,7 +135,7 @@ public class UserController extends BaseAction {
 		return jumpJsp;
 	}
 	@RequestMapping("/loginOut")
-	public void loginOut(HttpServletRequest request){
+	public String loginOut(HttpServletRequest request){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("back-user loginout IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
@@ -146,6 +145,7 @@ public class UserController extends BaseAction {
 		
 		request.getSession().setAttribute("user", null);
 		request.getSession().removeAttribute("user");
+		return "redirect:/articleFront/queryAllArticlePage.shtml";
 	}
 	@RequestMapping("/queryAll")
 	public String queryAll(Model model){
