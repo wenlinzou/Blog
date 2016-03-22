@@ -23,6 +23,7 @@ import com.apps.blog.back.bean.User;
 import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
+import com.apps.blog.front.rss.RSSUtils;
 
 @Controller
 @RequestMapping("/articleFrontAndroid")
@@ -106,7 +107,8 @@ public class ArticleFrontAndroidController {
 		if(null!=pid){
 			map.put("pid", pid);
 		}
-		
+		String webpath="", rsspath = "";
+		new RSSUtils().testBuilder(articleService, rsspath, webpath);
 		return map;
 	}
 	

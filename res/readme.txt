@@ -4,3 +4,9 @@ EXML.jar
 
 敏感词
 alex-word-filter.jar
+
+rss
+com.sun.syndication.feed.synd.SyndCategory
+rome.jar
+RssBuild.jar
+jdom.jar
