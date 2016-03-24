@@ -1,5 +1,6 @@
 package com.apps.blog.front.controller;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,7 @@ import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
 import com.apps.blog.back.service.impl.CommentServiceImpl;
+import com.apps.blog.front.rss.RSSUtils;
 /**
  * 文章博客前台操作类
  * @author Pet
@@ -121,10 +123,31 @@ public class ArticleFrontController extends BaseAction {
 			Map<String, String> monthMap = new TreeMap<String, String>();
 			monthMap = MyStringUtils.arrangeEnglishMonth(dateList);
 			request.getSession().setAttribute("monthMap", monthMap);
+			
+			//快速rss
+			String serverName = request.getServerName();
+			int port = request.getLocalPort();
+			String webName = request.getContextPath();
+			StringBuilder webTemp = new StringBuilder();
+			
+			String webpath="", rsspath = "";
+			webTemp = port==80?webTemp.append(serverName):webTemp.append(serverName).append(":").append(port);
+			webpath = webTemp.append(webName).toString();
+			//D:\server\apache-tomcat-7.0.54\webapps\Blog
+			String web = request.getSession().getServletContext().getRealPath("");
+			File rssFile = new File(web + File.separatorChar + "rss");
+			if(!rssFile.exists()){
+				rssFile.mkdir();
+			}
+			rsspath = rssFile.getAbsolutePath() + File.separatorChar;
+			page.setRows(10);
+			new RSSUtils().rssBuilder(articleService, page, rsspath, webpath);
 		}
 		if(null == request.getSession().getAttribute("categoryList")){
 			List<Category> categoryList = categoryService.queryAll();
 			request.getSession().setAttribute("categoryList", categoryList);
+			
+			
 		}
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageData", page);
@@ -138,6 +161,7 @@ public class ArticleFrontController extends BaseAction {
 		if(null!=pid){
 			model.addAttribute("pid", pid);
 		}
+		
 		
 		return "front/articleIndex";
 	}

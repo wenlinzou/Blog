@@ -5,10 +5,9 @@ import java.util.TimerTask;
 import org.apache.log4j.Logger;
 
 
-import com.apps.blog.back.controller.ArticleController;
 
 public class SendEmailTask extends TimerTask {
-	private final static Logger log = Logger.getLogger(ArticleController.class);
+	private final static Logger log = Logger.getLogger(SendEmailTask.class);
 	private static boolean isRunning = false;
 
 	@Override

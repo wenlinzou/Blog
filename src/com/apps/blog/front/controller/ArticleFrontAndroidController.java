@@ -107,8 +107,7 @@ public class ArticleFrontAndroidController {
 		if(null!=pid){
 			map.put("pid", pid);
 		}
-		String webpath="", rsspath = "";
-		new RSSUtils().testBuilder(articleService, rsspath, webpath);
+		
 		return map;
 	}
 	
