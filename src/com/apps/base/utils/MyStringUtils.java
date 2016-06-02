@@ -15,7 +15,32 @@ public class MyStringUtils {
 	private static final String[] MONTH = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	
 	private static final String[] SHORT_MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-	
+
+	public static String replaceStr(String replaceStr, String beforeStr, String afterStr){
+		String str = null;
+		str = replaceStr.replace(beforeStr, afterStr);
+		return str;
+	}
+	public static String arrangeShareUrl(String urlStr){
+		String str = null;
+		char[] chars = urlStr.toCharArray();
+		int index = -1;
+		int count = 0;
+		for(int i = chars.length-1; i>=0; i--){
+			if(count==2){
+				index = i;
+				break;
+			}
+			
+			if('/'==chars[i]){
+				count++;
+			}
+		}
+		if(index>0){
+			str = urlStr.substring(0, index+1);
+		}
+		return str;
+	}
 	//根据空格拆分字符串
 	public static String[] splitWordWithSpace(String strs){
 		if(strs.indexOf(" ")>0){

@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/article.css">
-	
+	<script type="text/javascript" src="<%=basePath%>plugjs/front/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/articleBack.js"></script>
   </head>
   
@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>操作</li>
 		</ul>
 		<c:forEach items="${articleList }" var="article">
-			<ul>
+			<ul name="articleul" >
 				<li>${article.id }</li>
 				<li>
 					<select>
@@ -67,12 +67,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</c:if>
 					<c:if test="${article.isleaf==0 }">
 						<input type="button" value="HIDDEN" class="currentBtnHidden" onclick="updateArticleView('<%=basePath%>', ${article.id}, 1);" />
+						<input type="button" value="SHARE" class="currentBtnShare" onclick="updateArticleShare('<%=basePath%>', ${article.id}, 1);" />
+						<input type="button" value="CLOSE" class="currentBtnShareClose" onclick="updateArticleShare('<%=basePath%>', ${article.id}, 0);" />
 					</c:if>
 				</li>
 				<li><a href="<%=basePath%>article/queryById.do?id=${article.id }">修改</a></li>
 			</ul>
 		</c:forEach>
 	</div>
+	<div class="alert">
+		<div><span id="sharemsg"></span></div>
+		<div class="input-box"><input type="button" class="confirm_btn" onclick="hiddenShareDiv();" value="确认"/></div>
+	</div>
+	<div class="mask"></div>
 	
 	</c:if>
 	

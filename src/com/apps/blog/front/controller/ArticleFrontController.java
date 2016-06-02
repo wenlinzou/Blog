@@ -23,11 +23,13 @@ import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.bean.Comment;
+import com.apps.blog.back.bean.Share;
 import com.apps.blog.back.bean.User;
 import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
 import com.apps.blog.back.service.impl.CommentServiceImpl;
+import com.apps.blog.back.service.impl.ShareServiceImpl;
 import com.apps.blog.front.rss.RSSUtils;
 /**
  * 文章博客前台操作类
@@ -51,6 +53,9 @@ public class ArticleFrontController extends BaseAction {
 	
 	@Autowired(required = false)
 	private CommentServiceImpl<Comment> commentService;
+
+	@Autowired(required = false)
+	private ShareServiceImpl<Share> shareService;
 	
 	
 	/**
@@ -224,7 +229,7 @@ public class ArticleFrontController extends BaseAction {
 	 * @throws Exception
 	 */
 	@RequestMapping("/queryDetailById")
-	public String queryDetailById(HttpServletRequest request, Integer id, Model model) throws Exception {
+	public String queryDetailById(HttpServletRequest request, Integer id, String shareCode, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("front-article visit detail IP : " + userLogIP +" : " /*+ IPUtils.getAddressByIP(userLogIP)*/);
@@ -235,30 +240,58 @@ public class ArticleFrontController extends BaseAction {
 			
 			Article article = articleService.queryById(id);
 			boolean isSecretArticle = article.getIsleaf() < 1;
+			boolean isShare = false;
+			Share share = shareService.queryByArticleId(id);
+			if(null != share){
+				isShare = share.getIsshare()==1?true:isShare;
+			}
+			boolean isRight = false;
+			if(isShare){
+				isRight = shareService.checkShareCode(article.getId(), shareCode);
+				log.info("front-article Share visit ID : " + article.getId() +" : shareCode - " + shareCode + " isRIGHT?" + isRight);
+			}
 			
-			//如果是存在id,但不可见,且用户没有登录
-			if(isSecretArticle && (null == objUser || !(objUser instanceof User))){
+			if(isSecretArticle && (null == objUser || !(objUser instanceof User)) && !isShare){
 				return "redirect:/articleFront/queryAllArticlePage.shtml";
 			}
-			
-			article.setShortmon(MyStringUtils.arrangeEnglishShortMonth(article.getPdate()));
-			articleService.updateClick(id);
-			model.addAttribute("article", article);
-			
-			if(null == request.getSession().getAttribute("monthMap")){
-				List<Article> articleMonthList = articleService.queryAllSortDate();
-				List<String> dateList = articleService.getAllDate(articleMonthList);
-				Map<String, String> monthMap = new TreeMap<String, String>();
-				monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
-				request.getSession().setAttribute("monthMap", monthMap);
+			//是分享文章，验证码同时正确
+			boolean shareBool = isShare && isRight;
+			//如果是存在id,但不可见,且用户没有登录,文章是分享的,但是验证码不正确或没有输入验证码
+			if(isSecretArticle && (null == objUser || !(objUser instanceof User)) && !shareBool){
+				//跳转页面输入分享码
+				model.addAttribute("articleId", id);
+				return "front/articleShare";
 			}
-			if(null == request.getSession().getAttribute("categoryList")){
-				List<Category> categoryList = categoryService.queryAll();
-				request.getSession().setAttribute("categoryList", categoryList);
-			}
+			articleInfo(request, article, model);
+			
 			jumpjsp = "front/articleDetail";
 		}
 		return jumpjsp;
 	}
+	
+	/**
+	 * 加载文章信息
+	 * @param request
+	 * @param article
+	 * @param model
+	 */
+	public void articleInfo(HttpServletRequest request, Article article, Model model){
+		article.setShortmon(MyStringUtils.arrangeEnglishShortMonth(article.getPdate()));
+		articleService.updateClick(article.getId());
+		model.addAttribute("article", article);
+		
+		if(null == request.getSession().getAttribute("monthMap")){
+			List<Article> articleMonthList = articleService.queryAllSortDate();
+			List<String> dateList = articleService.getAllDate(articleMonthList);
+			Map<String, String> monthMap = new TreeMap<String, String>();
+			monthMap = MyStringUtils.arrangeEnglishMonth(dateList,0);
+			request.getSession().setAttribute("monthMap", monthMap);
+		}
+		if(null == request.getSession().getAttribute("categoryList")){
+			List<Category> categoryList = categoryService.queryAll();
+			request.getSession().setAttribute("categoryList", categoryList);
+		}
+	}
+	
 	
 }

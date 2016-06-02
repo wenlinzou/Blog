@@ -1,5 +1,5 @@
 User-agent: Baiduspider
-Disallow: /
+#Disallow: /
 
 #Disallow: /j*/
 #Disallow: /p*/
@@ -15,4 +15,4 @@ Disallow: /
 #User-agent: Googlebot
 
 User-agent: *
-Disallow: /
+#Disallow: /

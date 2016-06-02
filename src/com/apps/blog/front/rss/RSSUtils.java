@@ -3,6 +3,7 @@ package com.apps.blog.front.rss;
 import java.util.Date;
 import java.util.List;
 
+import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.ArticleService;
@@ -27,8 +28,12 @@ public class RSSUtils {
 				ChannelEItem item = new ChannelEItem();
 				Article article = articleLists.get(i);
 				item.setTitle(article.getTitle());
-				item.setLink(webpath + "/articleFront/queryDetailById.shtml?id=" + article.getId());
-				item.setDescription("<![CDATA[" + article.getCont() + "]]>");
+				item.setLink("/articleFront/queryDetailById.shtml?id=" + article.getId());
+//				item.setLink(webpath + "/articleFront/queryDetailById.shtml?id=" + article.getId());
+//				item.setDescription("<![CDATA[" + article.getCont() + "]]>");
+				String content = article.getCont();
+				content = MyStringUtils.replaceStr(content, "..", webpath);
+				item.setDescription(content);
 				item.setAuthor("wenlinzou");
 				item.setPubDate(article.getPdate());
 				item.setCategory(article.getPid().toString());

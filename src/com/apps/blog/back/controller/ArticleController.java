@@ -11,14 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
+import com.apps.blog.back.bean.Share;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
+import com.apps.blog.back.service.impl.ShareServiceImpl;
 /**
  * 文章操作类
  * @author Pet
@@ -33,6 +36,8 @@ public class ArticleController extends BaseAction {
 	private ArticleServiceImpl<Article> articleService;
 	@Autowired(required = false)
 	private CategoryServiceImpl<Category> categoryService;
+	@Autowired(required = false)
+	private ShareServiceImpl<Share> shareService;
 	
 	/**
 	 * 添加文章时，加载文章类别
@@ -99,6 +104,48 @@ public class ArticleController extends BaseAction {
 	}
 	
 	/**
+	 * 分享文章
+	 * @param articleid
+	 * @param isshare
+	 * @return
+	 */
+	@RequestMapping("updateShare")
+	@ResponseBody
+	public Map<String, Object> updateShare(HttpServletRequest request, Integer articleid, Integer isshare){
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(null != isshare){
+			Share share = shareService.queryByArticleId(articleid);
+			if(null == share){
+				share = new Share();
+				share.setArticleid(articleid);
+				share.setIsshare(isshare);
+				shareService.add(share);
+			}else{
+				share.setIsshare(isshare);
+				shareService.update(share);
+			}
+		}
+		
+		if(1==isshare){
+			String shareCode = shareService.queryByArticleId(articleid).getCode();
+			map.put("shareCode", shareCode);
+			String shareUrl = request.getRequestURL().toString();
+			//http://localhost:8080/Blog/article/updateShare.do
+			//http://localhost:8080/Blog/articleFront/queryDetailById.shtml?id=
+			StringBuilder sb = new StringBuilder();
+			String tempUrl = MyStringUtils.arrangeShareUrl(shareUrl);
+			sb.append(tempUrl).append("/").append("articleFront/queryDetailById.shtml?id=").append(articleid);
+			shareUrl = sb.toString();
+			map.put("shareUrl", shareUrl);
+		}else{
+			map.put("articleId", articleid);
+		}
+		map.put("can", isshare==1?true:false);
+		return map;
+	
+	}
+	
+	/**
 	 * 修改文章信息
 	 * @param request
 	 * @param id 文章id
@@ -112,12 +159,12 @@ public class ArticleController extends BaseAction {
 	 * @throws Exception
 	 */
 	@RequestMapping("/update")
-	public String update(HttpServletRequest request, Integer id, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Model model) throws Exception {
+	public String update(HttpServletRequest request, Integer id, Integer pid, Integer rootid, String title, String cont, Integer isleaf, Integer isshare, Model model) throws Exception {
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("back-article update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
-		if(null != id){
+		if(null != id ){
 			Article article = new Article();
 			article.setId(id);
 			article.setPid(pid);
@@ -126,6 +173,8 @@ public class ArticleController extends BaseAction {
 			article.setCont(cont);
 			article.setIsleaf(isleaf);
 			articleService.update(article);
+			
+			
 			String redirctStr = "redirect:/article/queryAll.do";
 			return redirctStr;
 		}
