@@ -9,7 +9,7 @@ p{
 .comment ul li {
 	list-style-type: none;
 	float: left;
-	width: 170px;
+	width: 20%;
 	height:23px;
 	
 	overflow: hidden; /*自动隐藏文字*/
@@ -22,7 +22,7 @@ p{
 	overflow: hidden;
 }
 .title li{
-	width: 170px;
+	width: 20%;
 	height:23px;
 	background-color: #E4F88C;
 	text-align: center;

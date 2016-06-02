@@ -9,7 +9,7 @@ p{
 .category ul li {
 	list-style-type: none;
 	float: left;
-	width: 190px;
+	width: 33.3%;
 	height:23px;
 }
 .category ul{
@@ -18,7 +18,7 @@ p{
 	overflow: hidden;
 }
 .title li{
-	width: 190px;
+	width: 33.3%;
 	height:23px;
 	background-color: #FFDC76;
 	text-align: center;
@@ -34,7 +34,7 @@ p{
 .addCategory ul li {
 	list-style-type: none;
 	float: left;
-	width: 190px;
+	width: 33.3%;
 	height:23px;
 }
 .category ul li a {

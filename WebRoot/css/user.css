@@ -9,7 +9,7 @@ p{
 .user ul li {
 	list-style-type: none;
 	float: left;
-	width: 190px;
+	width: 25%;
 	height:23px;
 }
 .user ul{
@@ -20,7 +20,7 @@ p{
 .addUser ul li{
 	list-style-type: none;
 	float: left;
-	width: 190px;
+	width: 25%;
 	height:23px;
 }
 .addUser ul{
@@ -29,7 +29,7 @@ p{
 	overflow: hidden;
 }
 .title li{
-	width: 170px;
+	width: 33%;
 	height:23px;
 	background-color: #FD5B56;
 	text-align: center;
