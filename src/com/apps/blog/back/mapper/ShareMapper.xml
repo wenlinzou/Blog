@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apps.blog.back.dao.ShareDao">
+	<!-- Result Map -->
+	<resultMap id="BaseResultMap" type="com.apps.blog.back.bean.Share">
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, articleid, sharedate, code, isshare
+	</sql>
+
+	
+	<insert id="add" parameterType="Object" >
+		insert into share
+		(articleid, sharedate, code, isshare)
+		values
+		(#{articleid}, now(), #{code}, #{isshare})
+	</insert>
+	
+	
+	<!-- 根据id查询 -->
+	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
+		select * from share where id=#{id}
+	</select>
+
+	<!-- 根据id查询 -->
+	<select id="queryByArticleId" resultMap="BaseResultMap" parameterType="Object">
+		select * from share where articleid=#{id}
+	</select>
+	
+	<!-- 根据id，拼接修改记录 -->
+	<update id="update" parameterType="Object" >
+		update share set 
+		<trim suffixOverrides=",">
+			<if test="articleid != null  ">
+				articleid=#{articleid},
+			</if>
+			<if test="code != null  ">
+				code=#{code},
+			</if>
+			<if test="isshare != null  ">
+				isshare=#{isshare},
+			</if>
+			<if test="shareDate != null ">
+				sharedate = #{shareDate},
+			</if>
+		</trim>
+		 where id=#{id}
+	</update>
+
+</mapper>   
