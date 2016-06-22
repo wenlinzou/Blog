@@ -109,6 +109,52 @@ input{
 /*    background-color: tomato;*/
     background-color: #EAE7E7;
 }
+.page ul li{
+	list-style-type: none;
+	float: left;
+}
+.pageCenter{
+	margin-top:20px;
+	width: 100%;
+	text-align: center;
+}
+.pageNum{
+	margin: auto;
+	display: inline-block;
+	
+}
+.pageNum li{
+	float:left;
+	line-height:30px;
+	font-size:20px;
+	width: 30px;
+	height:30px;
+}
+.page ul li a{
+	text-decoration: none;
+}
+.currentPageEven{
+	display: block;
+    color: white;
+    line-height: 30px;
+	color:white;
+	background-color:#F3B0A9;
+	font-size:26px;
+	width: 30px;
+	height:30px;
+	border-radius: 4px;
+}
+.currentPageOdd{
+	display: block;
+    color: white;
+    line-height: 30px;
+	color:white;
+	background-color:#9EC9B7;
+	font-size:26px;
+	width: 30px;
+	height:30px;
+	border-radius: 4px;
+}
 /* .css1{
 color:#6699ff;border:1px #ff8000 dashed;
 margin-bottom:20px;

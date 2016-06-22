@@ -75,6 +75,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</ul>
 		</c:forEach>
 	</div>
+	
+	<div class="page pageCenter">
+		<ul class="pageNum">
+		<c:forEach begin="1" end="${pageData.pager.pageCount }" varStatus="status">
+			<c:if test="${status.count > (pageData.page - 3) && status.count < (pageData.page + 3) }">
+				<li><a href="<%=basePath%>article/queryAll.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if><c:if test='${!empty keyword }'>&keyword=${keyword }</c:if>"
+					<c:if test="${status.count == pageData.page && pageData.page%2==0 }">class="currentPageOdd"</c:if>
+					<c:if test="${status.count == pageData.page && pageData.page%2!=0 }">class="currentPageEven"</c:if> > ${status.count }</a>
+				</li>
+			</c:if>
+		</c:forEach>
+			<li>共</li>
+			<li>
+				<a href="<%=basePath%>article/queryAll.shtml?page=${pageData.pager.pageCount }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if><c:if test='${!empty keyword }'>&keyword=${keyword }</c:if>">${pageData.pager.pageCount }</a>
+			</li>
+			<li>页</li>
+		</ul>
+	</div>
+	
 	<div class="alert">
 		<div><span id="sharemsg"></span></div>
 		<div class="input-box"><input type="button" class="confirm_btn" onclick="hiddenShareDiv();" value="确认"/></div>

@@ -19,6 +19,7 @@ import com.apps.base.utils.MyStringUtils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.bean.Share;
+import com.apps.blog.back.pager.ArticlePage;
 import com.apps.blog.back.service.impl.ArticleServiceImpl;
 import com.apps.blog.back.service.impl.CategoryServiceImpl;
 import com.apps.blog.back.service.impl.ShareServiceImpl;
@@ -63,9 +64,12 @@ public class ArticleController extends BaseAction {
 	 * @throws Exception
 	 */
 	@RequestMapping("/queryAll")
-	public String queryAll(HttpServletRequest request, Model model) throws Exception {
-		List<Article> articleList = articleService.queryAll();
+	public String queryAll(HttpServletRequest request, Model model, ArticlePage page) throws Exception {
+	    //List<Article> queryListByPage(ArticlePage page)
+		List<Article> articleList = articleService.queryListByPage(page);
 		model.addAttribute("articleList", articleList);
+		model.addAttribute("pageData", page);
+		
 		
 		if(null == request.getSession().getAttribute("categoryList")){
 			List<Category> categoryList = categoryService.queryAll();
