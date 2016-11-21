@@ -1,3 +1,9 @@
+function editArticle(url,articleid){
+	window.location.href = url + "article/queryById.do?id="+articleid;
+}
+function viewArticle(url,articleid){
+	window.open(url + "articleFront/queryDetailById.shtml?id="+articleid);
+}
 function updateArticleView(url, id, isleaf){
 	var realurl = url+"article/update.do?isleaf="+isleaf+"&id="+id;
 	window.location.href = realurl;

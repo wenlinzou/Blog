@@ -6,6 +6,10 @@ p{
 	margin:0px;
 	padding:0px;
 }
+.editBtn{
+	background-color:#98BBF0;
+	color:white;
+}
 .article ul li {
 	list-style-type: none;
 	float: left;

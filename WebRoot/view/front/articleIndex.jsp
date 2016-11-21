@@ -90,7 +90,7 @@
         <div class="clear"></div>
         ${article.img }
         <div class="extra_wrapper">
-         <div class="text" style="width:100%; height:200px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+         <div class="text" style="width:100%; height:200px;overflow:hidden; text-overflow:ellipsis; ">
           <p>
           ${article.cont } 
           </p>

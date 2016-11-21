@@ -33,8 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ul class="title">
 			<li>编号</li>
 			<li>类别</li>
-			<li>置顶</li>
-			<li>标题</li>
+			<li style="width:7%;">置顶</li>
+			<li style="width:20%;">标题</li>
 			<!-- <li>内容</li> -->
 			<li>时间</li>
 			<li>状态</li>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</c:forEach>
 					</select>
 				</li>
-				<li>
+				<li  style="width:7%;">
 					<c:if test="${article.rootid==1 }">
 						<input type="button" value="ON" class="currentBtnTop" onclick="updateArticleIsTop('<%=basePath%>', ${article.id}, 0);" />
 					</c:if>
@@ -58,8 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="button" value="OFF" class="currentBtnNormal" onclick="updateArticleIsTop('<%=basePath%>', ${article.id}, 1);" />
 					</c:if>
 				</li>
-				<li>${article.title }</li>
-				<%-- <li>${article.cont }</li> --%>
+				<li style="width:20%;">${article.title }</li>
 				<li><fmt:formatDate value="${article.pdate }" pattern="yyyy-MM-dd HH:mm:ss" /></li>
 				<li>
 					<c:if test="${article.isleaf==1 }">
@@ -71,7 +70,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="button" value="CLOSE" class="currentBtnShareClose" onclick="updateArticleShare('<%=basePath%>', ${article.id}, 0);" />
 					</c:if>
 				</li>
-				<li><a href="<%=basePath%>article/queryById.do?id=${article.id }">修改</a></li>
+				<li>
+					<input type="button" class="editBtn" value="修改" onclick="editArticle('<%=basePath%>',${article.id})"/>
+					<input type="button" class="editBtn" value="查看" onclick="viewArticle('<%=basePath%>',${article.id})"/>
+				</li>
 			</ul>
 		</c:forEach>
 	</div>
