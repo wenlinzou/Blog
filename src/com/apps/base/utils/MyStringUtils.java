@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
 public class MyStringUtils {
 	private static final String FRISTDAY = "01";
 	
@@ -16,6 +17,24 @@ public class MyStringUtils {
 	
 	private static final String[] SHORT_MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
+	public static String arrangeEmailHost(String str){
+		StringBuilder hostname = new StringBuilder();
+		hostname.append("smtp");
+//		String hostname = "smtp.sina.com";
+		//截取
+		String hostat = getAtName(str);
+		hostname.append(".").append(hostat).append(".com");
+		return hostname.toString();
+	}
+	
+	public static String getAtName(String emailname){
+		String atname = "";
+		int beginIndex = emailname.indexOf("@");
+		int endIndex = emailname.lastIndexOf(".");
+		atname = emailname.substring(beginIndex+1, endIndex);
+		return atname;
+	}
+	
 	public static String replaceStr(String replaceStr, String beforeStr, String afterStr){
 		String str = null;
 		str = replaceStr.replace(beforeStr, afterStr);

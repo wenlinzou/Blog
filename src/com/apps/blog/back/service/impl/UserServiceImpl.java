@@ -1,14 +1,20 @@
 package com.apps.blog.back.service.impl;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apps.base.BaseService;
+import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
+import com.apps.blog.back.bean.ForgetUser;
+import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
+import com.apps.blog.back.dao.ForgetUserDao;
+import com.apps.blog.back.dao.SaltDao;
 import com.apps.blog.back.dao.UserDao;
 import com.apps.blog.back.service.UserService;
 
@@ -19,10 +25,17 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	@Autowired
     private UserDao<T> userDao;
 	
+	@Autowired
+	private SaltDao<T> saltDao;
+	
+	@Autowired
+	private ForgetUserDao<T> forgetUserDao;
+	
 	@Override
 	public UserDao<T> getDao() {
 		return userDao;
 	}
+	
 	
 	
 	@Override
@@ -75,6 +88,32 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	@Override
 	public User queryUserByName(User user) {
 		return userDao.queryUserByName(user);
+	}
+
+
+	@Override
+	public void updatePwd(String userId, String password) {
+		User user = new User();
+		user.setId(Integer.parseInt(userId));
+	
+		//将MD5+salt的MD5值放入password中,生成一个新的salt
+		String saltUpdateStr = MD5Utils.salt();
+		password = MD5Utils.md5Salt(password, saltUpdateStr);
+		
+		//update user password
+		user.setPassword(password);
+		update(user);
+		//update salt salt by userid
+		Salt salt = new Salt();
+		salt.setSalt(saltUpdateStr);
+		salt.setUserid(Integer.parseInt(userId));
+		saltDao.update(salt);
+		
+		//update forgetuser updatetime
+		ForgetUser fUser = new ForgetUser();
+		fUser.setUserId(userId);
+		fUser.setUpdateTime(new Date());
+		forgetUserDao.update(fUser);
 	}
 
 }

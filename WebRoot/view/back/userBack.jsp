@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<ul class="title">
 			<li>编号</li>
 			<li>名称</li>
-			<!-- <li>密码</li> -->
+			<li>邮箱</li>
 			<li>昵称</li>
 			<li>操作</li>
 		</ul>
@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul>
 				<li>${user.id }</li>
 				<li>${user.username }</li>
-				<%-- <li>${user.password }</li> --%>
+				<li>${user.email }</li>
 				<li>${user.nickname }</li>
 				<li><a href="<%=basePath %>user/queryById.do?id=${user.id }">修改</a></li>
 			</ul>
