@@ -5,12 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.apps.base.BaseService;
 import com.apps.blog.back.bean.Salt;
-import com.apps.blog.back.bean.User;
 import com.apps.blog.back.dao.SaltDao;
 import com.apps.blog.back.service.SaltService;
 
 @Service("saltServiceImpl")
-public class SaltServiceImpl<T> extends BaseService<T> implements SaltService<User> {
+public class SaltServiceImpl<T> extends BaseService<T> implements SaltService<Salt> {
 
 	@Autowired
 	private SaltDao<T> saltDao;

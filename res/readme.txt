@@ -10,3 +10,8 @@ com.sun.syndication.feed.synd.SyndCategory
 rome.jar
 RssBuild.jar
 jdom.jar
+
+
+添加发送邮件
+commons-email-1.2.jar
+mail.jar

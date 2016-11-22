@@ -1,0 +1,31 @@
+body{
+	background-color: #F8F8F8;
+}
+input{
+	border: 0px;
+}
+
+.titlecenter{
+	text-align:center;
+}
+.inputReg{
+	background-color: #E6E6E6;
+	line-height:25px;
+	width:200px;
+}
+
+.cueInfo{
+	text-align: right;	
+}
+
+.message{
+	color:red;
+}
+.btnReg{
+	background-color: #98BAEF;
+	height:26px;
+	width:202px;
+	color:white;
+	font-weight:bold;
+	font-size: 17px;
+}

@@ -37,12 +37,14 @@
 			<ul class="title">
 				<li>名称</li>
 				<li>昵称</li>
+				<li>邮箱</li>
 				<li>操作</li>
 			</ul>
 
 			<ul>
 				<li><input class="inputadd" type="text" value='${user.username }' name="username" /></li>
 				<li><input class="inputadd" type="text" value='${user.nickname }' name="nickname" /></li>
+				<li><input class="inputadd" type="text" value='${user.email }' name="email" /></li>
 				<li><input type="submit" value="确认" /><input type="button" class="updatepwd_btn" id="alert_btn" value="修改密码" /></li>
 			</ul>
 		</form>

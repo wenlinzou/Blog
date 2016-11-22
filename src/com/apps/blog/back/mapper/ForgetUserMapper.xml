@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.apps.blog.back.dao.UserDao">
+<mapper namespace="com.apps.blog.back.dao.ForgetUserDao">
 	<!-- Result Map -->
-	<resultMap id="BaseResultMap" type="com.apps.blog.back.bean.User">
+	<resultMap id="BaseResultMap" type="com.apps.blog.back.bean.ForgetUser">
 <!-- 		<result column="stu_id"				property="id" 			/> -->
 		
 	</resultMap>
 
-	<!-- t_student table all fields 不要stu_pwd, -->
 	<sql id="Base_Column_List">
-		id, username, password, nickname, email
+		id, userId, createTime, updateTime, count, dayCount
 	</sql>
 
 	<!-- 查询条件 -->
@@ -38,17 +37,19 @@
 		</trim>
 	</sql>
 
-	<!-- 插入记录 	初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
+	<!-- 插入记录  -->
 	<insert id="add" parameterType="Object" >
-		insert into user (username, password, nickname, email)
-		values (#{username}, #{password}, #{nickname}, #{email})
+		insert into forgetuser (userId, createTime, updateTime, count, dayCount)
+		values (#{userId}, now(), #{updateTime}, #{count}, #{dayCount})
 	</insert>
 	
-	<select id="queryUser" resultMap="BaseResultMap" parameterType="Object">
-		select * from user where username=#{username} and password=#{password}
+	
+	<select id="queryUserByUserId" resultMap="BaseResultMap" parameterType="Object">
+		select * from forgetuser where userId=#{userId}
 	</select>
-	<select id="queryUserByName" resultMap="BaseResultMap" parameterType="Object">
-		select * from user where username=#{username}
+	<!-- 查询用户记录数 -->
+	<select id="queryCountByUserId" resultType="Integer" parameterType="Object">
+		select count(1) from forgetuser where userId=#{userId}
 	</select>
 	
 	<!-- 查询所有用户 -->
@@ -67,22 +68,22 @@
 	
 	<!-- 根据id，修改记录，-->
 	<update id="update" parameterType="Object" >
-		update user 
+		update forgetuser
 		<set>
-			 <if test="username != null">
-				username=#{username},
+			 <if test="createTime != null">
+				createTime=#{createTime},
 			</if>
-			 <if test="nickname != null">
-				nickname=#{nickname},
+			 <if test="updateTime != null">
+				updateTime=#{updateTime},
 			</if>
-			 <if test="password != null">
-				password=#{password},
+			 <if test="count != null">
+				count=#{count},
 			</if>
-			 <if test="email != null">
-				email=#{email},
+			 <if test="dayCount != null">
+				dayCount=#{dayCount},
 			</if>
 		</set>
-		where id=#{id}
+		where userId=#{userId}
 	</update>
 	
 	
