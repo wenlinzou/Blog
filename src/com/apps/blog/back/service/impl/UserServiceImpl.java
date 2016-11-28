@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.base.utils.MD5Utils;
@@ -39,7 +40,8 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	
 	
 	@Override
-	public void add(User user){
+	@Transactional
+	public User add(User user){
 		if(null != user){
 			String password = user.getPassword();
 			String username = user.getUsername();
@@ -47,10 +49,33 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 				user.setPassword(password);
 				if(null!=username && !"".equals(username)){
 					userDao.add(user);
+					return user;
 				}
 			}
 		}
+		return null;
 	}
+	
+	@Override
+	@Transactional
+	public User add(User user, Salt salt) {
+		if(null != user){
+			User u = add(user);
+			salt.setUserid(u.getId());
+			saltDao.add(salt);
+		}
+		return null;
+	}
+	
+	@Override
+	@Transactional
+	public void update(User user, Salt salt) {
+		if(null != user){
+			update(user);
+			saltDao.update(salt);
+		}
+	}
+	
 	@Override
 	public boolean login(String inputpwd, String datapwd){
 		boolean canLogin = MyStringUtils.slowEquals(inputpwd.getBytes(), datapwd.getBytes());
@@ -72,6 +97,7 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	}
 
 	@Override
+	@Transactional
 	public void update(User user) {
 		if(null!=user){
 			userDao.update(user);
@@ -92,6 +118,7 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 
 
 	@Override
+	@Transactional
 	public void updatePwd(String userId, String password) {
 		User user = new User();
 		user.setId(Integer.parseInt(userId));
@@ -115,5 +142,9 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 		fUser.setUpdateTime(new Date());
 		forgetUserDao.update(fUser);
 	}
+
+
+
+	
 
 }

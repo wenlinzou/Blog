@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.blog.back.bean.Comment;
@@ -38,6 +39,7 @@ public class CommentServiceImpl<T> extends BaseService<T> implements CommentServ
 	}
 
 	@Override
+	@Transactional
 	public void update(Comment comment) {
 		if(null!=comment){
 			commentDao.update(comment);
@@ -45,6 +47,7 @@ public class CommentServiceImpl<T> extends BaseService<T> implements CommentServ
 	}
 
 	@Override
+	@Transactional
 	public void add(Comment c) {
 		if(null != c && null!=c.getArticleid() && null!=c.getComment() && null!=c.getVisitname()){
 			commentDao.add(c);
@@ -74,6 +77,7 @@ public class CommentServiceImpl<T> extends BaseService<T> implements CommentServ
 	}
 
 	@Override
+	@Transactional
 	public void updateClick(Integer inputid) {
 		if(null!=inputid)
 			commentDao.updateClick(inputid);

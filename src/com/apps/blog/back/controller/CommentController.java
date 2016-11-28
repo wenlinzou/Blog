@@ -30,6 +30,7 @@ public class CommentController extends BaseAction {
 
 	@Autowired(required = false)
 	private ArticleServiceImpl<Article> articleService;
+	
 	@Autowired(required = false)
 	private CommentServiceImpl<Comment> commentService;
 	

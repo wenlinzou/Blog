@@ -2,6 +2,7 @@ package com.apps.blog.back.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.blog.back.bean.Salt;
@@ -25,12 +26,13 @@ public class SaltServiceImpl<T> extends BaseService<T> implements SaltService<Sa
 	}
 
 	@Override
+	@Transactional
 	public void update(Salt salt) {
-		
 		saltDao.update(salt);
 	}
 
 	@Override
+	@Transactional
 	public void add(Salt salt) {
 		saltDao.add(salt);
 		

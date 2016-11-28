@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.base.utils.MyStringUtils;
@@ -41,6 +42,7 @@ public class ArticleServiceImpl<T> extends BaseService<T> implements ArticleServ
 	}
 
 	@Override
+	@Transactional
 	public void update(Article article) {
 		if(null!=article){
 			articleDao.update(article);
@@ -48,6 +50,7 @@ public class ArticleServiceImpl<T> extends BaseService<T> implements ArticleServ
 	}
 
 	@Override
+	@Transactional
 	public void add(Article article) {
 		if(null!=article){
 			articleDao.add(article);
@@ -68,6 +71,7 @@ public class ArticleServiceImpl<T> extends BaseService<T> implements ArticleServ
 	}
 
 	@Override
+	@Transactional
 	public void updateClick(Integer inputid) {
 		if(null!=inputid)
 			articleDao.updateClick(inputid);

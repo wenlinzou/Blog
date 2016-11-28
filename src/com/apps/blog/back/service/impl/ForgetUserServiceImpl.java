@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.base.utils.DateUtil;
@@ -26,6 +27,7 @@ public class ForgetUserServiceImpl<T> extends BaseService<T> implements
 	}
 
 	@Override
+	@Transactional
 	public void add(String userId) {
 		// 获取该用户修改记录数
 		ForgetUser user = new ForgetUser();
@@ -38,7 +40,6 @@ public class ForgetUserServiceImpl<T> extends BaseService<T> implements
 
 	@Override
 	public List<ForgetUser> queryAll() {
-
 		return forgetUserDao.queryAll();
 	}
 
@@ -51,6 +52,7 @@ public class ForgetUserServiceImpl<T> extends BaseService<T> implements
 	}
 
 	@Override
+	@Transactional
 	public void update(ForgetUser user) {
 		if (null != user) {
 			forgetUserDao.update(user);

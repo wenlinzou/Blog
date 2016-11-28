@@ -96,21 +96,23 @@ public class UserController extends BaseAction {
 			User user = new User();
 			user.setUsername(username);
 			User usernameTemp = userService.queryUserByName(user);
-				if(null==usernameTemp){
+			if(null==usernameTemp){
 				//将MD5+salt的MD5值放入password中
 				String saltStr = MD5Utils.salt();
 				password = MD5Utils.md5Salt(password, saltStr);
 				user.setPassword(password);
 				if(!nickanamenull)
 					user.setNickname(nickname);
-				userService.add(user);
+				/*userService.add(user);
 				
 				//获取userid
 				User loginuser = userService.queryUser(user);
 				Salt salt = new Salt();
 				salt.setSalt(saltStr);
 				salt.setUserid(loginuser.getId());
-				saltService.add(salt);
+				saltService.add(salt);*/
+				Salt salt = new Salt();
+				userService.add(user, salt);
 				
 			}
 		}
@@ -211,6 +213,7 @@ public class UserController extends BaseAction {
 					//触发网址的修改密码页面 http://localhost:8080/WebApp/
 					String path = request.getContextPath(); //WebApp
 					String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+					
 					
 					semail.setContent(basePath + "user/userUpdatePwd.shtml?userId="+user.getId()+"&email="+user.getEmail());//邮件内容
 					SendMailUtils.sendEMail(semail);
@@ -387,13 +390,20 @@ public class UserController extends BaseAction {
 				password = MD5Utils.md5Salt(password, saltUpdateStr);
 				
 				//update user password
-				user.setPassword(password);
+				/*user.setPassword(password);
 				userService.update(user);
 				//update salt salt by userid
 				Salt salt = new Salt();
 				salt.setSalt(saltUpdateStr);
 				salt.setUserid(id);
-				saltService.update(salt);
+				saltService.update(salt);*/
+				
+				user.setPassword(password);
+				Salt salt = new Salt();
+				salt.setSalt(saltUpdateStr);
+				salt.setUserid(id);
+				userService.update(user, salt);
+				
 				
 				map.put("message", "修改成功!");
 			}

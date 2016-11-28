@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.base.utils.CodeUtils;
@@ -46,6 +47,7 @@ public class ShareServiceImpl<T> extends BaseService<T> implements ShareService<
 	}
 
 	@Override
+	@Transactional
 	public void update(Share share) {
 		//生成链接密码
 		String codeStr = CodeUtils.randomCode(4);
@@ -57,6 +59,7 @@ public class ShareServiceImpl<T> extends BaseService<T> implements ShareService<
 	}
 
 	@Override
+	@Transactional
 	public void add(Share share) {
 		if (null != share) {
 			String code = CodeUtils.randomCode(4);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apps.base.BaseService;
 import com.apps.base.utils.MyStringUtils;
@@ -24,6 +25,7 @@ public class CategoryServiceImpl<T> extends BaseService<T>  implements CategoryS
 	
 	
 	@Override
+	@Transactional
 	public void add(Category category) {
 		if(!MyStringUtils.isNull(category.getName())){
 			categoryDao.add(category);
@@ -44,6 +46,7 @@ public class CategoryServiceImpl<T> extends BaseService<T>  implements CategoryS
 	}
 
 	@Override
+	@Transactional
 	public void update(Category category) {
 		if(null!=category){
 			if(null!=category.getId()){
