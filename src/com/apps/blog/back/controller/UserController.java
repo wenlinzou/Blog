@@ -244,7 +244,7 @@ public class UserController extends BaseAction {
 		String userLogIP = request.getRemoteAddr();
 		log.info("back-user loginout IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
-		User user = userService.queryById(Integer.parseInt(userId));
+		User user = userService.queryById(userId);
 		//链接的email地址为该用户的地址则跳转至密码修改页面
 		if(user.getEmail().equals(email)){
 			model.addAttribute("user", user);
@@ -326,8 +326,8 @@ public class UserController extends BaseAction {
 	 * @return 用户当前jsp
 	 */
 	@RequestMapping("/queryById")
-	public String queryById(Integer id, Model model){
-		if(null!=id){
+	public String queryById(String id, Model model){
+		if(!MyStringUtils.isNull(id)){
 			User user = userService.queryById(id);
 			model.addAttribute("user", user);
 		}
@@ -344,12 +344,12 @@ public class UserController extends BaseAction {
 	 * @return 用户当前jsp
 	 */
 	@RequestMapping("/update")
-	public String update(HttpServletRequest request, String username, String nickname, Integer id, String email, Model model){
+	public String update(HttpServletRequest request, String username, String nickname, String id, String email, Model model){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("back-user update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
 		
-		if(null!=id){
+		if(!MyStringUtils.isNull(id)){
 			User user = new User();
 			if(!MyStringUtils.isNull(username) && null!=id){
 				user.setId(id);
@@ -374,14 +374,14 @@ public class UserController extends BaseAction {
 	 */
 	@RequestMapping("/updatePwd")
 	@ResponseBody
-	public Map<String,String> updatePwd(HttpServletRequest request, String password,Integer id, Model model){
+	public Map<String,String> updatePwd(HttpServletRequest request, String password, String id, Model model){
 		Map<String, String> map = new HashMap<String, String>();
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
 		log.info("back-user update passwod IP : " + userLogIP + " : " + IPUtils.getAddressByIP(userLogIP));
 		
 		map.put("message", "修改失败!");
-		if(null!=id){
+		if(!MyStringUtils.isNull(id)){
 			User user = new User();
 			if(!MyStringUtils.isNull(password) && null!=id){
 				user.setId(id);

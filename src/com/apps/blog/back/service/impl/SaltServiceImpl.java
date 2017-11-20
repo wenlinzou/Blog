@@ -21,7 +21,7 @@ public class SaltServiceImpl<T> extends BaseService<T> implements SaltService<Sa
 	}
 
 	@Override
-	public Salt querySalt(Integer id) {
+	public Salt querySalt(String id) {
 		return saltDao.querySalt(id);
 	}
 

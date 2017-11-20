@@ -9,7 +9,7 @@
 
 	<!-- t_student table all fields 不要stu_pwd, -->
 	<sql id="Base_Column_List">
-		id, username, password, nickname, email
+		id, username, password, nickname, email, create_time, update_time
 	</sql>
 
 	<!-- 查询条件 -->
@@ -40,8 +40,8 @@
 
 	<!-- 插入记录 	初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
 	<insert id="add" parameterType="Object" >
-		insert into user (username, password, nickname, email)
-		values (#{username}, #{password}, #{nickname}, #{email})
+		insert into user (id, username, password, nickname, email, create_time, update_time)
+		values (#{id}, #{username}, #{password}, #{nickname}, #{email}, now(), now())
 	</insert>
 	
 	<select id="queryUser" resultMap="BaseResultMap" parameterType="Object">
@@ -62,7 +62,7 @@
 	
 	<!-- 删除记录 -->
 	<update id="delete" parameterType="Object">
-		update article set stu_delsta=0 where id=#{id}
+		update article set stu_delsta=0 , update_time = now() where id=#{id}
 	</update>
 	
 	<!-- 根据id，修改记录，-->
@@ -81,6 +81,7 @@
 			 <if test="email != null">
 				email=#{email},
 			</if>
+			update_time = now()
 		</set>
 		where id=#{id}
 	</update>

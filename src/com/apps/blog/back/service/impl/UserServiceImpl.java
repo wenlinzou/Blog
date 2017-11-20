@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.apps.base.BaseService;
 import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
+import com.apps.base.utils.RandomNumberUtil;
 import com.apps.blog.back.bean.ForgetUser;
 import com.apps.blog.back.bean.Salt;
 import com.apps.blog.back.bean.User;
@@ -40,7 +42,6 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	
 	
 	@Override
-	@Transactional
 	public User add(User user){
 		if(null != user){
 			String password = user.getPassword();
@@ -48,6 +49,7 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 			if(null!=password && !"".equals(password)){
 				user.setPassword(password);
 				if(null!=username && !"".equals(username)){
+				    user.setId(RandomNumberUtil.get32UUID());
 					userDao.add(user);
 					return user;
 				}
@@ -89,8 +91,8 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	}
 
 	@Override
-	public User queryById(Integer id) {
-		if(null!=id){
+	public User queryById(String id) {
+		if(!MyStringUtils.isNull(id)){
 			return userDao.queryById(id);
 		}
 		return null;
@@ -121,7 +123,7 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 	@Transactional
 	public void updatePwd(String userId, String password) {
 		User user = new User();
-		user.setId(Integer.parseInt(userId));
+		user.setId(userId);
 	
 		//将MD5+salt的MD5值放入password中,生成一个新的salt
 		String saltUpdateStr = MD5Utils.salt();
@@ -133,7 +135,7 @@ public class UserServiceImpl<T> extends BaseService<T> implements UserService<Us
 		//update salt salt by userid
 		Salt salt = new Salt();
 		salt.setSalt(saltUpdateStr);
-		salt.setUserid(Integer.parseInt(userId));
+		salt.setUserid(userId);
 		saltDao.update(salt);
 		
 		//update forgetuser updatetime

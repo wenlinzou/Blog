@@ -13,6 +13,6 @@ public interface UserDao<T> extends BaseDao<T>{
 	
 	public List<User> queryAll();
 	
-	public User queryById(Integer id);
+	public User queryById(String id);
 	public void update(User user);
 }

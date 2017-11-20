@@ -6,6 +6,6 @@ import com.apps.blog.back.bean.Salt;
 
 public interface SaltDao<T> extends BaseDao<T>{
 	public void add(Salt salt);
-	public Salt querySalt(Integer id);
+	public Salt querySalt(String id);
 	public void update(Salt salt);
 }

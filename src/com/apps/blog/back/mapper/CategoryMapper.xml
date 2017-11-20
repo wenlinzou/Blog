@@ -9,20 +9,21 @@
 
 	<!-- t_student table all fields 不要stu_pwd, -->
 	<sql id="Base_Column_List">
-		id, name
+		id, name, del_flag, create_time, update_time
 	</sql>
 
 	
 
 	<!-- 插入记录 	初始密码“111111”，sql语句中的是经过MD5 32位转码后的值。 -->
 	<insert id="add" parameterType="Object" >
-		insert into category (name)	values (#{name})
+		insert into category (name, del_flag, create_time, update_time)
+			values (#{name}, 0, now(), now())
 	</insert>
 	
 	
 	<!-- 查询所有用户 -->
 	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
-		select * from category;
+		select * from category where del_flag = 0;
 	</select>
 	<!-- 查询单个用户 -->
 	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
@@ -31,14 +32,15 @@
 	
 	<!-- 删除记录 -->
 	<update id="delete" parameterType="Object">
-		delete category where id=#{id}
+		update category set del_flag = 1 where id=#{id}
 	</update>
 	
 	<!-- 根据id，修改记录，-->
 	<update id="update" parameterType="Object" >
 		update category set
+		update_time = now()
 		 <if test="name != null  ">
-			name=#{name}
+			,name=#{name}
 		</if>
 		where id=#{id}
 	</update>

@@ -16,7 +16,7 @@ public interface UserService<T> {
 	public User queryUserByName(User user);
 	
 	public List<User> queryAll();
-	public User queryById(Integer id);
+	public User queryById(String id);
 	public void update(User user);
 	
 	public void updatePwd(String userId, String password);

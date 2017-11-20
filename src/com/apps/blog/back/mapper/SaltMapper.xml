@@ -7,12 +7,13 @@
 
 	<!-- t_student table all fields 不要stu_pwd, -->
 	<sql id="Base_Column_List">
-		id, salt, userid
+		id, salt, userid, create_time, update_time
 	</sql>
 	
 	
 	<insert id="add">
-		insert into salt(salt, userid) value(#{salt}, #{userid})
+		insert into salt(salt, userid, create_time, update_time)
+		 value(#{salt}, #{userid}, now(), now())
 	</insert>
 
 	
@@ -25,8 +26,9 @@
 	<!-- 根据id，修改记录，-->
 	<update id="update" parameterType="Object" >
 		update salt set
+		update_time = now()
 		 <if test="salt != null  ">
-			salt=#{salt}
+			,salt=#{salt}
 		</if>
 		where userid=#{userid}
 	</update>
