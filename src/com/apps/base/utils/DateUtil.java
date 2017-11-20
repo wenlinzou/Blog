@@ -1030,13 +1030,13 @@ public class DateUtil {
 	 * <br>
 	 *                         </pre>
 	 */
-	public static Map calcCurrentWeek() {
+	public static Map<String, Date> calcCurrentWeek() {
 		Calendar curCal = Calendar.getInstance();
 		int i = curCal.get(Calendar.DAY_OF_WEEK);
 		Date startOfWeek = addDaysToDate(curCal.getTime(), -i + 2);
 		Date endOfWeek = addDaysToDate(curCal.getTime(), 7 - i + 1);
 
-		Map resMap = new HashMap();
+		Map<String, Date> resMap = new HashMap<String, Date>();
 		resMap.put("startOfWeek", startOfWeek);
 		resMap.put("endOfWeek", endOfWeek);
 		return resMap;
@@ -1190,8 +1190,8 @@ public class DateUtil {
 	 *     Calendar.DATE			日<br>
 	 * </pre>
 	 */
-	public static Map getCalenderInfo(Date date) {
-		Map resultMap = new HashMap();
+	public static Map<Integer, Integer> getCalenderInfo(Date date) {
+		Map<Integer, Integer> resultMap = new HashMap<Integer, Integer>();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		cal.add(Calendar.DATE, -1);
@@ -1201,10 +1201,8 @@ public class DateUtil {
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int dt = cal.get(Calendar.DATE);
-		resultMap
-				.put(new Integer(Calendar.DAY_OF_WEEK), new Integer(dayOfWeek));
-		resultMap.put(new Integer(Calendar.WEEK_OF_MONTH), new Integer(
-				weekOfMonth));
+		resultMap.put(new Integer(Calendar.DAY_OF_WEEK), new Integer(dayOfWeek));
+		resultMap.put(new Integer(Calendar.WEEK_OF_MONTH), new Integer(weekOfMonth));
 		resultMap.put(new Integer(Calendar.YEAR), new Integer(year));
 		resultMap.put(new Integer(Calendar.MONTH), new Integer(month));
 		resultMap.put(new Integer(Calendar.DATE), new Integer(dt));
