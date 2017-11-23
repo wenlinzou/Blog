@@ -35,15 +35,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>昵称</li>
 			<li>操作</li>
 		</ul>
-		<c:forEach items="${users }" var="user">
-			<ul>
+		<div id="userList"></div>
+		<%-- <c:forEach items="${users }" var="user"> --%>
+			<%-- <ul id="userList">
 				<li>${user.id }</li>
 				<li>${user.username }</li>
 				<li>${user.email }</li>
 				<li>${user.nickname }</li>
 				<li><a href="<%=basePath %>user/queryById.do?id=${user.id }">修改</a></li>
-			</ul>
-		</c:forEach>
+			</ul> --%>
+		<%-- </c:forEach> --%>
 	</div>
 	<div id="showAddDiv" class="addUser" style="display: none;">
 		<form onsubmit="return checkName();" method="post" id="saveForm">

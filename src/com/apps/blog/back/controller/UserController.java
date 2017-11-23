@@ -319,6 +319,19 @@ public class UserController extends BaseAction {
 		return "back/userBack";
 	}
 	
+	@RequestMapping("/queryAllAjax")
+    @ResponseBody
+    public Map<String, Object> queryAllAjax(HttpServletRequest request, Model model) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        //记录访问者的IP
+        String userLogIP = request.getRemoteAddr();
+        log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+        List<User> list = userService.queryAll();
+        map.put("users", list);
+        map.put("res", 0);
+        map.put("msg", "查询成功!");
+        return map;
+    }
 	/**
 	 * 根据用户id查询用户对象
 	 * @param id 用户id

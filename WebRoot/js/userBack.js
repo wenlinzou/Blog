@@ -3,7 +3,41 @@
 		window.location.href = "user/loginOut.do";
 	}
 }*/
-
+getUserList();
+var basePath = "/Blog";
+function getUserList() {
+	$.ajax({
+		type:"POST",
+		url:"user/queryAllAjax.do",
+		success : function(data) {
+			if (data.res == 0) {
+				 //取出数据放入到dom中
+				var count = 0;
+				var users = data.users;
+				var s = "";
+				$.each(users, function(i, o) {  
+					s+='<ul>';
+					s+='<li>' + (++i) + '</li>';
+	                s+='<li>' + o.username+'</li>';
+	                s+='<li>' + o.email + '</li>';
+	                s+='<li>' + o.nickname + '</li>';
+	                s+='<li><a href="' + basePath + '/user/queryById.do?id=' + o.id + '">修改</a></li>';
+	                s+='</ul>';
+	            });
+	            if (users.length > 0) {
+	                $("#userList").html(s);
+	            }
+			} else {
+				alert(data.msg);
+			}
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrown){
+			alert(textStatus);
+			alert("error");
+			return false;
+		}
+	});
+}
 function $name(inputid) {
 	return document.getElementById(inputid);
 }
