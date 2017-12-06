@@ -42,7 +42,7 @@
 			</ul>
 
 			<ul>
-				<li><input class="inputadd" type="text" value='${user.username }' name="username" /></li>
+				<li><input class="inputadd" type="text" readonly="readonly" value='${user.username }' name="username" /></li>
 				<li><input class="inputadd" type="text" value='${user.nickname }' name="nickname" /></li>
 				<li><input class="inputadd" type="text" value='${user.email }' name="email" /></li>
 				<li><input type="button" onclick="updateUserInfo();" value="确认" /><input type="button" class="updatepwd_btn" id="alert_btn" value="修改密码" /></li>
