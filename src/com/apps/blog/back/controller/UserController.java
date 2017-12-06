@@ -12,16 +12,19 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.Code;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MD5Utils;
 import com.apps.base.utils.MyStringUtils;
 import com.apps.base.utils.OneUserUtils;
 import com.apps.base.utils.PropertiesUtils;
 import com.apps.base.utils.SendMailUtils;
+import com.apps.base.utils.Utils;
 import com.apps.blog.back.bean.ForgetUser;
 import com.apps.blog.back.bean.SEmail;
 import com.apps.blog.back.bean.Salt;
@@ -314,8 +317,8 @@ public class UserController extends BaseAction {
 	 */
 	@RequestMapping("/queryAll")
 	public String queryAll(Model model){
-		List<User> list = userService.queryAll();
-		model.addAttribute("users", list);
+		/*List<User> list = userService.queryAll();
+		model.addAttribute("users", list);*/
 		return "back/userBack";
 	}
 	
@@ -328,8 +331,7 @@ public class UserController extends BaseAction {
         log.info("front-article visit by-search IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
         List<User> list = userService.queryAll();
         map.put("users", list);
-        map.put("res", 0);
-        map.put("msg", "查询成功!");
+        Utils.getResMap(map, Code.SUCCESS, "查询成功！");
         return map;
     }
 	/**
@@ -360,8 +362,8 @@ public class UserController extends BaseAction {
 	public String update(HttpServletRequest request, String username, String nickname, String id, String email, Model model){
 		//记录访问者的IP
 		String userLogIP = request.getRemoteAddr();
-		log.info("back-user update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
-		
+		log.info("back-user update IP : " + userLogIP + " : " + IPUtils.getAddressByIP(userLogIP));
+		String backJsp = "back/userBack";
 		if(!MyStringUtils.isNull(id)){
 			User user = new User();
 			if(!MyStringUtils.isNull(username) && null!=id){
@@ -369,13 +371,48 @@ public class UserController extends BaseAction {
 				user.setUsername(username);
 				user.setNickname(nickname);
 				user.setEmail(email);
+				//判断修改的邮箱或登录用户名是否已经存在
+				if (userService.hasUser(user) > 0) return backJsp;
 				userService.update(user);
 				String redirctStr = "redirect:/user/queryAll.do";
 				return redirctStr;
 			}
 		}
-		return "back/userBack";
+		return backJsp;
 	}
+	/**
+     * 修改用户对象
+     * @param request
+     * @param username 用户名
+     * @param nickname 昵称
+     * @param id 用户id
+     * @param model
+     * @return 用户当前jsp
+     */
+    @RequestMapping("/updateAjax")
+    @ResponseBody
+    public Map<String, Object> updateAjax(HttpServletRequest request, User user, Model model){
+        Map<String, Object> map = new HashMap<String, Object>();
+        //记录访问者的IP
+        String userLogIP = request.getRemoteAddr();
+        String id = user.getId();
+log.info("back-user update IP : " + userLogIP + " : " + IPUtils.getAddressByIP(userLogIP));
+        String backJsp = "back/userBack.do";
+        Map<String, Object> body = new HashMap<String, Object>();
+        body.put("url", backJsp);
+        map.put("body", body);
+        if(!MyStringUtils.isNull(id) && !MyStringUtils.isNull(user.getUsername())){
+            //判断修改的邮箱或登录用户名是否已经存在
+            if (userService.hasUser(user) > 0) {
+                Utils.getResMap(map, Code.ERR_SYS, "邮箱或登录名已存在，无法修改！");
+            } else {
+                userService.update(user);
+                body.put("url", "user/queryAll.do");
+                Utils.getResMap(map, Code.SUCCESS, "修改成功！");
+            }
+        }
+        return map;
+    }
 	
 	/**
 	 * 修改用户密码ajax

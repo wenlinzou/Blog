@@ -15,4 +15,6 @@ public interface UserDao<T> extends BaseDao<T>{
 	
 	public User queryById(String id);
 	public void update(User user);
+	
+	public int hasUser(User user);
 }

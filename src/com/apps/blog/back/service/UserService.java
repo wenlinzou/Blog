@@ -23,4 +23,5 @@ public interface UserService<T> {
 	
 	public User add(User user, Salt salt);//save user and salt
 	public void update(User user, Salt salt);//update user and salt
+	public int hasUser(User user);
 }

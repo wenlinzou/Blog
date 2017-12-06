@@ -42,6 +42,23 @@ function updatePassword(){
 		});
 	}
 }
+function updateUserInfo(){
+	var formData = $("#updateInfo").serialize();
+	$.ajax({
+		type : 'POST',
+		url : 'user/updateAjax.shtml',
+		data:formData,
+		dataType : 'json',
+		success : function(data){
+			alert(data.res_msg);
+			if(data.res_code == 0) {
+				window.location.href = data.body.url;
+			} 
+		},error:function(e){
+			alert("error");
+		}
+	});
+}
 function check2Pwd(){
 	var pwd1 = $("input[name='password']").val();
 	var pwd2 = $("input[name='password1']").val();

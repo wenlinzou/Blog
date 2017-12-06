@@ -55,6 +55,15 @@
 	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
 		select * from user;
 	</select>
+	
+	<!-- 查询是否存在用户 -->
+	<select id="hasUser" resultType="java.lang.Integer" parameterType="Object">
+		select 
+			count(1) from user 
+		where 1=1 
+			and id !=#{id}
+			and (username=#{username} or email=#{email})
+	</select>
 	<!-- 查询单个用户 -->
 	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
 		select * from user where id=#{id};

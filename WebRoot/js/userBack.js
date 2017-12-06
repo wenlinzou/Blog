@@ -10,7 +10,7 @@ function getUserList() {
 		type:"POST",
 		url:"user/queryAllAjax.do",
 		success : function(data) {
-			if (data.res == 0) {
+			if (data.res_code == 0) {
 				 //取出数据放入到dom中
 				var count = 0;
 				var users = data.users;
@@ -28,7 +28,7 @@ function getUserList() {
 	                $("#userList").html(s);
 	            }
 			} else {
-				alert(data.msg);
+				alert(data.res_msg);
 			}
 		},
 		error:function(XMLHttpRequest, textStatus, errorThrown){
