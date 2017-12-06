@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/category.css">
 	
+	<script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/categoryBack.js"></script>
  </head>
    <body>
@@ -32,13 +33,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>名称</li>
 			<li>操作</li>
 		</ul>
-		<c:forEach items="${categorys }" var="category">
+		<div id="categoryList"></div>
+		<%-- <c:forEach items="${categorys }" var="category">
 			<ul>
 				<li>${category.id }</li>
 				<li>${category.name }</li>
 				<li><a href="<%=basePath %>category/queryById.do?id=${category.id }">修改</a></li>
 			</ul>
-		</c:forEach>
+		</c:forEach> --%>
 	</div>
 	<div id="showAddCategoryDiv" class="addCategory" style="display: none;">
 		<form action="<%=basePath%>category/save.do" method="post">

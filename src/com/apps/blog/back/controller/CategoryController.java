@@ -1,7 +1,9 @@
 package com.apps.blog.back.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.Code;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
+import com.apps.base.utils.Utils;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.service.CategoryService;
 /**
@@ -62,9 +67,23 @@ public class CategoryController extends BaseAction {
 	 */
 	@RequestMapping("/queryAll")
 	public String queryAll(Model model){
-		List<Category> list = categoryService.queryAll();
-		model.addAttribute("categorys", list);
+		/*List<Category> list = categoryService.queryAll();
+		model.addAttribute("categorys", list);*/
 		return "back/categoryBack";
+	}
+	/**
+	 * 所有类别
+	 * @param model
+	 * @return 所有类别页面jsp
+	 */
+	@RequestMapping("/queryAllAjax")
+	@ResponseBody
+    public Map<String, Object> queryAllAjax() {
+	    List<Category> list = categoryService.queryAll();
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("categorys", list);
+        Utils.getResMap(map, Code.SUCCESS, "查询成功！");
+        return map;
 	}
 	
 	/**
