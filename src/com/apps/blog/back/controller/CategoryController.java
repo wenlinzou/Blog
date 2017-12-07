@@ -132,4 +132,35 @@ public class CategoryController extends BaseAction {
 		}
 		return "back/categoryBack";
 	}
+	/**
+	 * 修改类别名称 
+	 * @param request
+	 * @param name 类别名称
+	 * @param id 类别id
+	 * @param model
+	 * @return 修改类别后所有类别页面jsp
+	 */
+	@RequestMapping("/updateAjax")
+	@ResponseBody
+	public Map<String, Object> updateAjax(HttpServletRequest request, Category category, Model model){
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    //记录访问者的IP
+	    String userLogIP = request.getRemoteAddr();
+	    log.info("back-category update IP : " + userLogIP +" : " + IPUtils.getAddressByIP(userLogIP));
+	    Integer id = category.getId();
+	    String backJsp = "category/queryAll.do";
+	    Map<String, Object> body = new HashMap<String, Object>();
+	    body.put("url", backJsp);
+	    map.put("body", body);
+	    if(null != id && !MyStringUtils.isNull(category.getName())) {
+	        //判断修改的业务名是否已存在
+	        if (categoryService.hasCategory(category) > 0) {
+	            Utils.getResMap(map, Code.ERR_SYS, "类别名称已存在，无法修改！");
+	        } else {
+	            categoryService.update(category);
+	            Utils.getResMap(map, Code.SUCCESS, "修改成功！");
+	        }
+	    }
+	    return map;
+	}
 }

@@ -12,4 +12,5 @@ public interface CategoryDao<T> extends BaseDao<T> {
 	
 	public Category queryById(Integer id);
 	public void update(Category category);
+	public int hasCategory(Category category);
 }

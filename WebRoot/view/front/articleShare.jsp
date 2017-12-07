@@ -16,8 +16,7 @@
 
 
 <link rel="icon" href="<%=basePath%>plugjs/front/images/favicon.ico">
-<link rel="shortcut icon"
-	href="<%=basePath%>plugjs/front/images/favicon.ico" />
+<link rel="shortcut icon" href="<%=basePath%>plugjs/front/images/favicon.ico" />
 <link rel="stylesheet" href="<%=basePath%>plugjs/front/css/style.css">
 <link rel="stylesheet" href="<%=basePath%>css/articleDetail.css">
 

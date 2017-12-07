@@ -14,6 +14,9 @@
 
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>css/category.css">
+
+<script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/categoryeditBack.js"></script>
 </head>
 
 <body>
@@ -26,7 +29,7 @@
 	<%@include file="HeadTemplate.jsp"%>
 	<input type="button" value="刷新" onclick="javascript:history.go(0);"/>
 	<div class="category">
-		<form action="<%=basePath%>category/update.do" method="post">
+		<form method="post" id="updateCategoryInfo">
 			<input type="hidden" value='${category.id }' name="id" />
 			<ul class="title">
 				<li>名称</li>
@@ -35,7 +38,7 @@
 
 			<ul>
 				<li><input class="inputadd" type="text" value='${category.name }' name="name" /></li>
-				<li><input type="submit" value="修改" /><input type="button" value="返回"onclick="window.history.go(-1)" /></li>
+				<li><input type="button" onclick="updateCategoryInfo();" value="修改" /><input type="button" value="返回"onclick="window.history.go(-1)" /></li>
 			</ul>
 		</form>
 	</div>

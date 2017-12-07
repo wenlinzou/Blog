@@ -13,48 +13,50 @@ import com.apps.blog.back.dao.CategoryDao;
 import com.apps.blog.back.service.CategoryService;
 
 @Service("categoryServiceImpl")
-public class CategoryServiceImpl<T> extends BaseService<T>  implements CategoryService<Category> {
-	
-	@Autowired
+public class CategoryServiceImpl<T> extends BaseService<T> implements CategoryService<Category> {
+
+    @Autowired
     private CategoryDao<T> categoryDao;
-	
-	@Override
-	public CategoryDao<T> getDao() {
-		return categoryDao;
-	}
-	
-	
-	@Override
-	@Transactional
-	public void add(Category category) {
-		if(!MyStringUtils.isNull(category.getName())){
-			categoryDao.add(category);
-		}
-	}
 
-	@Override
-	public List<Category> queryAll() {
-		return categoryDao.queryAll();
-	}
+    @Override
+    public CategoryDao<T> getDao() {
+        return categoryDao;
+    }
 
-	@Override
-	public Category queryById(Integer id) {
-		if(null!=id){
-			return categoryDao.queryById(id);
-		}
-		return null;
-	}
+    @Override
+    @Transactional
+    public void add(Category category) {
+        if (!MyStringUtils.isNull(category.getName())) {
+            categoryDao.add(category);
+        }
+    }
 
-	@Override
-	@Transactional
-	public void update(Category category) {
-		if(null!=category){
-			if(null!=category.getId()){
-				categoryDao.update(category);
-			}
-		}
-	}
+    @Override
+    public List<Category> queryAll() {
+        return categoryDao.queryAll();
+    }
 
-	
+    @Override
+    public Category queryById(Integer id) {
+        if (null != id) {
+            return categoryDao.queryById(id);
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public void update(Category category) {
+        if (null != category) {
+            if (null != category.getId()) {
+                categoryDao.update(category);
+            }
+        }
+    }
+
+    @Override
+    public int hasCategory(Category category) {
+        return categoryDao.hasCategory(category);
+    }
 
 }

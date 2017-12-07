@@ -11,4 +11,6 @@ public void add(Category category);
 	
 	public Category queryById(Integer id);
 	public void update(Category category);
+	
+	public int hasCategory(Category category);
 }

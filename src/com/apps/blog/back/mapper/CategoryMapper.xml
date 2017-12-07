@@ -21,10 +21,17 @@
 	</insert>
 	
 	
-	<!-- 查询所有用户 -->
+	<!-- 查询所有类别 -->
 	<select id="queryAll" resultMap="BaseResultMap" parameterType="Object">
 		select * from category where del_flag = 0;
 	</select>
+	
+	<!-- 查询是否存在此类别 -->
+	<select id="hasCategory" resultType="java.lang.Integer" parameterType="Object">
+		select count(1) from category where 
+		del_flag = 0 and name =#{name}
+	</select>
+	
 	<!-- 查询单个用户 -->
 	<select id="queryById" resultMap="BaseResultMap" parameterType="Object">
 		select * from category where id=#{id};
