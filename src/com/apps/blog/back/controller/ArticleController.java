@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apps.base.BaseAction;
+import com.apps.base.utils.Code;
 import com.apps.base.utils.IPUtils;
 import com.apps.base.utils.MyStringUtils;
+import com.apps.base.utils.Utils;
 import com.apps.blog.back.bean.Article;
 import com.apps.blog.back.bean.Category;
 import com.apps.blog.back.bean.Share;
@@ -86,9 +88,25 @@ public class ArticleController extends BaseAction {
 	 */
 	@RequestMapping("/queryAllComment")
 	public String queryAllComment(Model model) throws Exception {
-		List<Article> articleList = articleService.queryAllComment();
-		model.addAttribute("articleList", articleList);
+		/*List<Article> articleList = articleService.queryAllComment();
+		model.addAttribute("articleList", articleList);*/
 		return "back/commentBack";
+	}
+	
+	/**
+	 * 含有评论的所有文章
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/queryAllCommentAjax")
+	@ResponseBody
+	public Map<String, Object> queryAllCommentAjax(Model model) throws Exception {
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    List<Article> articleList = articleService.queryAllComment();
+	    map.put("articleComments", articleList);
+        Utils.getResMap(map, Code.SUCCESS, "查询成功！");
+        return map;
 	}
 	
 	/**

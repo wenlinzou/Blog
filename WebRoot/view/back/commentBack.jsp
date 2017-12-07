@@ -15,6 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/comment.css">
+	
+	<script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/commentBack.js"></script>
   </head>
   
   <body>
@@ -36,7 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>状态</li>
 			<li>评论</li>
 		</ul>
-		<c:forEach items="${articleList }" var="article">
+		<div id="articleComments"></div>
+		<%-- <c:forEach items="${articleList }" var="article">
 			<ul>
 				<li>${article.id }</li>
 				<li>${article.title }</li>
@@ -53,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="<%=basePath%>comment/queryListByArticle.do?articleid=${article.id }">${article.comments}条</a>
 				</li>
 			</ul>
-		</c:forEach>
+		</c:forEach> --%>
 	</div>
 	
 	</c:if>
