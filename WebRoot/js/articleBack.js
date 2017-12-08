@@ -74,7 +74,7 @@ function getArticleList(page, pid, date, keyword) {
 				}
 				p+='<li>共</li>';
 				p+='<li>';
-					p+='<a onclick="getArticleList(' + page + ', \'' + pid + '\', ' + date + ', \'' + keyword + '\');">' + pageCount + '</a>';
+					p+='<a onclick="getArticleList(' + pageCount + ', \'' + pid + '\', \'' + date + '\', \'' + keyword + '\');">' + pageCount + '</a>';
 				p+='</li>';
 				p+='<li>页</li>';
 				
