@@ -40,7 +40,7 @@ function getArticleList(page, pid, date, keyword) {
 					s+='</li>';
 					s+='<li style="width:20%;">' + o.title + '</li>';
 					var d = new Date(o.pdate);
-					var date = d.toLocaleString();
+					var date = formatDateTime(d);
 					s+='<li>' + date + '</li>';
 					s+='<li>';
 					if (o.isleaf == 1) {

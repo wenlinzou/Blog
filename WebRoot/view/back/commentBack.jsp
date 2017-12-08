@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/comment.css">
 	
 	<script src="<%=basePath%>plugjs/front/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugjs/back/js/dateUtils.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/commentBack.js"></script>
   </head>
   

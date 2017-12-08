@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/HeadTemplate.css">
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/article.css">
 	<script type="text/javascript" src="<%=basePath%>plugjs/front/js/jquery.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugjs/back/js/dateUtils.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/articleBack.js"></script>
   </head>
   

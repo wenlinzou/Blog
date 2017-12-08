@@ -16,7 +16,7 @@ function getArticleCommentsList() {
 					s+='<li>' + (++i) + '</li>';
 	                s+='<li>' + o.title+'</li>';
 	                var d = new Date(o.pdate);
-	                var date = d.toLocaleString();
+	                var date = formatDateTime(d);
 	                s+='<li>' + date + '</li>';
 	                if (o.isleaf == 1) {
 	                	s+='<li><input type="button" value="SHOW" class="currentBtnShow" /></li>';
