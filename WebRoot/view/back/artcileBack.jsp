@@ -40,7 +40,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>状态</li>
 			<li>操作</li>
 		</ul>
-		<c:forEach items="${articleList }" var="article">
+		<div id="articleInfoList"></div>
+		<%-- <c:forEach items="${articleList }" var="article">
 			<ul name="articleul" >
 				<li>${article.id }</li>
 				<li>
@@ -75,12 +76,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="button" class="editBtn" value="查看" onclick="viewArticle('<%=basePath%>',${article.id})"/>
 				</li>
 			</ul>
-		</c:forEach>
+		</c:forEach> --%>
 	</div>
 	
 	<div class="page pageCenter">
-		<ul class="pageNum">
-		<c:forEach begin="1" end="${pageData.pager.pageCount }" varStatus="status">
+		<ul class="pageNum"  id="pageDiv">
+		<%-- <c:forEach begin="1" end="${pageData.pager.pageCount }" varStatus="status">
 			<c:if test="${status.count > (pageData.page - 3) && status.count < (pageData.page + 3) }">
 				<li><a href="<%=basePath%>article/queryAll.shtml?page=${status.count }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if><c:if test='${!empty keyword }'>&keyword=${keyword }</c:if>"
 					<c:if test="${status.count == pageData.page && pageData.page%2==0 }">class="currentPageOdd"</c:if>
@@ -92,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li>
 				<a href="<%=basePath%>article/queryAll.shtml?page=${pageData.pager.pageCount }<c:if test='${!empty pid }'>&pid=${pid }</c:if><c:if test='${!empty date }'>&date=${date }</c:if><c:if test='${!empty keyword }'>&keyword=${keyword }</c:if>">${pageData.pager.pageCount }</a>
 			</li>
-			<li>页</li>
+			<li>页</li> --%>
 		</ul>
 	</div>
 	

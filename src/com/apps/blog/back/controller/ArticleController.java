@@ -1,5 +1,6 @@
 package com.apps.blog.back.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +69,7 @@ public class ArticleController extends BaseAction {
 	@RequestMapping("/queryAll")
 	public String queryAll(HttpServletRequest request, Model model, ArticlePage page) throws Exception {
 	    //List<Article> queryListByPage(ArticlePage page)
-		List<Article> articleList = articleService.queryListByPage(page);
+		/*List<Article> articleList = articleService.queryListByPage(page);
 		model.addAttribute("articleList", articleList);
 		model.addAttribute("pageData", page);
 		
@@ -76,8 +77,36 @@ public class ArticleController extends BaseAction {
 		if(null == request.getSession().getAttribute("categoryList")){
 			List<Category> categoryList = categoryService.queryAll();
 			request.getSession().setAttribute("categoryList", categoryList);
-		}
+		}*/
 		return "back/artcileBack";
+	}
+	
+	/**
+	 * 查询所有文章
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/queryAllAjax")
+	@ResponseBody
+	public Map<String, Object> queryAllAjax(HttpServletRequest request, ArticlePage page) throws Exception {
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    List<Article> articleList = articleService.queryListByPage(page);
+	    @SuppressWarnings("unchecked")
+        List<Category> categoryList = (List<Category>) request.getSession().getAttribute("categoryList");
+	    if(null == categoryList || categoryList.size() < 1) {
+	        categoryList = categoryService.queryAll();
+	        request.getSession().setAttribute("categoryList", categoryList);
+	    }
+	    
+	    Map<String, Object> body = new HashMap<String, Object>();
+	    body.put("categoryList", categoryList);
+	    body.put("articleList", articleList);
+	    body.put("pageData", page);
+	    map.put("body", body);
+        Utils.getResMap(map, Code.SUCCESS, "查询成功！");
+        return map;
 	}
 	
 	/**

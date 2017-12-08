@@ -15,7 +15,9 @@ function getArticleCommentsList() {
 					s+='<ul>';
 					s+='<li>' + (++i) + '</li>';
 	                s+='<li>' + o.title+'</li>';
-	                s+='<li>' + o.pdate + '</li>';
+	                var d = new Date(o.pdate);
+	                var date = d.toLocaleString();
+	                s+='<li>' + date + '</li>';
 	                if (o.isleaf == 1) {
 	                	s+='<li><input type="button" value="SHOW" class="currentBtnShow" /></li>';
 	                } else {
